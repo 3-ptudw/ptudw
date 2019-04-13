@@ -1,0 +1,64 @@
+#img img {
+    width: 10%;
+    padding: 20px
+}
+
+#nav-menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#nav-menu li {
+    display: inline-block;
+    text-align: center;
+    padding: 20px;
+    line-height: 50px;
+    float: right;
+    font-weight: bold;
+}
+
+#nav-menu .home .contact {
+    color: black;
+}
+
+#nav-menu .jobs {
+    color: orange;
+}
+
+#choose {
+    width: 100%;
+}
+
+#text {
+    width: 100%;
+}
+
+#content h4 {
+    display: inline-block;
+    width: 90%;
+}
+
+#content p {
+    display: inline-block;
+    width: 5%;
+    color: orange;
+    font-weight: bold;
+}
+
+#content a {
+    color: white;
+    text-decoration: none;
+}
+
+#content h1,
+h2 {
+    display: block;
+    text-align: center;
+    background-color: black;
+    color: white;
+}
+
+#content h3 {
+    text-align: center;
+}
