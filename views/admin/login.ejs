@@ -11,10 +11,10 @@
         <%= page %>
     </title>
 
-    <link href="./css/bootstrap.min.css" rel="stylesheet">
-    <link href="./font-awesome/css/font-awesome.css" rel="stylesheet">
-    <link href="./css/animate.css" rel="stylesheet">
-    <link href="./css/style.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 
     <meta property="og:image" content="https://cdn0.iconfinder.com/data/icons/social-media-2092/100/social-35-512.png" />
     <meta property="og:image:secure_url" content="https://cdn0.iconfinder.com/data/icons/social-media-2092/100/social-35-512.png" />
@@ -28,13 +28,11 @@
     <div class="middle-box text-center loginscreen animated fadeInDown">
         <div>
             <div>
-
                 <h1 class="logo-name" style="margin-left: -170px;">GROUP3</h1>
-
             </div>
             <h3>Welcome to Báo Điện Tử TH16-News</h3>
-            <p>Login</p>
-            <form method="POST" class="m-t" role="form" action="/user-login">
+            <p>Admin Login</p>
+            <form method="POST" class="m-t" role="form" action="dashboard">
                 <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
                 <div class="form-group">
                     <input type="email" name="email" class="form-control" placeholder="Email" required="">
@@ -50,8 +48,8 @@
     </div>
 
     <!-- Mainly scripts -->
-    <script src="./js/jquery-3.1.1.min.js"></script>
-    <script src="./js/bootstrap.min.js}"></script>
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/bootstrap.min.js}"></script>
 
 </body>
 

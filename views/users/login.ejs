@@ -28,13 +28,11 @@
     <div class="middle-box text-center loginscreen animated fadeInDown">
         <div>
             <div>
-
                 <h1 class="logo-name" style="margin-left: -170px;">GROUP3</h1>
-
             </div>
             <h3>Welcome to Báo Điện Tử TH16-News</h3>
             <p>Login</p>
-            <form method="POST" class="m-t" role="form" action="/user-login">
+            <form method="POST" class="m-t" role="form" action="">
                 <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
                 <div class="form-group">
                     <input type="email" name="email" class="form-control" placeholder="Email" required="">

@@ -11,4 +11,14 @@ router.get('/login', function(req, res, next) {
     res.render('admin/login', { page: 'Login', menuId: 'login' });
 });
 
+/* GET admin dashboard page. */
+router.get('/dashboard', function(req, res, next) {
+    res.render('admin/dashboard', { page: 'Dashboard', menuId: 'dashboard' });
+});
+
+/* GET admin dashboard page. */
+router.get('/minor', function(req, res, next) {
+    res.render('admin/minor', { page: 'Minor', menuId: 'minor' });
+});
+
 module.exports = router;

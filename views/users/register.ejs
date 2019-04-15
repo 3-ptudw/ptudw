@@ -31,7 +31,7 @@
             </div>
             <h3>Welcome to Báo Điện Tử TH16-News</h3>
             <p>Register</p>
-            <form method="POST" class="m-t" role="form" action="/user-register">
+            <form method="POST" class="m-t" role="form" action="login">
                 <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="Name" name="name" required="">
