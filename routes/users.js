@@ -8,12 +8,12 @@ router.get('/', function(req, res, next) {
 
 /* GET user login page. */
 router.get('/login', function(req, res, next) {
-    res.render('users/login', { page: 'Login', menuId: 'login' });
+    res.render('users/login', { page: 'Login', menuId: 'Login' });
 });
 
 /* GET user register page. */
 router.get('/register', function(req, res, next) {
-    res.render('users/register', { page: 'Register', menuId: 'register' });
+    res.render('users/register', { page: 'Register', menuId: 'Register' });
 });
 
 module.exports = router;

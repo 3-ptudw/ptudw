@@ -9,14 +9,28 @@
 <script src="js/inspinia.js"></script>
 <script src="js/plugins/pace/pace.min.js"></script>
 
-<script src="https://cdn.ckeditor.com/ckeditor5/12.1.0/classic/ckeditor.js"></script>
-
 <!-- Chosen -->
 <script src="js/plugins/chosen/chosen.jquery.js"></script>
 
 <!-- Sweet alert -->
 <script src="js/plugins/sweetalert/sweetalert.min.js"></script>
 
+<!-- slick carousel-->
+<script src="js/plugins/slick/slick.min.js"></script>
+
+<!-- blueimp gallery -->
+<script src="js/plugins/blueimp/jquery.blueimp-gallery.min.js"></script>
+
+
+
+
+<script>
+    ClassicEditor
+        .create(document.querySelector('#content'))
+        .catch(error => {
+            console.error(error);
+        });
+</script>
 
 
 <!-- Page-Level Scripts -->

@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.render('homepage/index', { page: 'Home', menuId: 'home' });
+    res.render('homepage/index', { page: 'Home', menuId: 'Home' });
 });
 
 /* GET homepage phim ảnh page. */
