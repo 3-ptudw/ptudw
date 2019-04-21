@@ -13,14 +13,130 @@
 
         <% include layout/navbar %>
 
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-10">
+                    <h2>Thêm Bài viết mới</h2>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="/admin">Admin</a>
+                        </li>
+                        <li>
+                            <a href="/admin-post">Bài viết</a>
+                        </li>
+                        <li class="active">
+                            <strong>Thêm Bài viết mới</strong>
+                        </li>
+                    </ol>
+                </div>
+                <div class="col-lg-2">
+
+                </div>
+            </div>
+
             <div class="wrapper wrapper-content animated fadeInRight">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="text-center m-t-lg">
-                            <h1>
-                                Simple example of second view
-                            </h1>
-                            <small>Writen in minor.html file.</small>
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Thêm Bài viết mới</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+                                <form class="form-horizontal" method="POST" action="/admin-post/add" enctype="multipart/form-data">
+                                    <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
+                                    <div class="form-group"><label class="col-lg-2 control-label">Chuyên mục</label>
+                                        <div class="col-lg-10">
+                                            <select id="article" data-placeholder="Chọn ấn phẩm..." class="chosen-select" tabindex="4" ; name="article" required="">
+                                            <option value="">Chọn</option>
+                                            <option value="phim-anh">Phim ảnh</option>
+                                            <option value="cong-nghe">Công nghệ</option>
+                                            <option value="xuat-ban">Xuất bản</option>
+                                        </select>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="url" />
+                                    <div class="form-group"><label class="col-lg-2 control-label">Link</label>
+                                        <div class="col-lg-10">
+                                            <div class="input-group m-b">
+                                                <span class="input-group-addon">/bai-viet</span>
+                                                <input type="text" placeholder="" name="link" class="form-control" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group"><label class="col-lg-2 control-label">Tên bài viết</label>
+                                        <div class="col-lg-10"><input type="text" name="name" placeholder="Những câu hỏi lớn 'Avengers: Endgame' phải trả lời" class="form-control" required="">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group"><label class="col-lg-2 control-label">Tóm tắt</label>
+                                        <div class="col-lg-10"><input type="text" name="description" placeholder="Bom tấn 'Avengers: Endgame' sẽ công phá các rạp chiếu từ ngày 26/4. Các siêu anh hùng sẽ làm gì để đảo ngược cú búng tay định mệnh của Thanos và giải cứu mọi người?"
+                                                class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group"><label class="col-lg-2 control-label">Nội dung</label>
+                                        <div class="col-lg-10">
+                                            <textarea type="text" name="content" id="content" class="form-control" required="">.</textarea>
+                                            <script>
+                                                CKEDITOR.replace('content');
+                                            </script>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-lg-12">
+                                            <button type="submit" class="btn btn-primary pull-right">Đăng bài viết</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Danh sách Bài viết</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+                                <div class="table-responsive">
+                                    <table class="table dataTables">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Bài viết</th>
+                                                <th>Chuyên mục/th>
+                                                    <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>Những câu hỏi lớn 'Avengers: Endgame' phải trả lời</td>
+                                                <td>Phim ảnh</td>
+                                                <td>
+                                                    <a style="margin: 5px;" href="/admin-post/edit/{{$post->id}}" class="btn btn-warning btn-custom">Cập nhật</a>
+                                                    <button class="btn btn-danger btn-custom btn-delete" data-id="{{$post->id}}">Xóa</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

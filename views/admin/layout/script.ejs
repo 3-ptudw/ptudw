@@ -3,7 +3,57 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
 <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="js/plugins/dataTables/datatables.min.js"></script>
 
 <!-- Custom and plugin javascript -->
 <script src="js/inspinia.js"></script>
 <script src="js/plugins/pace/pace.min.js"></script>
+
+<script src="https://cdn.ckeditor.com/ckeditor5/12.1.0/classic/ckeditor.js"></script>
+
+<!-- Chosen -->
+<script src="js/plugins/chosen/chosen.jquery.js"></script>
+
+<!-- Sweet alert -->
+<script src="js/plugins/sweetalert/sweetalert.min.js"></script>
+
+
+
+<!-- Page-Level Scripts -->
+<script>
+    $(document).ready(function() {
+        $('.dataTables').DataTable({
+            pageLength: 10,
+            responsive: true,
+            dom: '<"html5buttons"B>lTfgitp',
+            buttons: [],
+            stateSave: true //save the state before reload
+        });
+
+    });
+</script>
+
+<!-- <script>
+    $('.dataTables').on('click', '.btn-delete', function() {
+        var id = $(this).data('id');
+        swal({
+                title: "Bạn có chắc chắn xóa không?",
+                text: "Ấn phẩm sau khi xóa sẽ không hồi phục lại được.",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Có",
+                cancelButtonText: "Không",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            },
+            function(isConfirm) {
+                if (isConfirm) {
+                    swal("Đã xóa!", "Ấn phẩm đã được xóa.", "success");
+                    window.location.href = "/admin-article/delete/" + id;
+                } else {
+                    swal("Đã hủy", "Ấn phẩm đã được giữ lại", "error");
+                }
+            });
+    });
+</script> -->
