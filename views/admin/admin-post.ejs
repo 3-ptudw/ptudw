@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <% include layout/header %>
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <% include layout/navbar %>
+
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-10">
+                    <h2>Thêm Bài viết mới</h2>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="#">Quản trị viên</a>
+                        </li>
+                        <li>
+                            <a href="#">Bài viết</a>
+                        </li>
+                        <li class="active">
+                            <strong>Thêm Bài viết mới</strong>
+                        </li>
+                    </ol>
+                </div>
+                <div class="col-lg-2">
+
+                </div>
+            </div>
+
+            <div class="wrapper wrapper-content animated fadeInRight">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Thêm Bài viết mới</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+                                <form class="form-horizontal" method="POST" action="" enctype="multipart/form-data">
+                                    <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
+                                    <div class="form-group">
+                                        <label class="col-lg-2 control-label">Chuyên mục</label>
+                                        <div class="col-lg-10">
+                                            <select name="article" id="article" tabindex="4" required="">
+                                                <option value="">Chọn</option>
+                                                <option value="phim-anh">Phim ảnh</option>
+                                                <option value="cong-nghe">Công nghệ</option>
+                                                <option value="xuat-ban">Xuất bản</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group"><label class="col-lg-2 control-label">Tiêu đề</label>
+                                        <div class="col-lg-10"><input type="text" name="name" class="form-control" required="">
+                                        </div>
+                                    </div>
+
+                                    <input type="hidden" name="url" />
+                                    <div class="form-group"><label class="col-lg-2 control-label">Link</label>
+                                        <div class="col-lg-10">
+                                            <div class="input-group m-b">
+                                                <span class="input-group-addon">/bai-viet</span>
+                                                <input type="text" placeholder="" name="link" class="form-control" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group"><label class="col-lg-2 control-label">Ảnh đại diện</label>
+                                        <div class="col-lg-10">
+                                            <input accept="image/*" type="file" class="banner-img-input" name="banner" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group"><label class="col-lg-2 control-label">Tóm tắt</label>
+                                        <div class="col-lg-10"><input type="text" name="description" class="form-control" required="">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group"><label class="col-lg-2 control-label">Tag</label>
+                                        <div class="col-lg-10"><input type="text" name="tag" class="form-control" required="">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group"><label class="col-lg-2 control-label">Nội dung</label>
+                                        <div class="col-lg-10">
+                                            <textarea name="content" id="content" class="form-control" cols="30" rows="10">.</textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-lg-12">
+                                            <button type="submit" class="btn btn-primary pull-right">Đăng bài viết</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Danh sách Bài viết</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-hover dataTables">
+                                        <thead>
+                                            <tr>
+                                                <th>STT</th>
+                                                <th>Bài viết</th>
+                                                <th>Chuyên mục</th>
+                                                <th>Trạng thái</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>Những câu hỏi lớn 'Avengers: Endgame' phải trả lời</td>
+                                                <td>Phim ảnh</td>
+                                                <td><button class="btn btn-w-m btn-success">Đã được duyệt</button></td>
+                                                <td>
+                                                    <a href="admin-post-edit"><button class="btn btn-info " type="button"><i class="fa fa-paste"></i> Cập nhật</button></a>
+                                                    <button class="btn btn-danger " type="button"><i class="fa fa-warning"></i> <span class="bold">Xóa</span></button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th>STT</th>
+                                                <th>Bài viết</th>
+                                                <th>Chuyên mục</th>
+                                                <th>Trạng thái</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% include layout/footer %>
+    </div>
+    </div>
+
+    <% include layout/script %>
+
+</body>
+
+</html>

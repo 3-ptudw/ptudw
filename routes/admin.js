@@ -22,18 +22,38 @@ router.get('/minor', function(req, res, next) {
 });
 
 /* GET admin post page. */
-router.get('/post', function(req, res, next) {
-    res.render('admin/post', { page: 'Post', menuId: 'Post' });
+router.get('/admin-post', function(req, res, next) {
+    res.render('admin/admin-post', { page: 'Post', menuId: 'Post' });
 });
 
 /* GET admin post page. */
-router.get('/post-edit', function(req, res, next) {
-    res.render('admin/post-edit', { page: 'Edit', menuId: 'Edit' });
+router.get('/admin-post-edit', function(req, res, next) {
+    res.render('admin/admin-post-edit', { page: 'Edit', menuId: 'Edit' });
+});
+
+/* GET writer post page. */
+router.get('/writer-post', function(req, res, next) {
+    res.render('admin/writer-post', { page: 'Post', menuId: 'Post' });
+});
+
+/* GET writer post page. */
+router.get('/writer-post-edit', function(req, res, next) {
+    res.render('admin/writer-post-edit', { page: 'Edit', menuId: 'Edit' });
+});
+
+/* GET editor post page. */
+router.get('/editor-post', function(req, res, next) {
+    res.render('admin/editor-post', { page: 'Post', menuId: 'Post' });
+});
+
+/* GET editor post page. */
+router.get('/editor-post-edit', function(req, res, next) {
+    res.render('admin/editor-post-edit', { page: 'Edit', menuId: 'Edit' });
 });
 
 /* GET admin user page. */
-router.get('/user', function(req, res, next) {
-    res.render('admin/user', { page: 'User', menuId: 'User' });
+router.get('/admin-user', function(req, res, next) {
+    res.render('admin/admin-user', { page: 'User', menuId: 'User' });
 });
 
 module.exports = router;
