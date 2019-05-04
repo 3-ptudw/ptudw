@@ -15,16 +15,16 @@
 
             <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-10">
-                    <h2>Thêm bài viết mới</h2>
+                    <h2>Cập nhật chuyên mục</h2>
                     <ol class="breadcrumb">
                         <li>
                             <a href="#">Quản trị viên</a>
                         </li>
                         <li>
-                            <a href="#">Bài viết</a>
+                            <a href="#">Chuyên mục</a>
                         </li>
                         <li class="active">
-                            <strong>Thêm bài viết mới</strong>
+                            <strong>Cập nhật chuyên mục</strong>
                         </li>
                     </ol>
                 </div>
@@ -38,7 +38,7 @@
                     <div class="col-lg-12">
                         <div class="ibox float-e-margins">
                             <div class="ibox-title">
-                                <h5>Thêm bài viết mới</h5>
+                                <h5>Cập nhật chuyên mục</h5>
                                 <div class="ibox-tools">
                                     <a class="collapse-link">
                                         <i class="fa fa-chevron-up"></i>
@@ -51,48 +51,10 @@
                             <div class="ibox-content">
                                 <form class="form-horizontal" method="POST" action="" enctype="multipart/form-data">
                                     <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
-                                    <div class="form-group">
-                                        <label class="col-lg-2 control-label">Chuyên mục</label>
+
+                                    <div class="form-group"><label class="col-lg-2 control-label">Tên chuyên mục</label>
                                         <div class="col-lg-10">
-                                            <select name="article" id="article" tabindex="4" required="">
-                                                <option value="">Chọn</option>
-                                                <option value="phim-anh">Phim ảnh</option>
-                                                <option value="cong-nghe">Công nghệ</option>
-                                                <option value="xuat-ban">Xuất bản</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group"><label class="col-lg-2 control-label">Tiêu đề</label>
-                                        <div class="col-lg-10"><input type="text" name="name" class="form-control" required="">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group"><label class="col-lg-2 control-label">Link</label>
-                                        <div class="col-lg-10">
-                                            <input type="text" name="link" class="form-control" value="/" disabled>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group"><label class="col-lg-2 control-label">Ảnh đại diện</label>
-                                        <div class="col-lg-10">
-                                            <input accept="image/*" type="file" class="banner-img-input" name="banner" required>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group"><label class="col-lg-2 control-label">Tóm tắt</label>
-                                        <div class="col-lg-10"><input type="text" name="description" class="form-control" required="">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group"><label class="col-lg-2 control-label">Tag</label>
-                                        <div class="col-lg-10"><input type="text" name="tag" class="form-control" required="">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group"><label class="col-lg-2 control-label">Nội dung</label>
-                                        <div class="col-lg-10">
-                                            <textarea name="content" id="content" class="form-control" cols="30" rows="10">.</textarea>
+                                            <input type="text" name="article" class="form-control" value="Phim ảnh" required="">
                                         </div>
                                     </div>
 
@@ -108,7 +70,7 @@
                     <div class="col-lg-12">
                         <div class="ibox float-e-margins">
                             <div class="ibox-title">
-                                <h5>Danh sách bài viết</h5>
+                                <h5>Danh sách Bài viết</h5>
                                 <div class="ibox-tools">
                                     <a class="collapse-link">
                                         <i class="fa fa-chevron-up"></i>
@@ -163,6 +125,17 @@
     </div>
 
     <% include layout/script %>
+
+        <!-- Page-Level Scripts -->
+        <script>
+            $(document).ready(function() {
+                $('.chosen-select').chosen({
+                    width: "100%"
+                });
+
+
+            });
+        </script>
 
 </body>
 

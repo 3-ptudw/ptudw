@@ -16,4 +16,9 @@ router.get('/register', function(req, res, next) {
     res.render('users/register', { page: 'Register', menuId: 'Register' });
 });
 
+/* GET user register page. */
+router.get('/forgot_password', function(req, res, next) {
+    res.render('users/forgot_password', { page: 'forgot_password', menuId: 'forgot_password' });
+});
+
 module.exports = router;
