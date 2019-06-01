@@ -1,42 +1,46 @@
-var createError = require('http-errors');
 var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var adminRouter = require('./routes/admin');
-var homepageRouter = require('./routes/homepage');
+var exphbs = require('express-handlebars');
+var morgan = require('morgan');
+var numeral = require('numeral');
 
 var app = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+app.use(morgan('dev'));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'));
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.engine('hbs', exphbs({
+  layoutsDir: 'views/_layouts',
+  defaultLayout: 'main.hbs',
+  helpers: {
+    format: val => {
+      return numeral(val).format('0,0');
+    }
+  }
+}));
+app.set('view engine', 'hbs');
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/admin', adminRouter);
-app.use('/homepage', homepageRouter);
+app.use(require('./middlewares/locals.mdw'));
 
-app.use(function(req, res, next) {
-    next(createError(404));
-});
+app.get('/', (req, res) => {
+  res.render('home');
+})
 
-app.use(function(err, req, res, next) {
-    res.locals.message = err.message;
-    res.locals.error = req.app.get('env') === 'development' ? err : {};
+app.use('/projects', require('./routes/project.route'))
+app.use('/admin/projects', require('./routes/admin/project.route'))
 
-    res.status(err.status || 500);
-    // res.render('error');
-    res.render('admin/404');
-});
+app.use((req, res, next) => {
+  res.render('404', { layout: false });
+})
 
-module.exports = app;
+app.use((error, req, res, next) => {
+  res.render('error', {
+    layout: false,
+    message: error.message,
+    error
+  })
+})
+
+app.listen(3000, () => {
+  console.log('server is running at http://localhost:3000');
+})
