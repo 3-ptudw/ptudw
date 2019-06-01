@@ -1,6 +1,6 @@
 <div class="card shadow">
   <h4 class="card-header">
-    Projects
+    Categories
   </h4>
   <table class="table table-hover">
     <thead>
@@ -8,16 +8,17 @@
         <th scope="col" class="text-center">#</th>
         <th scope="col">Name</th>
         <th scope="col">Status</th>
+        <th scope="col">of Project</th>
         <th scope="col" class="text-right">
-          <a class="btn btn-outline-success" href="/admin/projects/add" role="button">
+          <a class="btn btn-outline-success" href="/admin/categories/add" role="button">
             <i class="fa fa-plus" aria-hidden="true"></i>
-            Add Project
+            Add Category
           </a>
         </th>
       </tr>
     </thead>
     <tbody>
-      {{#each this.projects}}
+      {{#each this.categories}}
       <tr>
         <th scope="row" class="text-center">{{id}}</th>
         <td>{{name}}</td>
@@ -32,11 +33,12 @@
           </p>
           {{/if}}
         </td>
+        <td>{{name_project}}</td>
         <td class="text-right">
-          <a class="btn btn-primary btn-sm" href="/admin/projects/edit/{{id}}" role="button">
+          <a class="btn btn-primary btn-sm" href="/admin/categories/edit/{{id}}" role="button">
             <i class="fa fa-edit" aria-hidden="true"></i>
           </a>
-          <button id="btn-delete" class="btn btn-danger btn-delete-project btn-sm" data-id="{{id}}" role="button">
+          <button id="btn-delete" class="btn btn-danger btn-delete-category btn-sm" data-id="{{id}}" role="button">
             <i class="fa fa-trash" aria-hidden="true"></i>
           </button>
         </td>
@@ -44,4 +46,3 @@
       {{/each}}
     </tbody>
   </table>
-

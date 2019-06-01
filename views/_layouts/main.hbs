@@ -7,7 +7,7 @@
   <title>Dashboard</title>
 
   <link rel="stylesheet" href="/admin/style.css">
-  {{!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"> --}}
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.css" />
   <style>
@@ -121,6 +121,15 @@
             </a>
           </li>
 
+          <li class="nav-item">
+            <a class="sidebar-link" href="/admin/posts">
+              <span class="icon-holder">
+                <i class="fa fa-windows"></i>
+              </span>
+              <span class="title">Posts</span>
+            </a>
+          </li>
+
         </ul>
       </div>
     </div>
@@ -183,6 +192,7 @@
     src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.js"></script>
   <script type="text/javascript" src="/admin/vendor.js"></script>
   <script type="text/javascript" src="/admin/bundle.js"></script>
+  <script type="text/javascript" src="/custom-link.js"></script>
 
   <script>
     $('.table').on('click', '.btn-delete-project', function () {
@@ -214,6 +224,80 @@
           Swal.fire(
             'Cancelled',
             'Your project has been retained!',
+            'error'
+          )
+        }
+      })
+    });
+  </script>
+
+  <script>
+    $('.table').on('click', '.btn-delete-category', function () {
+      var id = $(this).data('id');
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        type: 'warning',
+        showConfirmButton: true,
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, cancel!',
+        confirmButtonColor: "#28a745",
+        cancelButtonColor: "#dc3545",
+        reverseButtons: true,
+        focusConfirm: true,
+        showCloseButton: true,
+
+      }).then((result) => {
+        if (result.value) {
+          Swal.fire(
+            'Deleted!',
+            'Your category has been deleted.',
+            'success'
+          );
+          window.location.href = '/admin/categories/delete/' + id;
+        }
+        else {
+          Swal.fire(
+            'Cancelled',
+            'Your category has been retained!',
+            'error'
+          )
+        }
+      })
+    });
+  </script>
+
+  <script>
+    $('.table').on('click', '.btn-delete-post', function () {
+      var id = $(this).data('id');
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        type: 'warning',
+        showConfirmButton: true,
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, cancel!',
+        confirmButtonColor: "#28a745",
+        cancelButtonColor: "#dc3545",
+        reverseButtons: true,
+        focusConfirm: true,
+        showCloseButton: true,
+
+      }).then((result) => {
+        if (result.value) {
+          Swal.fire(
+            'Deleted!',
+            'Your post has been deleted.',
+            'success'
+          );
+          window.location.href = '/admin/posts/delete/' + id;
+        }
+        else {
+          Swal.fire(
+            'Cancelled',
+            'Your post has been retained!',
             'error'
           )
         }
