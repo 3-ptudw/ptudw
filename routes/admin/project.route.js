@@ -28,9 +28,7 @@ router.post("/add", (req, res) => {
     projectModel
         .add(req.body)
         .then(id => {
-            res.redirect("/admin/projects", {
-                layout: 'admin.hbs',
-            });
+            res.redirect("/admin/projects");
         })
         .catch(err => {
             console.log(err);
@@ -73,9 +71,7 @@ router.post("/update", (req, res) => {
     projectModel
         .update(req.body)
         .then(n => {
-            res.redirect("/admin/projects", {
-                layout: 'admin.hbs',
-            });
+            res.redirect("/admin/projects");
         })
         .catch(err => {
             console.log(err);
@@ -87,9 +83,7 @@ router.get("/delete/:id", (req, res) => {
     projectModel
         .delete(req.params.id)
         .then(n => {
-            res.redirect("/admin/projects", {
-                layout: 'admin.hbs',
-            });
+            res.redirect("/admin/projects");
         })
         .catch(err => {
             console.log(err);

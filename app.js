@@ -22,11 +22,7 @@ app.set('view engine', 'hbs');
 
 app.use(require('./middlewares/locals.mdw'));
 
-app.get('/', (req, res) => {
-    res.render('home');
-})
-
-app.use('/projects', require('./routes/project.route'))
+app.use('/', require('./routes/homepage.route'))
 app.use('/admin/projects', require('./routes/admin/project.route'))
 app.use('/admin/categories', require('./routes/admin/category.route'))
 app.use('/admin/posts', require('./routes/admin/post.route'))
@@ -39,12 +35,12 @@ app.use((error, req, res, next) => {
     res.render('error', {
         layout: false,
         message: error.message,
-        error
+        error,
     })
 })
 
 var port = process.env.PORT || 3000;
 
-app.listen(port, function () {
-  console.log('Example app listening on port ' + port + '!');
+app.listen(port, function() {
+    console.log('Example app listening on port ' + port + '!');
 });

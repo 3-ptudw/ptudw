@@ -38,9 +38,7 @@ router.post("/add", (req, res) => {
     categoryModel
         .add(req.body)
         .then(id => {
-            res.redirect("/admin/categories", {
-                layout: 'admin.hbs',
-            });
+            res.redirect("/admin/categories");
         })
         .catch(err => {
             console.log(err);
@@ -109,9 +107,7 @@ router.post("/update", (req, res) => {
     categoryModel
         .update(req.body)
         .then(n => {
-            res.redirect("/admin/categories", {
-                layout: 'admin.hbs',
-            });
+            res.redirect("/admin/categories");
         })
         .catch(err => {
             console.log(err);
@@ -123,9 +119,7 @@ router.get("/delete/:id", (req, res) => {
     categoryModel
         .delete(req.params.id)
         .then(n => {
-            res.redirect("/admin/categories", {
-                layout: 'admin.hbs',
-            });
+            res.redirect("/admin/categories");
         })
         .catch(err => {
             console.log(err);

@@ -48,9 +48,7 @@ router.post("/add", (req, res) => {
     postModel
         .add(req.body)
         .then(id => {
-            res.redirect("/admin/posts", {
-                layout: 'admin.hbs',
-            });
+            res.redirect("/admin/posts");
         })
         .catch(err => {
             console.log(err);
@@ -102,9 +100,7 @@ router.post("/update", (req, res) => {
     postModel
         .update(req.body)
         .then(n => {
-            res.redirect("/admin/posts", {
-                layout: 'admin.hbs',
-            });
+            res.redirect("/admin/posts");
         })
         .catch(err => {
             console.log(err);
@@ -116,9 +112,7 @@ router.get("/delete/:id", (req, res) => {
     postModel
         .delete(req.params.id)
         .then(n => {
-            res.redirect("/admin/posts", {
-                layout: 'admin.hbs',
-            });
+            res.redirect("/admin/posts");
         })
         .catch(err => {
             console.log(err);

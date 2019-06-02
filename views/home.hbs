@@ -6,57 +6,23 @@
         <div class="hero-slides owl-carousel">
 
           <!-- Single Blog Post -->
+          {{#each this.posts}}
           <div class="single-blog-post d-flex align-items-center mb-50">
             <div class="post-thumb">
               <!-- 130x130 -->
-              <a href="nhung-cau-hoi-lon-avengers-endgame-phai-tra-loi"><img style="width: 130px; height: 130px;"
-                  src="https://znews-photo.zadn.vn/w480/Uploaded/bpivpjbp/2018_10_29/endgame5.jpg" alt=""></a>
+              <a href="{{url}}"><img style="width: 130px; height: 130px;"
+                  src="{{url_thumbnail}}" alt=""></a>
             </div>
             <div class="post-data">
-              <a href="nhung-cau-hoi-lon-avengers-endgame-phai-tra-loi" class="post-title">
-                <h6>Những câu hỏi lớn "Avengers: Endgame" phải trả lời</h6>
+              <a href="{{url}}" class="post-title">
+                <h6>{{title}}</h6>
               </a>
               <div class="post-meta">
-                <p class="post-date">14:08 20/04/2019</p>
+                <p class="post-date">{{posted_at}}</p>
               </div>
             </div>
           </div>
-
-          <!-- Single Blog Post -->
-          <div class="single-blog-post d-flex align-items-center mb-50">
-            <div class="post-thumb">
-              <!-- 130x130 -->
-              <a href="#"><img style="width: 130px; height: 130px;"
-                  src="https://znews-photo.zadn.vn/w480/Uploaded/wyhktpu/2019_04_19/samsungTV8K_1.jpg" alt=""></a>
-            </div>
-            <div class="post-data">
-              <a href="#" class="post-title">
-                <h6>Chi tiết TV QLED 8K đầu tiên của Samsung ở Việt Nam</h6>
-              </a>
-              <div class="post-meta">
-                <p class="post-date">19:00 19/04/2019</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Single Blog Post -->
-          <div class="single-blog-post d-flex align-items-center mb-50">
-            <div class="post-thumb">
-              <!-- 130x130 -->
-              <a href="#"><img style="width: 130px; height: 130px;"
-                  src="https://znews-photo.zadn.vn/w480/Uploaded/Wagtrb/2019_04_19/khai_mac_sach_3_zing__Copy.JPG"
-                  alt=""></a>
-            </div>
-            <div class="post-data">
-              <a href="#" class="post-title">
-                <h6>Khai mạc Ngày sách Việt Nam tại TP.HCM</h6>
-              </a>
-              <div class="post-meta">
-                <p class="post-date">18:43 19/04/2019</p>
-              </div>
-            </div>
-          </div>
-
+          {{/each}}
         </div>
       </div>
     </div>

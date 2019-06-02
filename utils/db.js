@@ -5,19 +5,19 @@ var createConnection = () => {
 
         //LOCAL
 
-        host: 'localhost',
-        port: '3306',
-        user: 'root',
-        password: '',
-        database: 'viralstory',
+        // host: 'localhost',
+        // port: '3306',
+        // user: 'root',
+        // password: '',
+        // database: 'viralstory',
 
         // HOST
 
-        // host: 'remotemysql.com',
-        // port: '3306',
-        // user: 'z3zQ5c6IwE',
-        // password: 'byAreXw1bD',
-        // database: 'z3zQ5c6IwE',
+        host: 'remotemysql.com',
+        port: '3306',
+        user: 'z3zQ5c6IwE',
+        password: 'byAreXw1bD',
+        database: 'z3zQ5c6IwE',
     });
 }
 
