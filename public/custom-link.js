@@ -42,7 +42,7 @@ $('input[name=name]').keyup(function(e) {
     var date = Date.now().toString();
     date = date.substr();
 
-    link = '/' + name + '-' + date;
+    link = name + '-' + date;
 
     if (name != '') {
         $('input[name=url]').val(link);
@@ -60,7 +60,7 @@ $('input[name=title]').keyup(function(e) {
     var date = Date.now().toString();
     date = date.substr();
 
-    link = '/' + name + '-' + date;
+    link = name + '-' + date;
 
     if (name != '') {
         $('input[name=url]').val(link);

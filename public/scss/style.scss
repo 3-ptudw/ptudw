@@ -9,6 +9,7 @@
 - Template URL: http://colorlib.com
 - Version: 1.0.0 */
 
+
 /* ###### Index of Stylesheet ######
 :: 1.0 Import Fonts
 :: 2.0 Import All CSS
@@ -19,6 +20,7 @@
 :: 7.0 Blog Post Area
 :: 8.0 Footer Area
 :: 9.0 Contact Area */
+
 
 /* :: 1.0 Import Fonts */
 
@@ -55,7 +57,6 @@ h6 {
     color: $secondary-color;
     line-height: 1.3;
     font-weight: 700;
-
 }
 
 p {
@@ -89,6 +90,7 @@ img {
     height: auto;
     max-width: 100%;
 }
+
 
 /* Spacing */
 
@@ -164,6 +166,7 @@ img {
     margin-right: 50px !important;
 }
 
+
 /* Height */
 
 .height-400 {
@@ -186,6 +189,7 @@ img {
     height: 800px !important;
 }
 
+
 /* Section Padding */
 
 .section-padding-50 {
@@ -207,6 +211,7 @@ img {
     padding-top: 100px;
     padding-bottom: 100px;
 }
+
 
 /* Miscellaneous */
 
@@ -260,6 +265,7 @@ textarea:focus {
     border-color: transparent;
 }
 
+
 /* ScrollUp */
 
 #scrollUp {
@@ -283,6 +289,7 @@ textarea:focus {
         right: 30px;
     }
 }
+
 
 /* Button */
 
@@ -333,6 +340,7 @@ textarea:focus {
         @include bg-gradients;
     }
 }
+
 
 /* :: 4.0 Header Area */
 
@@ -402,7 +410,6 @@ textarea:focus {
             }
         }
     }
-
     .viral-news-main-menu {
         position: relative;
         width: 100%;
@@ -437,7 +444,7 @@ textarea:focus {
             .classynav ul li.active a {
                 color: $hover-color;
             }
-            .classynav > ul > li > a {
+            .classynav>ul>li>a {
                 text-transform: uppercase;
                 padding: 12px 12px 11px;
                 background-color: transparent;
@@ -464,7 +471,6 @@ textarea:focus {
             }
         }
     }
-
     /* Search Form Area */
     .viral-search-form {
         position: fixed;
@@ -564,6 +570,7 @@ textarea:focus {
     }
 }
 
+
 /* :: 5.0 Hero Area */
 
 .hero-area {
@@ -573,6 +580,7 @@ textarea:focus {
     padding-top: 50px;
     border-bottom: 5px solid $hover-color;
 }
+
 
 /* :: 6.0 Welcome Slides Area */
 
@@ -659,6 +667,7 @@ textarea:focus {
         @include display-flex(flex);
     }
 }
+
 
 /* :: 7.0 Blog Post Area */
 
@@ -1338,7 +1347,7 @@ textarea:focus {
     input[type=radio] {
         display: none;
     }
-    input[type="radio"] + label {
+    input[type="radio"]+label {
         padding-left: 60px;
         user-select: none;
         -webkit-user-select: none;
@@ -1355,7 +1364,7 @@ textarea:focus {
         line-height: 55px;
         @include trans-duration(100ms);
     }
-    input[type=radio] + label:before {
+    input[type=radio]+label:before {
         content: '';
         position: absolute;
         left: 25px;
@@ -1369,12 +1378,12 @@ textarea:focus {
         @include trans-duration(100ms);
         @include transform(translateY(-50%));
     }
-    input[type=radio]:checked + label:before {
+    input[type=radio]:checked+label:before {
         content: '';
         background-color: $hover-color;
         border: 9px solid #fff;
     }
-    input[type=radio]:checked + label {
+    input[type=radio]:checked+label {
         @include bg-gradients;
         color: #fff;
     }
@@ -1455,6 +1464,7 @@ textarea:focus {
     background-color: #eff4f9;
 }
 
+
 /* :: 8.0 Footer Area */
 
 .footer-area {
@@ -1528,6 +1538,7 @@ textarea:focus {
     }
 }
 
+
 /* :: 9.0 Contact Area */
 
 .single-contact-information {
@@ -1576,6 +1587,7 @@ textarea:focus {
         margin-bottom: 70px;
     }
 }
+
 .contact-info-details {
     @media #{$breakpoint-xs} {
         @include flex-wrap(wrap);

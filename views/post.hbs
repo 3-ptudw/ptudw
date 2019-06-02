@@ -1,0 +1,320 @@
+{{#if this.error}}
+<div class="alert alert-danger" role="alert">
+    Invalid link. <a href="/" class="alert-link">Go back</a>.
+</div>
+{{else}}
+<!-- ##### Viral News Breadcumb Area Start ##### -->
+<div class="viral-news-breadcumb-area section-padding-50">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center">
+
+            <!-- Breadcumb Area -->
+            <div class="col-12 col-md-4">
+                <h3>{{this.post.id_category}}</h3>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">ID_PROJECT</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{this.post.id_category}}</li>
+                    </ol>
+                </nav>
+            </div>
+
+            <!-- Add Widget -->
+            <div class="col-12 col-md-8">
+                <div class="add-widget">
+                    <a href="#"><img src="/img/bg-img/add2.png" alt=""></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Viral News Breadcumb Area End ##### -->
+
+<!-- ##### Blog Area Start ##### -->
+<div class="blog-area section-padding-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg-11">
+                <div class="blog-posts-area">
+
+                    <!-- Single Featured Post -->
+                    <div class="single-blog-post-details">
+                        <div class="post-data">
+                            <h2 class="post-title">
+                                {{this.post.title}}
+                            </h2>
+                            <a href="phim-anh" class="post-catagory">ID_PROJECT</a>
+                            <div class="post-meta">
+
+                                <!-- Post Details Meta Data -->
+                                <div
+                                    class="post-details-meta-data mb-50 d-flex align-items-center justify-content-between">
+                                    <!-- Post Author & Date -->
+                                    <div class="post-authors-date">
+                                        <p class="post-author">Đăng bởi <a href="#">ID_USER</a></p>
+                                        <p class="post-date">{{this.post.posted_at}}</p>
+                                        <p class="post-author">Tag <a href="#">{{this.post.tag}}</a></p>
+                                    </div>
+                                    <!-- View Comments -->
+                                    <div class="view-comments">
+                                        <p class="views">{{this.post.views}} lượt xem</p>
+                                        <a href="#comments" class="comments">3 bình luận</a>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    {{{this.post.content}}}
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- Login with Facebook to post comments -->
+                        <div class="login-with-facebook my-5">
+                            <a href="#">Login with Facebook to post comments</a>
+                        </div>
+                    </div>
+
+                    <!-- Comment Area Start -->
+                    <div class="comment_area clearfix" id="comments">
+                        <h4 class="title mb-70">3 comment</h4>
+
+                        <ol>
+                            <!-- Single Comment Area -->
+                            <li class="single_comment_area">
+                                <!-- Comment Content -->
+                                <div class="comment-content d-flex">
+                                    <!-- Comment Author -->
+                                    <div class="comment-author">
+                                        <img src="/img/bg-img/t1.jpg" alt="author">
+                                    </div>
+                                    <!-- Comment Meta -->
+                                    <div class="comment-meta">
+                                        <a href="#" class="post-author">Christian Williams</a>
+                                        <a href="#" class="post-date">April 15, 2018</a>
+                                        <p>Donec turpis erat, scelerisque id euismod sit amet, fermentum vel dolor.
+                                            Nulla facilisi. Sed pellen tesque lectus et accu msan aliquam. Fusce
+                                            lobortis cursus quam, id mattis sapien.</p>
+                                    </div>
+                                </div>
+                                <ol class="children">
+                                    <li class="single_comment_area">
+                                        <!-- Comment Content -->
+                                        <div class="comment-content d-flex">
+                                            <!-- Comment Author -->
+                                            <div class="comment-author">
+                                                <img src="/img/bg-img/t2.jpg" alt="author">
+                                            </div>
+                                            <!-- Comment Meta -->
+                                            <div class="comment-meta">
+                                                <a href="#" class="post-author">Sandy Doe</a>
+                                                <a href="#" class="post-date">April 15, 2018</a>
+                                                <p>Donec turpis erat, scelerisque id euismod sit amet, fermentum vel
+                                                    dolor. Nulla facilisi. Sed pellen tesque lectus et accu msan
+                                                    aliquam. Fusce lobortis cursus quam, id mattis sapien.</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ol>
+                            </li>
+
+                            <!-- Single Comment Area -->
+                            <li class="single_comment_area">
+                                <!-- Comment Content -->
+                                <div class="comment-content d-flex">
+                                    <!-- Comment Author -->
+                                    <div class="comment-author">
+                                        <img src="/img/bg-img/t3.jpg" alt="author">
+                                    </div>
+                                    <!-- Comment Meta -->
+                                    <div class="comment-meta">
+                                        <a href="#" class="post-author">Christian Williams</a>
+                                        <a href="#" class="post-date">April 15, 2018</a>
+                                        <p>Donec turpis erat, scelerisque id euismod sit amet, fermentum vel dolor.
+                                            Nulla facilisi. Sed pellen tesque lectus et accu msan aliquam. Fusce
+                                            lobortis cursus quam, id mattis sapien.</p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+
+                    <div class="post-a-comment-area">
+                        <h4 class="mb-70">Leave a comment</h4>
+
+                        <!-- Reply Form -->
+                        <div class="contact-form-area">
+                            <form action="#" method="post">
+                                <div class="row">
+                                    <div class="col-12 col-lg-6">
+                                        <input type="text" class="form-control" id="name" placeholder="Name*">
+                                    </div>
+                                    <div class="col-12 col-lg-6">
+                                        <input type="email" class="form-control" id="email" placeholder="Email*">
+                                    </div>
+                                    <div class="col-12">
+                                        <input type="text" class="form-control" id="subject" placeholder="Website">
+                                    </div>
+                                    <div class="col-12">
+                                        <textarea name="message" class="form-control" id="message" cols="30" rows="10"
+                                            placeholder="Message"></textarea>
+                                    </div>
+                                    <div class="col-12">
+                                        <button class="btn viral-btn mt-30" type="submit">Submit Comment</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <br>
+                    <!-- Related Articles Area -->
+                    <div class="related-articles-">
+                        <h4 class="mb-70">Bài viết cùng chuyên mục</h4>
+
+                        <div class="row">
+                            <!-- Single Post -->
+                            <div class="col-12 col-lg-12">
+                                <div class="single-blog-post style-3 style-5 d-flex align-items-center mb-50">
+                                    <!-- Post Thumb -->
+                                    <div class="post-thumb">
+                                        <a href="#"><img style="width: 508px; height: 293px;"
+                                                src="https://znews-photo.zadn.vn/w480/Uploaded/mdf_rkxrxd/2019_04_29/Avengers_endgame_1_1.jpg"
+                                                alt=""></a>
+                                    </div>
+                                    <!-- Post Data -->
+                                    <div class="post-data">
+                                        <a href="#" class="post-catagory">ID_PROJECT</a>
+                                        <a href="#" class="post-title">
+                                            <h6>Trong kịch bản đầu tiên, 'Avengers: Endgame' diễn biến như thế nào?</h6>
+                                        </a>
+                                        <div class="post-meta">
+                                            <p class="post-author">Tag <a href="#">Avengers Endgame</a>, <a
+                                                    href="#">Tony Stark</a> </p>
+                                            <p class="post-date">5 Hours Ago</p>
+                                        </div>
+                                        <p class="post-excerp">Để cho ra một siêu phẩm hoàn hảo nhất có thể, biên kịch
+                                            của 'Avengers: Endgame' đã phải dựng lên nhiều ý tưởng khác nhau trước khi
+                                            đi đến kịch bản cuối cùng.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Single Post -->
+                            <div class="col-12 col-lg-12">
+                                <div class="single-blog-post style-3 style-5 d-flex align-items-center mb-50">
+                                    <!-- Post Thumb -->
+                                    <div class="post-thumb">
+                                        <a href="#"><img style="width: 508px; height: 293px;"
+                                                src="https://znews-photo.zadn.vn/w480/Uploaded/xbhunku/2019_04_29/e15.jpg"
+                                                alt=""></a>
+                                    </div>
+                                    <!-- Post Data -->
+                                    <div class="post-data">
+                                        <a href="#" class="post-catagory">ID_PROJECT</a>
+                                        <a href="#" class="post-title">
+                                            <h6>Những chi tiết thú vị ẩn giấu trong bom tấn 'Avengers: Endgame'</h6>
+                                        </a>
+                                        <div class="post-meta">
+                                            <p class="post-author">Tag <a href="#">Avengers Endgame</a>, <a
+                                                    href="#">Tony Stark</a> </p>
+                                            <p class="post-date">5 Hours Ago</p>
+                                        </div>
+                                        <p class="post-excerp">Bom tấn siêu anh hùng mới nhất của Marvel Studios chẳng
+                                            khác nào một bữa đại tiệc 'trứng phục sinh' để các fan tìm kiếm, soi xét, và
+                                            suy đoán.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Single Post -->
+                            <div class="col-12 col-lg-12">
+                                <div class="single-blog-post style-3 style-5 d-flex align-items-center mb-50">
+                                    <!-- Post Thumb -->
+                                    <div class="post-thumb">
+                                        <a href="#"><img style="width: 508px; height: 293px;"
+                                                src="https://znews-photo.zadn.vn/w480/Uploaded/bzcvolp3/2019_04_29/ironmantony.jpg"
+                                                alt=""></a>
+                                    </div>
+                                    <!-- Post Data -->
+                                    <div class="post-data">
+                                        <a href="#" class="post-catagory">ID_PROJECT</a>
+                                        <a href="#" class="post-title">
+                                            <h6>Iron Man - siêu anh hùng vĩ đại nhất</h6>
+                                        </a>
+                                        <div class="post-meta">
+                                            <p class="post-author">Tag <a href="#">Avengers Endgame</a>, <a
+                                                    href="#">Tony Stark</a> </p>
+                                            <p class="post-date">5 Hours Ago</p>
+                                        </div>
+                                        <p class="post-excerp">Trong thế giới truyện tranh, Iron Man thua kém Batman và
+                                            Superman của DC, Spider-Man và Wolverine từ Marvel. Nhưng trên màn ảnh lớn,
+                                            không ai có thể so được với Tony Stark.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Single Post -->
+                            <div class="col-12 col-lg-12">
+                                <div class="single-blog-post style-3 style-5 d-flex align-items-center mb-50">
+                                    <!-- Post Thumb -->
+                                    <div class="post-thumb">
+                                        <a href="#"><img style="width: 508px; height: 293px;"
+                                                src="https://znews-photo.zadn.vn/w480/Uploaded/mdf_rkxrxd/2019_04_29/avaend1.jpeg"
+                                                alt=""></a>
+                                    </div>
+                                    <!-- Post Data -->
+                                    <div class="post-data">
+                                        <a href="#" class="post-catagory">ID_PROJECT</a>
+                                        <a href="#" class="post-title">
+                                            <h6>Với 1,2 tỷ USD doanh thu tuần đầu, 'Endgame' liệu có vượt 'Avatar'?</h6>
+                                        </a>
+                                        <div class="post-meta">
+                                            <p class="post-author">Tag <a href="#">Avengers Endgame</a>, <a
+                                                    href="#">Tony Stark</a> </p>
+                                            <p class="post-date">5 Hours Ago</p>
+                                        </div>
+                                        <p class="post-excerp">Doanh thu 1,2 tỷ USD sau tuần đầu công chiếu liệu có phải
+                                            là tín hiệu cho thấy "Avengers: Endgame" sẽ soán ngôi "Avatar" ở danh sách
+                                            phim có doanh thu cao nhất mọi thời đại?</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Single Post -->
+                        <div class="col-12 col-lg-12">
+                            <div class="single-blog-post style-3 style-5 d-flex align-items-center mb-50">
+                                <!-- Post Thumb -->
+                                <div class="post-thumb">
+                                    <a href="#"><img style="width: 508px; height: 293px;"
+                                            src="https://znews-photo.zadn.vn/w480/Uploaded/xbhunku/2019_04_29/58379605_379647249302285_3675327566727610368_n.jpg"
+                                            alt=""></a>
+                                </div>
+                                <!-- Post Data -->
+                                <div class="post-data">
+                                    <a href="#" class="post-catagory">ID_PROJECT</a>
+                                    <a href="#" class="post-title">
+                                        <h6>Avengers: 'Endgame' thu hơn 112 tỷ đồng tại Việt Nam chỉ sau 3 ngày</h6>
+                                    </a>
+                                    <div class="post-meta">
+                                        <p class="post-author">Tag <a href="#">Avengers Endgame</a>, <a href="#">Tony
+                                                Stark</a> </p>
+                                        <p class="post-date">5 Hours Ago</p>
+                                    </div>
+                                    <p class="post-excerp">Giống như tại nhiều nơi trên thế giới, 'Avengers: Endgame'
+                                        lập kỳ tích trong ba ngày trình chiếu đầu tiên ở Việt Nam.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<!-- ##### Blog Area End ##### -->
+{{/if}}

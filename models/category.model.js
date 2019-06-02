@@ -25,6 +25,10 @@ module.exports = {
         return db.load(`select * from categories where id = ${id}`);
     },
 
+    getURL: url => {
+        return db.load(`select * from categories where url = "${url}"`);
+    },
+
     add: entity => {
         return db.add('categories', entity);
     },
