@@ -65,16 +65,25 @@ router.get("/edit/:id", (req, res) => {
     postModel
         .single(id)
         .then(rows => {
-            if (rows.length > 0) {
-                res.render("admin/posts/edit", {
-                    error: false,
-                    post: rows[0]
+            categoryModel
+                .all()
+                .then(rows1 => {
+                    if (rows.length > 0) {
+                        res.render("admin/posts/edit", {
+                            error: false,
+                            post: rows[0],
+                            categories: rows1,
+                        });
+                    } else {
+                        res.render("admin/posts/edit", {
+                            error: true
+                        });
+                    }
+                })
+                .catch(err => {
+                    console.log(err);
+                    res.end("error occured.");
                 });
-            } else {
-                res.render("admin/posts/edit", {
-                    error: true
-                });
-            }
         })
         .catch(err => {
             console.log(err);

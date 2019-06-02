@@ -6,9 +6,10 @@
     <thead>
       <tr>
         <th scope="col" class="text-center">#</th>
-        <th scope="col">Name</th>
+        <th scope="col">Title</th>
+        <th>Người đăng</th>
         <th scope="col">Status</th>
-        <th scope="col">of Project</th>
+        <th scope="col">of Category</th>
         <th scope="col" class="text-right">
           <a class="btn btn-outline-success" href="/admin/posts/add" role="button">
             <i class="fa fa-plus" aria-hidden="true"></i>
@@ -21,7 +22,8 @@
       {{#each this.posts}}
       <tr>
         <th scope="row" class="text-center">{{id}}</th>
-        <td>{{name}}</td>
+        <td>{{title}}</td>
+        <td>???</td>
         <td>
           {{#if status}}
           <p style="color: green; font-weight: bold;">
@@ -33,7 +35,7 @@
           </p>
           {{/if}}
         </td>
-        <td>{{name_project}}</td>
+        <td>{{name_category}}</td>
         <td class="text-right">
           <a class="btn btn-primary btn-sm" href="/admin/posts/edit/{{id}}" role="button">
             <i class="fa fa-edit" aria-hidden="true"></i>

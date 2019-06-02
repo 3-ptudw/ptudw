@@ -1,35 +1,33 @@
 <div class="card shadow">
   <h4 class="card-header">
-    Edit Category
+    Edit Post
   </h4>
   <div class="card-body">
     {{#if this.error}}
     <div class="alert alert-danger" role="alert">
-      Invalid categoryId. <a href="/admin/categories" class="alert-link">Go back</a>.
+      Invalid PostId. <a href="/admin/posts" class="alert-link">Go back</a>.
     </div>
     {{else}}
-    <form method="POST" action="/admin/categories/update">
+    <form method="POST" action="/admin/posts/update">
       <div class="form-group">
-        <label for="txtID">#</label>
-        <input readonly type="text" class="form-control" id="txtID" name="id" value="{{this.category.id}}">
+        <label for="id">#</label>
+        <input readonly type="text" class="form-control" id="id" name="id" value="{{this.post.id}}">
       </div>
       <div class="form-group">
-        <label for="txtName">Category</label>
-        <input type="text" class="form-control" id="txtName" name="name" autofocus placeholder="Enter category name"
-          value="{{this.category.name}}">
-      </div>
-
-      <div class="form-group">
-        {{!-- <input type="hidden" name="url" /> --}}
-        {{!-- <label>Link</label> --}}
-        <input type="hidden" placeholder="" name="url" class="form-control" value="{{this.category.url}}">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" id="title" name="title" autofocus placeholder="Enter Post name"
+          value="{{this.post.title}}">
       </div>
 
       <div class="form-group">
-        <label for="txtProject">Project</label>
-        <select name="id_project" id="txtProject" class="form-control">
-          <option value="{{this.category.id_project}}" selected>Hiện tại: {{this.category.id_project}}</option>
-          {{#each this.projects}}
+        <input type="hidden" placeholder="" name="url" class="form-control" value="{{this.post.url}}">
+      </div>
+
+      <div class="form-group">
+        <label for="id_category">Category</label>
+        <select name="id_category" id="id_category" class="form-control">
+          <option value="{{this.post.id_category}}" selected>Hiện tại: {{this.post.id_category}}</option>
+          {{#each this.categories}}
           {{!-- {{#if id}}
           {{/if}} --}}
           <option value="{{id}}">{{id}}: {{name}}</option>
@@ -38,10 +36,40 @@
       </div>
 
       <div class="form-group">
+        <label for="url_thumbnail">Thumbnail</label>
+        <input type="text" class="form-control" id="url_thumbnail" name="url_thumbnail"
+          placeholder="Enter url Thumbnail" value="{{this.post.url_thumbnail}}">
+      </div>
+
+      <div class="form-group">
+        <label for="abstract">Abstract</label>
+        <input type="text" class="form-control" id="abstract" name="abstract" placeholder="Enter abstract"
+          value="{{this.post.abstract}}">
+      </div>
+
+      <div class="form-group">
+        <label for="content">Content</label>
+        <textarea name="content" id="content" cols="30" rows="10" class="form-control"
+          placeholder="Enter content">{{this.post.url_thumbnail}}</textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="tag">Tag</label>
+        <input type="text" class="form-control" id="tag" name="tag" placeholder="Enter abstract"
+          value="{{this.post.tag}}">
+      </div>
+
+      <div class="form-group">
+        <label for="posted_at">Time Post</label>
+        <input type="text" class="form-control" id="posted_at" name="posted_at" value="{{this.post.posted_at}}">
+      </div>
+
+
+      <div class="form-group">
         <label for="status">Status</label>
         <select name="status" id="status" class="form-control">
-          <option value="{{this.category.status}}">Hiện tại:
-            {{#if this.category.status}}
+          <option value="{{this.post.status}}">Hiện tại:
+            {{#if this.post.status}}
             Đã duyệt
             {{else}}
             Chưa duyệt
@@ -51,7 +79,7 @@
           <option value="1">Đã duyệt</option>
         </select>
       </div>
-      <a class="btn btn-primary" href="/admin/categories" role="button">
+      <a class="btn btn-primary" href="/admin/posts" role="button">
         <i class="fa fa-backward" aria-hidden="true"></i>
         List
       </a>
