@@ -7,9 +7,11 @@
   <title>Dashboard</title>
 
   <link rel="stylesheet" href="/admin/style.css">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  {{!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"> --}}
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
   <style>
     #loader {
       transition: all .3s ease-in-out;
@@ -190,9 +192,52 @@
   <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <script type="text/javascript"
     src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
   <script type="text/javascript" src="/admin/vendor.js"></script>
   <script type="text/javascript" src="/admin/bundle.js"></script>
   <script type="text/javascript" src="/custom-link.js"></script>
+
+
+  <script>
+    $(function () {
+      $('input[name="posted_at"]').daterangepicker({
+        singleDatePicker: true,
+        timePicker24Hour: true,
+        timePicker: true,
+        showDropdowns: true,
+        "drops": "up",
+        locale: {
+          format: 'YYYY-MM-DD HH:mm'
+        }
+      });
+    });
+  </script>
+
+  {{!-- <script>
+    $('#id_project').on('change', function () {
+      var id = $(this).val();
+      $.ajax({
+        url: '/admin/category/id_project' + id,
+        type: "get",
+        success: function (data) {
+          var html = '';
+          $('#id_category').children().remove();
+
+          var list = data.categories;
+        //  console.log(data);
+        //  for (var i = 0; i < list.length; i++) {
+        //    html += '<option value="' + list[i].id + '">' + list[i].name + '</option>';
+        //  }
+          $('#id_category').append(html);
+        },
+        error: function (data) {
+          console.log(data);
+        }
+      });
+    });
+  </script> --}}
 
   <script>
     $('.table').on('click', '.btn-delete-project', function () {
@@ -304,6 +349,8 @@
       })
     });
   </script>
+
+
 
 </body>
 

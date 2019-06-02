@@ -17,6 +17,10 @@ module.exports = {
         return db.load(`select count(*) as total from categories where id_project = ${id}`);
     },
 
+    getByProject: id => {
+        return db.load(`select * from categories where id_project = ${id}`);
+    },
+
     single: id => {
         return db.load(`select * from categories where id = ${id}`);
     },

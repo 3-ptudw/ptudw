@@ -23,7 +23,7 @@ router.get("/add", (req, res) => {
         .all()
         .then(rows => {
             res.render("admin/categories/add", {
-                projects: rows
+                projects: rows,
             });
         })
         .catch(err => {
@@ -43,6 +43,22 @@ router.post("/add", (req, res) => {
             res.end("error occured.");
         });
 });
+
+// router.get("/id_project/:id", (req, res) => {
+//     var id = req.params.id;
+//     console.log(id);
+//     categoryModel
+//         .getByProject(id)
+//         .then(rows => {
+//             res.json({
+//                 categories: rows,
+//             });
+//         })
+//         .catch(err => {
+//             console.log(err);
+//             res.end("error occured.");
+//         });
+// });
 
 router.get("/edit/:id", (req, res) => {
     var id = req.params.id;

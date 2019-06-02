@@ -52,6 +52,24 @@ $('input[name=name]').keyup(function(e) {
         $('input[name=link]').val('');
     }
 });
+
+$('input[name=title]').keyup(function(e) {
+    var name = $(this).val();
+
+    name = converStrtToLink(name);
+    var date = Date.now().toString();
+    date = date.substr();
+
+    link = '/' + name + '-' + date;
+
+    if (name != '') {
+        $('input[name=url]').val(link);
+        $('input[name=link]').val(link);
+    } else {
+        $('input[name=url]').val('');
+        $('input[name=link]').val('');
+    }
+});
 $('input[name=tab_name]').keyup(function(e) {
     var name = $(this).val();
 

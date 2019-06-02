@@ -1,5 +1,7 @@
 var express = require("express");
 var postModel = require("../../models/post.model");
+var projectModel = require("../../models/project.model");
+var categoryModel = require("../../models/category.model");
 
 var router = express.Router();
 
@@ -18,14 +20,32 @@ router.get("/", (req, res) => {
 });
 
 router.get("/add", (req, res) => {
-    res.render("admin/posts/add");
+    projectModel
+        .all()
+        .then(rows => {
+            categoryModel
+                .all()
+                .then(rows1 => {
+                    res.render("admin/posts/add", {
+                        projects: rows,
+                        categories: rows1,
+                    });
+                })
+                .catch(err => {
+                    console.log(err);
+                    res.end("error occured.");
+                });
+        })
+        .catch(err => {
+            console.log(err);
+            res.end("error occured.");
+        });
 });
 
 router.post("/add", (req, res) => {
     postModel
         .add(req.body)
         .then(id => {
-            // console.log(id);
             res.redirect("/admin/posts");
         })
         .catch(err => {
