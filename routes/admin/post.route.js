@@ -10,7 +10,8 @@ router.get("/", (req, res) => {
         .all()
         .then(rows => {
             res.render("admin/posts/index", {
-                posts: rows
+                posts: rows,
+                layout: 'admin.hbs',
             });
         })
         .catch(err => {
@@ -29,6 +30,7 @@ router.get("/add", (req, res) => {
                     res.render("admin/posts/add", {
                         projects: rows,
                         categories: rows1,
+                        layout: 'admin.hbs',
                     });
                 })
                 .catch(err => {
@@ -46,7 +48,9 @@ router.post("/add", (req, res) => {
     postModel
         .add(req.body)
         .then(id => {
-            res.redirect("/admin/posts");
+            res.redirect("/admin/posts", {
+                layout: 'admin.hbs',
+            });
         })
         .catch(err => {
             console.log(err);
@@ -58,7 +62,8 @@ router.get("/edit/:id", (req, res) => {
     var id = req.params.id;
     if (isNaN(id)) {
         res.render("admin/posts/edit", {
-            error: true
+            error: true,
+            layout: 'admin.hbs',
         });
     }
 
@@ -73,10 +78,12 @@ router.get("/edit/:id", (req, res) => {
                             error: false,
                             post: rows[0],
                             categories: rows1,
+                            layout: 'admin.hbs',
                         });
                     } else {
                         res.render("admin/posts/edit", {
-                            error: true
+                            error: true,
+                            layout: 'admin.hbs',
                         });
                     }
                 })
@@ -95,7 +102,9 @@ router.post("/update", (req, res) => {
     postModel
         .update(req.body)
         .then(n => {
-            res.redirect("/admin/posts");
+            res.redirect("/admin/posts", {
+                layout: 'admin.hbs',
+            });
         })
         .catch(err => {
             console.log(err);
@@ -107,7 +116,9 @@ router.get("/delete/:id", (req, res) => {
     postModel
         .delete(req.params.id)
         .then(n => {
-            res.redirect("/admin/posts");
+            res.redirect("/admin/posts", {
+                layout: 'admin.hbs',
+            });
         })
         .catch(err => {
             console.log(err);

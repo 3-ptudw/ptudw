@@ -9,7 +9,8 @@ router.get("/", (req, res) => {
         .all()
         .then(rows => {
             res.render("admin/categories/index", {
-                categories: rows
+                categories: rows,
+                layout: 'admin.hbs',
             });
         })
         .catch(err => {
@@ -24,6 +25,7 @@ router.get("/add", (req, res) => {
         .then(rows => {
             res.render("admin/categories/add", {
                 projects: rows,
+                layout: 'admin.hbs',
             });
         })
         .catch(err => {
@@ -36,7 +38,9 @@ router.post("/add", (req, res) => {
     categoryModel
         .add(req.body)
         .then(id => {
-            res.redirect("/admin/categories");
+            res.redirect("/admin/categories", {
+                layout: 'admin.hbs',
+            });
         })
         .catch(err => {
             console.log(err);
@@ -64,7 +68,8 @@ router.get("/edit/:id", (req, res) => {
     var id = req.params.id;
     if (isNaN(id)) {
         res.render("admin/categories/edit", {
-            error: true
+            error: true,
+            layout: 'admin.hbs',
         });
     }
 
@@ -78,11 +83,13 @@ router.get("/edit/:id", (req, res) => {
                         res.render("admin/categories/edit", {
                             error: false,
                             projects: rows1,
-                            category: rows[0]
+                            category: rows[0],
+                            layout: 'admin.hbs',
                         });
                     } else {
                         res.render("admin/categories/edit", {
-                            error: true
+                            error: true,
+                            layout: 'admin.hbs',
                         });
                     }
 
@@ -102,7 +109,9 @@ router.post("/update", (req, res) => {
     categoryModel
         .update(req.body)
         .then(n => {
-            res.redirect("/admin/categories");
+            res.redirect("/admin/categories", {
+                layout: 'admin.hbs',
+            });
         })
         .catch(err => {
             console.log(err);
@@ -114,7 +123,9 @@ router.get("/delete/:id", (req, res) => {
     categoryModel
         .delete(req.params.id)
         .then(n => {
-            res.redirect("/admin/categories");
+            res.redirect("/admin/categories", {
+                layout: 'admin.hbs',
+            });
         })
         .catch(err => {
             console.log(err);

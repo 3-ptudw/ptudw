@@ -1,356 +1,435 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
-  <title>Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
 
-  <link rel="stylesheet" href="/admin/style.css">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  {{!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"> --}}
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.css" />
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-  <style>
-    #loader {
-      transition: all .3s ease-in-out;
-      opacity: 1;
-      visibility: visible;
-      position: fixed;
-      height: 100vh;
-      width: 100%;
-      background: #fff;
-      z-index: 90000
-    }
-
-    #loader.fadeOut {
-      opacity: 0;
-      visibility: hidden
-    }
-
-    .spinner {
-      width: 40px;
-      height: 40px;
-      position: absolute;
-      top: calc(50% - 20px);
-      left: calc(50% - 20px);
-      background-color: #333;
-      border-radius: 100%;
-      -webkit-animation: sk-scaleout 1s infinite ease-in-out;
-      animation: sk-scaleout 1s infinite ease-in-out
-    }
-
-    @-webkit-keyframes sk-scaleout {
-      0% {
-        -webkit-transform: scale(0)
-      }
-
-      100% {
-        -webkit-transform: scale(1);
-        opacity: 0
-      }
-    }
-
-    @keyframes sk-scaleout {
-      0% {
-        -webkit-transform: scale(0);
-        transform: scale(0)
-      }
-
-      100% {
-        -webkit-transform: scale(1);
-        transform: scale(1);
-        opacity: 0
-      }
-    }
-  </style>
-
-
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/style.css">
 </head>
 
-<body class="app">
-  <div id="loader">
-    <div class="spinner"></div>
-  </div>
-  <script>
-    window.addEventListener('load', function load() {
-      const loader = document.getElementById('loader');
-      setTimeout(function () {
-        loader.classList.add('fadeOut');
-      }, 300);
-    });
-  </script>
-  <div>
-    <div class="sidebar">
-      <div class="sidebar-inner">
-        <div class="sidebar-logo">
-          <div class="peers ai-c fxw-nw">
-            <div class="peer peer-greed"><a class="sidebar-link td-n" href="#">
-                <div class="peers ai-c fxw-nw">
-                  <div class="peer">
-                    <div class="logo"><img src="/admin/assets/static/images/logo.png" alt=""></div>
-                  </div>
-                  <div class="peer peer-greed">
-                    <h5 class="lh-1 mB-0 logo-text">Adminator</h5>
-                  </div>
+<body>
+    <!-- ##### Header Area Start ##### -->
+    <header class="header-area">
+
+        <!-- Top Header Area -->
+        <div class="top-header-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="top-header-content d-flex align-items-center justify-content-between">
+                            <!-- Breaking News Area -->
+                            <div class="top-breaking-news-area">
+                                <div id="breakingNewsTicker" class="ticker">
+                                    <ul>
+                                        <li><a href="nhung-cau-hoi-lon-avengers-endgame-phai-tra-loi">Những câu hỏi lớn
+                                                "Avengers: Endgame" phải trả lời</a></li>
+                                        <li><a href="#">Khai mạc Ngày sách Việt Nam tại TP.HCM</a></li>
+                                        <li><a href="#">Chi tiết TV QLED 8K đầu tiên của Samsung ở Việt Nam</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Social Info Area-->
+                            <div class="top-social-info-area">
+                                <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </a></div>
-            <div class="peer">
-              <div class="mobile-toggle sidebar-toggle"><a href="" class="td-n"><i
-                    class="fa fa-arrow-circle-left"></i></a>
-              </div>
             </div>
-          </div>
         </div>
-        <ul class="sidebar-menu scrollable pos-r">
-          <li class="nav-item mT-30 actived">
-            <a class="sidebar-link" href="/admin/projects">
-              <span class="icon-holder">
-                <i class="fa fa-microchip"></i>
-              </span>
-              <span class="title">Projects</span>
-            </a>
-          </li>
 
-          <li class="nav-item">
-            <a class="sidebar-link" href="/admin/categories">
-              <span class="icon-holder">
-                <i class="fa fa-cube"></i>
-              </span>
-              <span class="title">Categories</span>
-            </a>
-          </li>
+        <!-- Navbar Area -->
+        <div class="viral-news-main-menu" id="stickyMenu">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <!-- Menu -->
+                    <nav class="classy-navbar justify-content-between" id="viralnewsNav">
 
-          <li class="nav-item">
-            <a class="sidebar-link" href="/admin/posts">
-              <span class="icon-holder">
-                <i class="fa fa-windows"></i>
-              </span>
-              <span class="title">Posts</span>
-            </a>
-          </li>
+                        <!-- Logo -->
+                        <a class="nav-brand" href="/homepage"><img src="img/core-img/logo.png" alt="Logo"></a>
 
-        </ul>
-      </div>
-    </div>
-    <div class="page-container">
-      <div class="header navbar">
-        <div class="header-container">
-          <ul class="nav-left">
-            <li><a id="sidebar-toggle" class="sidebar-toggle" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
-            </li>
-            <li class="search-box"><a class="search-toggle no-pdd-right" href="javascript:void(0);"><i
-                  class="search-icon fa fa-search pdd-right-10"></i> <i
-                  class="search-icon-close fa fa-times pdd-right-10"></i></a></li>
-            <li class="search-input"><input class="form-control" type="text" placeholder="Search..."></li>
-          </ul>
-          <ul class="nav-right">
-            <li class="dropdown"><a href="" class="dropdown-toggle no-after peers fxw-nw ai-c lh-1"
-                data-toggle="dropdown">
-                <div class="peer mR-10"><img class="w-2r bdrs-50p" src="https://randomuser.me/api/portraits/men/10.jpg"
-                    alt=""></div>
-                <div class="peer"><span class="fsz-sm c-grey-900">NAT</span></div>
-              </a>
-              <ul class="dropdown-menu fsz-sm">
-                <li><a href="#" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700"><i class="fa fa-cog mR-10"></i>
-                    <span>Setting</span></a></li>
-                <li><a href="#" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700"><i class="fa fa-user mR-10"></i>
-                    <span>Profile</span></a></li>
-                <li><a href="#" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700"><i class="fa fa-envelope mR-10"></i>
-                    <span>Messages</span></a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="#" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700"><i class="fa fa-power-off mR-10"></i>
-                    <span>Logout</span></a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <main class="main-content bgc-grey-100">
-        <div id="mainContent">
-          <div class="row gap-20 masonry pos-r">
-            <div class="masonry-sizer col-md-6"></div>
-            <div class="masonry-item col-12">
-              {{{body}}}
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+
+                        <!-- Menu -->
+                        <div class="classy-menu">
+
+                            <!-- close btn -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+
+                            <!-- Nav Start -->
+                            <div class="classynav">
+                                <ul>
+                                    <li><a href="phim-anh">Phim ảnh</a></li>
+                                    <li><a href="#">Chuyên mục</a>
+                                        <ul class="dropdown">
+                                            <li><a href="#">Thời sự</a>
+                                                <ul class="dropdown">
+                                                    <li><a href="#">Chính trị</a></li>
+                                                    <li><a href="#">Giao giông</a></li>
+                                                    <li><a href="#">Đô thị</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">Pháp luật</a>
+                                                <ul class="dropdown">
+                                                    <li><a href="#">Pháp đình</a></li>
+                                                    <li><a href="#">Vụ án</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">Thế giới</a>
+                                                <ul class="dropdown">
+                                                    <li><a href="#">Quân sự</a></li>
+                                                    <li><a href="#">Tư liệu</a></li>
+                                                    <li><a href="#">Phân tích</a></li>
+                                                    <li><a href="#">Người việt bốn phương</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">Kinh doanh</a>
+                                                <ul class="dropdown">
+                                                    <li><a href="#">Bất động sản</a></li>
+                                                    <li><a href="#">Hàng không</a></li>
+                                                    <li><a href="#">Tài chính</a></li>
+                                                    <li><a href="#">Tiêu dùng</a></li>
+                                                    <li><a href="#">Doanh nhân</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">Công nghệ</a>
+                                                <ul class="dropdown">
+                                                    <li><a href="#">Mobile</a></li>
+                                                    <li><a href="#">AI</a></li>
+                                                    <li><a href="#">Smart Home</a></li>
+                                                    <li><a href="#">Startup</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">Thể thao</a>
+                                                <ul class="dropdown">
+                                                    <li><a href="#">Thể thao Việt Nam</a></li>
+                                                    <li><a href="#">Cup châu Âu</a></li>
+                                                    <li><a href="#">Thể thao thế giới</a></li>
+                                                    <li><a href="#">Bóng đá Anh</a></li>
+                                                    <li><a href="#">Bóng đá Việt Nam</a></li>
+                                                    <li><a href="#">Hậu trường thể thao</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">Giải trí</a>
+                                                <ul class="dropdown">
+                                                    <li><a href="#">Sao Việt</a></li>
+                                                    <li><a href="#">Sao châu Á</a></li>
+                                                    <li><a href="#">Sao Hollywood</a></li>
+                                                    <li><a href="#">Quize Article</a></li>
+                                                    <li><a href="#">Contact</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">Sống trẻ</a>
+                                                <ul class="dropdown">
+                                                    <li><a href="#">Gương mặt trẻ</a></li>
+                                                    <li><a href="#">Cộng đồng mạng</a></li>
+                                                    <li><a href="#">Sự kiện</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">Xe 360</a>
+                                                <ul class="dropdown">
+                                                    <li><a href="#">Mua xe</a></li>
+                                                    <li><a href="#">Lái xe</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">Âm nhạc</a>
+                                                <ul class="dropdown">
+                                                    <li><a href="#">Nhạc Việt</a></li>
+                                                    <li><a href="#">Nhạc Hàn</a></li>
+                                                    <li><a href="#">Nhạc Âu Mỹ</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">Phim ảnh</a>
+                                                <ul class="dropdown">
+                                                    <li><a href="#">Phim chiếu rạp</a></li>
+                                                    <li><a href="#">Phim truyền hình</a></li>
+                                                    <li><a href="#">Game Show</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">Thời trang</a>
+                                                <ul class="dropdown">
+                                                    <li><a href="#">Thời trang sao</a></li>
+                                                    <li><a href="#">Mặc đẹp</a></li>
+                                                    <li><a href="#">Làm đẹp</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">Xuất bản</a>
+                                                <ul class="dropdown">
+                                                    <li><a href="#">Tin tức xuất bản</a></li>
+                                                    <li><a href="#">Sách hay</a></li>
+                                                    <li><a href="#">Tác giả</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">Giáo dục</a>
+                                                <ul class="dropdown">
+                                                    <li><a href="#">Tuyển sinh 2019</a></li>
+                                                    <li><a href="#">Tư vấn</a></li>
+                                                    <li><a href="#">Du học</a></li>
+                                                    <li><a href="#">Học tiếng Anh</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">Sức khỏe</a>
+                                                <ul class="dropdown">
+                                                    <li><a href="#">Khỏe đẹp</a></li>
+                                                    <li><a href="#">Dinh dưỡng</a></li>
+                                                    <li><a href="#">Mẹ và Bé</a></li>
+                                                    <li><a href="#">Bệnh thường gặp</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">Du lịch</a>
+                                                <ul class="dropdown">
+                                                    <li><a href="#">Địa điểm du lịch</a></li>
+                                                    <li><a href="#">Kinh nghiệm du lịch</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">Ẩm thực</a>
+                                                <ul class="dropdown">
+                                                    <li><a href="#">Địa điểm ăn uống</a></li>
+                                                    <li><a href="#">Món ngon</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">Nhịp sống</a>
+                                                <ul class="dropdown">
+                                                    <li><a href="#">TTDN</a></li>
+                                                    <li><a href="#">Cười</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">Test</a>
+                                                <ul class="dropdown">
+                                                    <li><a href="#">Home</a></li>
+                                                    <li><a href="#">Catagories</a></li>
+                                                    <li><a href="#">Contact</a></li>
+                                                    <li><a href="#">Home</a></li>
+                                                    <li><a href="#">Catagories</a></li>
+                                                    <li><a href="#">Contact</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#">Tin game</a></li>
+                                    <li><a href="#">Cafebiz</a></li>
+                                    <li><a href="#">Videos</a></li>
+                                    <li><a href="#">Mega Menu</a>
+                                        <div class="megamenu">
+                                            <ul class="single-mega cn-col-4">
+                                                <li><a href="#">Thời sự</a></li>
+                                                <li><a href="#">Pháp luật</a></li>
+                                                <li><a href="#">Thế giới</a></li>
+                                                <li><a href="#">Kinh doanh</a></li>
+                                                <li><a href="#">Công nghệ</a></li>
+                                            </ul>
+                                            <ul class="single-mega cn-col-4">
+                                                <li><a href="#">Thể thao</a></li>
+                                                <li><a href="#">Giải trí</a></li>
+                                                <li><a href="#">Sống trẻ</a></li>
+                                                <li><a href="#">Xe 360</a></li>
+                                                <li><a href="#">Âm nhạc</a></li>
+                                            </ul>
+                                            <ul class="single-mega cn-col-4">
+                                                <li><a href="#">Phim ảnh</a></li>
+                                                <li><a href="#">Thời trang</a></li>
+                                                <li><a href="#">Xuất bản</a></li>
+                                                <li><a href="#">Giáo dục</a></li>
+                                                <li><a href="#">Sức khỏe</a></li>
+                                            </ul>
+                                            <ul class="single-mega cn-col-4">
+                                                <li><a href="#">Du lịch</a></li>
+                                                <li><a href="#">Ẩm thực</a></li>
+                                                <li><a href="#">Nhịp sống</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                                <!-- Search Button -->
+                                <div class="search-btn">
+                                    <i id="searchbtn" class="fa fa-search" aria-hidden="true"></i>
+                                </div>
+
+                                <!-- Search Form -->
+                                <div class="viral-search-form">
+                                    <form id="search" action="#" method="get">
+                                        <input type="text" name="search-terms" placeholder="Enter your keywords ...">
+                                        <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                    </form>
+                                </div>
+
+                                <!-- Video Post Button -->
+                                <div class="add-post-button">
+                                    <a href="../users/login" class="btn add-post-btn">Đăng nhập</a>
+                                </div>
+
+                            </div>
+                            <!-- Nav End -->
+                        </div>
+                    </nav>
+                </div>
             </div>
-          </div>
         </div>
-      </main>
-      <footer class="bdT ta-c p-30 lh-0 fsz-sm c-grey-600"><span>Copyright © 2017 Designed by <a
-            href="https://colorlib.com" target="_blank" title="Colorlib">Colorlib</a>. All rights reserved.</span>
-      </footer>
-    </div>
-  </div>
+    </header>
+    <!-- ##### Header Area End ##### -->
 
+    {{{body}}}
 
+    <!-- ##### Footer Area Start ##### -->
+    <footer class="footer-area">
 
-  <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-  <script type="text/javascript"
-    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  <script type="text/javascript"
-    src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.js"></script>
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-  <script type="text/javascript" src="/admin/vendor.js"></script>
-  <script type="text/javascript" src="/admin/bundle.js"></script>
-  <script type="text/javascript" src="/custom-link.js"></script>
+        <!-- Main Footer Area -->
+        <div class="main-footer-area">
+            <div class="container">
+                <div class="row">
 
+                    <!-- Footer Widget Area -->
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="footer-widget-area">
+                            <!-- Footer Logo -->
+                            <div class="footer-logo">
+                                <a href="/homepage"><img src="img/core-img/logo.png" alt=""></a>
+                            </div>
+                            <!-- Footer Nav -->
+                            <div class="footer-nav">
+                                <ul>
+                                    <li class="active"><a href="#">Top 10</a></li>
+                                    <li><a href="#">FAQ</a></li>
+                                    <li><a href="#">Funny</a></li>
+                                    <li><a href="#">Advertising</a></li>
+                                    <li><a href="#">Celebs</a></li>
+                                    <li><a href="#">Lifestyle</a></li>
+                                    <li><a href="#">Videos</a></li>
+                                    <li><a href="#">Travel</a></li>
+                                    <li><a href="#">Features</a></li>
+                                    <li><a href="#">Submit a video</a></li>
+                                    <li><a href="#">Don’tMiss</a></li>
+                                    <li><a href="#">Contact</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
 
-  <script>
-    $(function () {
-      $('input[name="posted_at"]').daterangepicker({
-        singleDatePicker: true,
-        timePicker24Hour: true,
-        timePicker: true,
-        showDropdowns: true,
-        "drops": "up",
-        locale: {
-          format: 'YYYY-MM-DD HH:mm'
-        }
-      });
-    });
-  </script>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <!-- Newsletter Widget -->
+                        <div class="newsletter-widget">
+                            <h4>Sign up to <br>our newsletter</h4>
+                            <form action="#" method="post">
+                                <input type="text" name="text" placeholder="Name">
+                                <input type="email" name="email" placeholder="Email">
+                                <button type="submit" class="btn w-100">Subscribe</button>
+                            </form>
+                        </div>
+                    </div>
 
-  {{!-- <script>
-    $('#id_project').on('change', function () {
-      var id = $(this).val();
-      $.ajax({
-        url: '/admin/category/id_project' + id,
-        type: "get",
-        success: function (data) {
-          var html = '';
-          $('#id_category').children().remove();
+                    <!-- Footer Widget Area -->
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="footer-widget-area">
+                            <!-- Widget Title -->
+                            <h4 class="widget-title">Latest articles</h4>
 
-          var list = data.categories;
-        //  console.log(data);
-        //  for (var i = 0; i < list.length; i++) {
-        //    html += '<option value="' + list[i].id + '">' + list[i].name + '</option>';
-        //  }
-          $('#id_category').append(html);
-        },
-        error: function (data) {
-          console.log(data);
-        }
-      });
-    });
-  </script> --}}
+                            <!-- Single Latest Post -->
+                            <div class="single-blog-post style-2 d-flex align-items-center">
+                                <div class="post-thumb">
+                                    <!-- 89x91 -->
+                                    <a href="nhung-cau-hoi-lon-avengers-endgame-phai-tra-loi"><img
+                                            style="width: 90px; height: 90px;"
+                                            src="https://znews-photo.zadn.vn/w480/Uploaded/bpivpjbp/2018_10_29/endgame5.jpg"
+                                            alt=""></a>
+                                </div>
+                                <div class="post-data">
+                                    <a href="nhung-cau-hoi-lon-avengers-endgame-phai-tra-loi" class="post-title">
+                                        <h6>Những câu hỏi lớn "Avengers: Endgame" phải trả lời</h6>
+                                    </a>
+                                    <div class="post-meta">
+                                        <p class="post-date"><a href="#">14:08 20/04/2019</a></p>
+                                    </div>
+                                </div>
+                            </div>
 
-  <script>
-    $('.table').on('click', '.btn-delete-project', function () {
-      var id = $(this).data('id');
-      Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        type: 'warning',
-        showConfirmButton: true,
-        showCancelButton: true,
-        confirmButtonText: 'Yes, delete it!',
-        cancelButtonText: 'No, cancel!',
-        confirmButtonColor: "#28a745",
-        cancelButtonColor: "#dc3545",
-        reverseButtons: true,
-        focusConfirm: true,
-        showCloseButton: true,
+                            <!-- Single Latest Post -->
+                            <div class="single-blog-post style-2 d-flex align-items-center">
+                                <div class="post-thumb">
+                                    <!-- 89x91 -->
+                                    <a href="#"><img style="width: 90px; height: 90px;"
+                                            src="https://znews-photo.zadn.vn/w480/Uploaded/wyhktpu/2019_04_19/samsungTV8K_1.jpg"
+                                            alt=""></a>
+                                </div>
+                                <div class="post-data">
+                                    <a href="#" class="post-title">
+                                        <h6>Chi tiết TV QLED 8K đầu tiên của Samsung ở Việt Nam</h6>
+                                    </a>
+                                    <div class="post-meta">
+                                        <p class="post-date"><a href="#">19:00 19/04/2019</a></p>
+                                    </div>
+                                </div>
+                            </div>
 
-      }).then((result) => {
-        if (result.value) {
-          Swal.fire(
-            'Deleted!',
-            'Your project has been deleted.',
-            'success'
-          );
-          window.location.href = '/admin/projects/delete/' + id;
-        }
-        else {
-          Swal.fire(
-            'Cancelled',
-            'Your project has been retained!',
-            'error'
-          )
-        }
-      })
-    });
-  </script>
+                            <!-- Single Latest Post -->
+                            <div class="single-blog-post style-2 d-flex align-items-center">
+                                <div class="post-thumb">
+                                    <!-- 89x91 -->
+                                    <a href="#"><img style="width: 90px; height: 90px;"
+                                            src="https://znews-photo.zadn.vn/w480/Uploaded/Wagtrb/2019_04_19/khai_mac_sach_3_zing__Copy.JPG"
+                                            alt=""></a>
+                                </div>
+                                <div class="post-data">
+                                    <a href="#" class="post-title">
+                                        <h6>Khai mạc Ngày sách Việt Nam tại TP.HCM</h6>
+                                    </a>
+                                    <div class="post-meta">
+                                        <p class="post-date"><a href="#">18:43 19/04/2019</a></p>
+                                    </div>
+                                </div>
+                            </div>
 
-  <script>
-    $('.table').on('click', '.btn-delete-category', function () {
-      var id = $(this).data('id');
-      Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        type: 'warning',
-        showConfirmButton: true,
-        showCancelButton: true,
-        confirmButtonText: 'Yes, delete it!',
-        cancelButtonText: 'No, cancel!',
-        confirmButtonColor: "#28a745",
-        cancelButtonColor: "#dc3545",
-        reverseButtons: true,
-        focusConfirm: true,
-        showCloseButton: true,
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-      }).then((result) => {
-        if (result.value) {
-          Swal.fire(
-            'Deleted!',
-            'Your category has been deleted.',
-            'success'
-          );
-          window.location.href = '/admin/categories/delete/' + id;
-        }
-        else {
-          Swal.fire(
-            'Cancelled',
-            'Your category has been retained!',
-            'error'
-          )
-        }
-      })
-    });
-  </script>
+        <!-- Bottom Footer Area -->
+        <div class="bottom-footer-area">
+            <div class="container h-100">
+                <div class="row h-100 align-items-center">
+                    <div class="col-12">
+                        <!-- Copywrite -->
+                        <p>
+                            <a href="#">
+                                Copyright &copy;
+                                <script>
+                                    document.write(new Date().getFullYear());
+                                </script> All rights reserved | <i class="fa fa-heart-o" aria-hidden="true"></i> by <a
+                                    href="https://www.facebook.com/ntuan.2502" target="_blank">NAT</a>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- ##### Footer Area Start ##### -->
 
-  <script>
-    $('.table').on('click', '.btn-delete-post', function () {
-      var id = $(this).data('id');
-      Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        type: 'warning',
-        showConfirmButton: true,
-        showCancelButton: true,
-        confirmButtonText: 'Yes, delete it!',
-        cancelButtonText: 'No, cancel!',
-        confirmButtonColor: "#28a745",
-        cancelButtonColor: "#dc3545",
-        reverseButtons: true,
-        focusConfirm: true,
-        showCloseButton: true,
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-      }).then((result) => {
-        if (result.value) {
-          Swal.fire(
-            'Deleted!',
-            'Your post has been deleted.',
-            'success'
-          );
-          window.location.href = '/admin/posts/delete/' + id;
-        }
-        else {
-          Swal.fire(
-            'Cancelled',
-            'Your post has been retained!',
-            'error'
-          )
-        }
-      })
-    });
-  </script>
-
-
+    <script src="/js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="/js/bootstrap/popper.min.js"></script>
+    <script src="/js/bootstrap/bootstrap.min.js"></script>
+    <script src="/js/plugins/plugins.js"></script>
+    <script src="/js/active.js"></script>
 
 </body>
 

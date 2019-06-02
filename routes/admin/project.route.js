@@ -8,7 +8,8 @@ router.get("/", (req, res) => {
         .all()
         .then(rows => {
             res.render("admin/projects/index", {
-                projects: rows
+                projects: rows,
+                layout: 'admin.hbs',
             });
         })
         .catch(err => {
@@ -18,15 +19,18 @@ router.get("/", (req, res) => {
 });
 
 router.get("/add", (req, res) => {
-    res.render("admin/projects/add");
+    res.render("admin/projects/add", {
+        layout: 'admin.hbs',
+    });
 });
 
 router.post("/add", (req, res) => {
     projectModel
         .add(req.body)
         .then(id => {
-            // console.log(id);
-            res.redirect("/admin/projects");
+            res.redirect("/admin/projects", {
+                layout: 'admin.hbs',
+            });
         })
         .catch(err => {
             console.log(err);
@@ -38,7 +42,8 @@ router.get("/edit/:id", (req, res) => {
     var id = req.params.id;
     if (isNaN(id)) {
         res.render("admin/projects/edit", {
-            error: true
+            error: true,
+            layout: 'admin.hbs',
         });
     }
 
@@ -48,11 +53,13 @@ router.get("/edit/:id", (req, res) => {
             if (rows.length > 0) {
                 res.render("admin/projects/edit", {
                     error: false,
-                    project: rows[0]
+                    project: rows[0],
+                    layout: 'admin.hbs',
                 });
             } else {
                 res.render("admin/projects/edit", {
-                    error: true
+                    error: true,
+                    layout: 'admin.hbs',
                 });
             }
         })
@@ -66,7 +73,9 @@ router.post("/update", (req, res) => {
     projectModel
         .update(req.body)
         .then(n => {
-            res.redirect("/admin/projects");
+            res.redirect("/admin/projects", {
+                layout: 'admin.hbs',
+            });
         })
         .catch(err => {
             console.log(err);
@@ -78,7 +87,9 @@ router.get("/delete/:id", (req, res) => {
     projectModel
         .delete(req.params.id)
         .then(n => {
-            res.redirect("/admin/projects");
+            res.redirect("/admin/projects", {
+                layout: 'admin.hbs',
+            });
         })
         .catch(err => {
             console.log(err);
