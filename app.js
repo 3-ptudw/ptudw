@@ -23,6 +23,7 @@ app.set('view engine', 'hbs');
 app.use(require('./middlewares/locals.mdw'));
 
 app.use('/', require('./routes/homepage.route'))
+app.use('/admin', require('./routes/admin.route'))
 app.use('/admin/projects', require('./routes/admin/project.route'))
 app.use('/admin/categories', require('./routes/admin/category.route'))
 app.use('/admin/posts', require('./routes/admin/post.route'))
