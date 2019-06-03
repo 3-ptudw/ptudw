@@ -215,21 +215,21 @@
     });
   </script>
 
-  {{!-- <script>
+  <script>
     $('#id_project').on('change', function () {
       var id = $(this).val();
       $.ajax({
-        url: '/admin/category/id_project' + id,
+        url: '/admin/categories/id_project/' + id,
         type: "get",
         success: function (data) {
           var html = '';
           $('#id_category').children().remove();
 
           var list = data.categories;
-        //  console.log(data);
-        //  for (var i = 0; i < list.length; i++) {
-        //    html += '<option value="' + list[i].id + '">' + list[i].name + '</option>';
-        //  }
+          console.log(list);
+          for (var i = 0; i < list.length; i++) {
+            html += '<option value="' + list[i].id + '">' + list[i].name + '</option > ';
+          }
           $('#id_category').append(html);
         },
         error: function (data) {
@@ -237,7 +237,7 @@
         }
       });
     });
-  </script> --}}
+  </script>
 
   <script>
     $('.table').on('click', '.btn-delete-project', function () {

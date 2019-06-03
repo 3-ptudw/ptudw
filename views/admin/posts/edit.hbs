@@ -23,13 +23,21 @@
         <input type="hidden" placeholder="" name="url" class="form-control" value="{{this.post.url}}">
       </div>
 
+      {{!-- <div class="form-group">
+        <label for="id_project">Project</label>
+        <select id="id_project" class="form-control">
+          <option value="" selected disabled>Chọn Project</option>
+          {{#each this.projects}}
+          <option value="{{id}}">{{name}}</option>
+          {{/each}}
+        </select>
+      </div> --}}
+
       <div class="form-group">
         <label for="id_category">Category</label>
         <select name="id_category" id="id_category" class="form-control">
           <option value="{{this.post.id_category}}" selected>Hiện tại: {{this.post.id_category}}</option>
           {{#each this.categories}}
-          {{!-- {{#if id}}
-          {{/if}} --}}
           <option value="{{id}}">{{id}}: {{name}}</option>
           {{/each}}
         </select>
@@ -55,8 +63,7 @@
 
       <div class="form-group">
         <label for="tag">Tag</label>
-        <input type="text" class="form-control" id="tag" name="tag" placeholder="Enter tag"
-          value="{{this.post.tag}}">
+        <input type="text" class="form-control" id="tag" name="tag" placeholder="Enter tag" value="{{this.post.tag}}">
       </div>
 
       <div class="form-group">

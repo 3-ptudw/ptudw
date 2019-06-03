@@ -18,6 +18,7 @@
       <div class="form-group">
         <label for="id_project">Project</label>
         <select id="id_project" class="form-control">
+          <option value="" selected disabled>Chọn Project</option>
           {{#each this.projects}}
           <option value="{{id}}">{{name}}</option>
           {{/each}}
