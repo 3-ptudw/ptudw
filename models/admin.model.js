@@ -2,8 +2,8 @@ var db = require('../utils/db');
 
 module.exports = {
 
-    singleByEmail: email => {
-        return db.load(`select * from users where email = '${email}'`);
+    singleByUsername: username => {
+        return db.load(`select * from users where username = '${username}'`);
     },
 
     add: entity => {

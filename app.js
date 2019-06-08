@@ -1,32 +1,14 @@
 var express = require('express');
-var exphbs = require('express-handlebars');
-var hbs_sections = require('express-handlebars-sections');
 var morgan = require('morgan');
-var numeral = require('numeral');
-
 var app = express();
 
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
-app.engine('hbs', exphbs({
-    layoutsDir: 'views/_layouts',
-    defaultLayout: 'main.hbs',
-    helpers: {
-        format: val => {
-            return numeral(val).format('0,0');
-        },
-        section: hbs_sections(),
-        opt: (val1, opt, val2) => {
-            switch (opt) {
-                case '==':
-                    return val1 == val2
-            }
-        },
-    }
-}));
-app.set('view engine', 'hbs');
+require('./middlewares/view-engine')(app);
+require('./middlewares/session')(app);
+require('./middlewares/passport')(app);
 
 app.use(require('./middlewares/locals.mdw'));
 
