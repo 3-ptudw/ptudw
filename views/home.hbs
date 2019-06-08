@@ -90,6 +90,7 @@
         <div class="row">
 
           {{#each this.posts}}
+          {{#if (opt status '==' true opt) }}
           <!-- Single Blog Post -->
           <div class="col-12 col-lg-6">
             <div class="single-blog-post style-3">
@@ -112,6 +113,7 @@
               </div>
             </div>
           </div>
+          {{/if}}
           {{/each}}
 
 

@@ -1,5 +1,6 @@
 var express = require('express');
 var exphbs = require('express-handlebars');
+var hbs_sections = require('express-handlebars-sections');
 var morgan = require('morgan');
 var numeral = require('numeral');
 
@@ -15,7 +16,14 @@ app.engine('hbs', exphbs({
     helpers: {
         format: val => {
             return numeral(val).format('0,0');
-        }
+        },
+        section: hbs_sections(),
+        opt: (val1, opt, val2) => {
+            switch (opt) {
+                case '==':
+                    return val1 == val2
+            }
+        },
     }
 }));
 app.set('view engine', 'hbs');
