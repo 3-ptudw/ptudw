@@ -13,7 +13,7 @@ module.exports = function(app) {
     }, (username, password, done) => {
         adminModel.singleByUsername(username).then(rows => {
             if (rows.length === 0) {
-                return done(null, false, { message: 'Invalid username.' });
+                return done(null, false, { message: 'Invalid email.' });
             } else {
                 var user = rows[0];
                 var ret = bcrypt.compareSync(password, rows[0].password);

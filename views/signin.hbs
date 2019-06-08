@@ -4,8 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
-    <title>Sign Up</title>
-
+    <title>Sign In</title>
     <style>
         #loader {
             transition: all .3s ease-in-out;
@@ -59,11 +58,7 @@
             }
         }
     </style>
-    <link rel="stylesheet" href="/admin/style.css">
-
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
-
+    <link href="/admin/style.css" rel="stylesheet">
 </head>
 
 <body class="app">
@@ -79,7 +74,7 @@
         });
     </script>
     <div class="peers ai-s fxw-nw h-100vh">
-        <div class="peer peer-greed h-100 pos-r bgr-n bgpX-c bgpY-c bgsz-cv"
+        <div class="d-n@sm- peer peer-greed h-100 pos-r bgr-n bgpX-c bgpY-c bgsz-cv"
             style="background-image:url(/admin/assets/static/images/bg.jpg)">
             <div class="pos-a centerXY">
                 <div class="bgc-white bdrs-50p pos-r" style="width:120px;height:120px">
@@ -88,35 +83,46 @@
             </div>
         </div>
         <div class="col-12 col-md-4 peer pX-40 pY-80 h-100 bgc-white scrollable pos-r" style="min-width:320px">
-            <h4 class="fw-300 c-grey-900 mB-40">Register</h4>
-            <form novalidate action="" method="POST" id="registerForm">
+            <h4 class="fw-300 c-grey-900 mB-40">Login</h4>
+            <form novalidate action="" method="POST" id="loginForm">
                 <div class="form-group"><label for="username" class="text-normal text-dark">Email Address</label>
                     <input type="text" name="username" id="username" class="form-control" placeholder="name@email.com">
                 </div>
                 <div class="form-group"><label for="password" class="text-normal text-dark">Password</label>
                     <input type="password" name="password" id="password" class="form-control" placeholder="Password">
                 </div>
-                <div class="form-group"><label for="confirm" class="text-normal text-dark">Confirm Password</label>
-                    <input type="password" name="confirm" id="confirm" class="form-control" placeholder="Password">
-                </div>
-                <div class="form-group"><label for="name" class="text-normal text-dark">Name</label>
-                    <input type="text" name="name" id="name" class="form-control" placeholder="Fullname">
-                </div>
-                <div class="form-group"><label for="date_of_birth" class="text-normal text-dark">DOB</label>
-                    <input type="text" name="date_of_birth" id="date_of_birth" class="form-control">
-                </div>
-
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Register</button>
+                    <div class="peers ai-c jc-sb fxw-nw">
+                        {{!-- <div class="peer">
+                            <div class="checkbox checkbox-circle checkbox-info peers ai-c">
+                                <input type="checkbox" id="inputCall1" name="inputCheckboxesCall" class="peer">
+                                <label for="inputCall1" class="peers peer-greed js-sb ai-c">
+                                    <span class="peer peer-greed">Remember Me</span>
+                                </label>
+                            </div>
+                        </div> --}}
+                        <div class="peer">
+                            <button type="submit" class="btn btn-primary">Login</button>
+                        </div>
+                    </div>
                 </div>
             </form>
+
+            {{#if err_message}}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{err_message}}
+            </div>
+            {{/if}}
 
             <div class="form-group pull-right">
                 <div class="peers ai-c jc-sb fxw-nw">
                     <div class="peer">
                         <label for="inputCall1" class="peers peer-greed js-sb ai-c">
-                            <span class="peer peer-greed">Already have an account?&nbsp</span>
-                            <a href="/admin/signin">Login</a>
+                            <span class="peer peer-greed">Don't have an account?&nbsp</span>
+                            <a href="/signup">Register</a>
                         </label>
                     </div>
                 </div>
@@ -129,66 +135,29 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
-    <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
 
     <script type="text/javascript" src="/admin/vendor.js"></script>
     <script type="text/javascript" src="/admin/bundle.js"></script>
 
     <script>
         $(function () {
-
-            $('#date_of_birth').datetimepicker({
-                format: 'd/m/Y',
-                timepicker: false,
-                mask: true,
-            });
-
-            $('#registerForm').validate({
+            $('#loginForm').validate({
                 rules: {
                     username: {
                         required: true,
-                        email: true,
-                        remote: {
-                            url: '/admin/is-available'
-                        }
+                        email: true
                     },
                     password: {
                         required: true,
-                        minlength: 6
-                    },
-                    confirm: {
-                        required: true,
-                        equalTo: $('[name="password"]')
-                    },
-                    name: {
-                        required: true,
-                    },
-
-                    date_of_birth: {
-                        required: true
                     },
                 },
                 messages: {
                     username: {
                         required: 'Please enter a valid email address.',
                         email: 'Please enter a valid email address.',
-                        remote: 'Your username has been taken, please take another.'
                     },
                     password: {
                         required: 'Your password is required.',
-                        minlength: 'Your password must have at least 6 characters.'
-                    },
-                    confirm: {
-                        required: 'Your password does not match.',
-                        equalTo: 'Your password does not match.'
-                    },
-                    name: {
-                        required: 'Valid full name is required.',
-                    },
-
-                    date_of_birth: {
-                        required: 'Valid date of birth is required.',
                     },
                 },
                 errorElement: 'small',
@@ -202,6 +171,7 @@
             });
         })
     </script>
+
 </body>
 
 </html>

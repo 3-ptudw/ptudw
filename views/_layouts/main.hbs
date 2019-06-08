@@ -268,10 +268,28 @@
                                     </form>
                                 </div>
 
-                                <!-- Video Post Button -->
-                                <div class="add-post-button">
+                                <form id="frmSignout" action="/logout" method="POST"></form>
+
+                                {{#if isAuthenticated}}
+                                <ul>
+                                    <li><a href="#">Hi, <b>{{authUser.name}}</a>
+                                        <ul class="dropdown">
+                                            <li><a href="/profile">Profile</a></li>
+                                            <li><a href="javascript: $('#frmSignout').submit();">Logout</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                {{else}}
+                                <ul>
+                                    <li>
+                                        <a href="/signin">Đăng nhập</a>
+                                    </li>
+                                </ul>
+                                {{/if}}
+
+                                {{!-- <div class="add-post-button">
                                     <a href="/admin/signin" class="btn add-post-btn">Đăng nhập</a>
-                                </div>
+                                </div> --}}
 
                             </div>
                             <!-- Nav End -->

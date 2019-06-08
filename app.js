@@ -10,6 +10,7 @@ require('./middlewares/view-engine')(app);
 require('./middlewares/session')(app);
 require('./middlewares/passport')(app);
 
+app.use(require('./middlewares/auth-locals.mdw'));
 app.use(require('./middlewares/locals.mdw'));
 
 app.use('/', require('./routes/homepage.route'))
