@@ -1,0 +1,88 @@
+{{#section 'js'}}
+<script>
+  $('.table').on('click', '.btn-delete-user', function () {
+    var id = $(this).data('id');
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      type: 'warning',
+      showConfirmButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+      confirmButtonColor: "#28a745",
+      cancelButtonColor: "#dc3545",
+      reverseButtons: true,
+      focusConfirm: true,
+      showCloseButton: true,
+
+    }).then((result) => {
+      if (result.value) {
+        Swal.fire(
+          'Deleted!',
+          'Your user has been deleted.',
+          'success'
+        );
+        window.location.href = '/admin/users/delete/' + id;
+      }
+      else {
+        Swal.fire(
+          'Cancelled',
+          'Your user has been retained!',
+          'error'
+        )
+      }
+    })
+  });
+</script>
+{{/section}}
+<div class="card shadow">
+  <h4 class="card-header">
+    Users
+  </h4>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col" class="text-center">#</th>
+        <th scope="col">Email</th>
+        <th scope="col">Fullname</th>
+        <th scope="col">Role</th>
+        <th scope="col">Status</th>
+        <th scope="col" class="text-right">
+          {{!-- <a class="btn btn-outline-success" href="/admin/users/add" role="button">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            Add User
+          </a> --}}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each this.users}}
+      <tr>
+        <th scope="row" class="text-center">{{id}}</th>
+        <td>{{username}}</td>
+        <td>{{name}}</td>
+        <td>{{id_role}}</td>
+        <td>
+          {{#if is_active}}
+          <p style="color: green; font-weight: bold;">
+            Active
+          </p>
+          {{else}}
+          <p style="color: #ed5565; font-weight: bold;">
+            Inactive
+          </p>
+          {{/if}}
+        </td>
+        <td class="text-right">
+          <a class="btn btn-primary btn-sm" href="/admin/users/edit/{{id}}" role="button">
+            <i class="fa fa-edit" aria-hidden="true"></i>
+          </a>
+          {{!-- <button id="btn-delete" class="btn btn-danger btn-delete-post btn-sm" data-id="{{id}}" role="button">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+          </button> --}}
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>

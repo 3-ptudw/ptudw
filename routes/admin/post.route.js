@@ -45,8 +45,21 @@ router.get("/add", (req, res) => {
 });
 
 router.post("/add", (req, res) => {
+    var entity = {
+        title: req.body.title,
+        url: req.body.url,
+        id_category: req.body.id_category,
+        id_user: req.user.id,
+        url_thumbnail: req.body.url_thumbnail,
+        abstract: req.body.abstract,
+        content: req.body.content,
+        tag: req.body.tag,
+        posted_at: req.body.posted_at,
+        created_at: new Date(),
+        updated_at: new Date(),
+    }
     postModel
-        .add(req.body)
+        .add(entity)
         .then(id => {
             res.redirect("/admin/posts");
         })
@@ -97,8 +110,21 @@ router.get("/edit/:id", (req, res) => {
 });
 
 router.post("/update", (req, res) => {
+    var entity = {
+        id: req.body.id,
+        title: req.body.title,
+        url: req.body.url,
+        id_category: req.body.id_category,
+        url_thumbnail: req.body.url_thumbnail,
+        abstract: req.body.abstract,
+        content: req.body.content,
+        tag: req.body.tag,
+        status: req.body.status,
+        posted_at: req.body.posted_at,
+        updated_at: new Date(),
+    }
     postModel
-        .update(req.body)
+        .update(entity)
         .then(n => {
             res.redirect("/admin/posts");
         })

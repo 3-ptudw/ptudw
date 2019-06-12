@@ -4,4 +4,5 @@ module.exports = {
     all: () => {
         return db.load('select * from posts');
     },
+
 };

@@ -1,41 +1,16 @@
 var express = require("express");
-var projectModel = require("../../models/project.model");
+var userModel = require("../../models/user.model");
 
 var router = express.Router();
 
 router.get("/", (req, res) => {
-    projectModel
+    userModel
         .all()
         .then(rows => {
-            res.render("admin/projects/index", {
-                projects: rows,
+            res.render("admin/users/index", {
+                users: rows,
                 layout: 'admin.hbs',
             });
-        })
-        .catch(err => {
-            console.log(err);
-            res.end("error occured.");
-        });
-});
-
-router.get("/add", (req, res) => {
-    res.render("admin/projects/add", {
-        layout: 'admin.hbs',
-    });
-});
-
-router.post("/add", (req, res) => {
-
-    var entity = {
-        name: req.body.name,
-        created_at: new Date(),
-        updated_at: new Date(),
-    }
-
-    projectModel
-        .add(entity)
-        .then(id => {
-            res.redirect("/admin/projects");
         })
         .catch(err => {
             console.log(err);
@@ -46,23 +21,23 @@ router.post("/add", (req, res) => {
 router.get("/edit/:id", (req, res) => {
     var id = req.params.id;
     if (isNaN(id)) {
-        res.render("admin/projects/edit", {
+        res.render("admin/users/edit", {
             error: true,
             layout: 'admin.hbs',
         });
     }
 
-    projectModel
+    userModel
         .single(id)
         .then(rows => {
             if (rows.length > 0) {
-                res.render("admin/projects/edit", {
+                res.render("admin/users/edit", {
                     error: false,
-                    project: rows[0],
+                    user: rows[0],
                     layout: 'admin.hbs',
                 });
             } else {
-                res.render("admin/projects/edit", {
+                res.render("admin/users/edit", {
                     error: true,
                     layout: 'admin.hbs',
                 });
@@ -78,14 +53,16 @@ router.post("/update", (req, res) => {
     var entity = {
         id: req.body.id,
         name: req.body.name,
-        status: req.body.status,
+        other_name: req.body.other_name,
+        id_role: req.body.id_role,
+        premium: req.body.premium,
+        is_active: req.body.is_active,
         updated_at: new Date(),
     }
-
-    projectModel
+    userModel
         .update(entity)
         .then(n => {
-            res.redirect("/admin/projects");
+            res.redirect("/admin/users");
         })
         .catch(err => {
             console.log(err);
@@ -93,16 +70,5 @@ router.post("/update", (req, res) => {
         });
 });
 
-router.get("/delete/:id", (req, res) => {
-    projectModel
-        .delete(req.params.id)
-        .then(n => {
-            res.redirect("/admin/projects");
-        })
-        .catch(err => {
-            console.log(err);
-            res.end("error occured.");
-        });
-});
 
 module.exports = router;

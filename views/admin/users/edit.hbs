@@ -1,0 +1,78 @@
+{{#section 'js'}}
+
+{{/section}}
+<div class="card shadow">
+  <h4 class="card-header">
+    Edit User
+  </h4>
+  <div class="card-body">
+    {{#if this.error}}
+    <div class="alert alert-danger" role="alert">
+      Invalid userId. <a href="/admin/users" class="alert-link">Go back</a>.
+    </div>
+    {{else}}
+    <form method="POST" action="/admin/users/update">
+      <div class="form-group">
+        <label for="id">#</label>
+        <input readonly type="text" class="form-control" id="id" name="id" value="{{this.user.id}}">
+      </div>
+      <div class="form-group">
+        <label for="username">Email</label>
+        <input type="text" class="form-control" id="username" name="username" readonly placeholder="Enter email"
+          value="{{this.user.username}}">
+      </div>
+
+      <div class="form-group">
+        <label for="name">Fullname</label>
+        <input type="text" class="form-control" id="name" name="name" placeholder="Enter url Thumbnail"
+          value="{{this.user.name}}">
+      </div>
+
+      <div class="form-group">
+        <label for="other_name">Other name</label>
+        <input type="text" class="form-control" id="other_name" name="other_name" placeholder="Enter other_name"
+          value="{{this.user.other_name}}">
+      </div>
+
+      <div class="form-group">
+        <label for="date_of_birth">DOB</label>
+        <input name="date_of_birth" id="date_of_birth" class="form-control" readonly
+          value="{{this.user.date_of_birth}}">
+      </div>
+
+      <div class="form-group">
+        <label for="id_role">Role</label>
+        <input type="text" class="form-control" id="id_role" name="id_role" value="{{this.user.id_role}}">
+      </div>
+
+      <div class="form-group">
+        <label for="premium">Premium</label>
+        <input type="text" class="form-control" id="premium" name="premium" placeholder="Enter premium" value="{{this.user.premium}}">
+      </div>
+
+      <div class="form-group">
+        <label for="is_active">Status</label>
+        <select name="is_active" id="is_active" class="form-control">
+          <option value="{{this.user.is_active}}">Hiện tại:
+            {{#if this.user.is_active}}
+            Active
+            {{else}}
+            Inactive
+            {{/if}}
+          </option>
+          <option value="0">Inactive</option>
+          <option value="1">Active</option>
+        </select>
+      </div>
+      <a class="btn btn-primary" href="/admin/users" role="button">
+        <i class="fa fa-backward" aria-hidden="true"></i>
+        List
+      </a>
+      <button type="submit" class="btn btn-success">
+        <i class="fa fa-check" aria-hidden="true"></i>
+        Save
+      </button>
+    </form>
+    {{/if}}
+  </div>
+</div>

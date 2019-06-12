@@ -1,5 +1,6 @@
 var express = require('express');
 var morgan = require('morgan');
+var auth = require("./middlewares/auth");
 var app = express();
 
 app.use(morgan('dev'));
@@ -14,10 +15,11 @@ app.use(require('./middlewares/auth-locals.mdw'));
 app.use(require('./middlewares/locals.mdw'));
 
 app.use('/', require('./routes/homepage.route'))
-app.use('/admin', require('./routes/admin.route'))
-app.use('/admin/projects', require('./routes/admin/project.route'))
-app.use('/admin/categories', require('./routes/admin/category.route'))
-app.use('/admin/posts', require('./routes/admin/post.route'))
+app.use('/admin', auth, require('./routes/admin.route'))
+app.use('/admin/projects', auth, require('./routes/admin/project.route'))
+app.use('/admin/categories', auth, require('./routes/admin/category.route'))
+app.use('/admin/posts', auth, require('./routes/admin/post.route'))
+app.use('/admin/users', auth, require('./routes/admin/user.route'))
 
 app.use((req, res, next) => {
     res.render('404', { layout: false });

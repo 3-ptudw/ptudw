@@ -87,9 +87,13 @@ router.get('/is-available', (req, res, next) => {
 });
 
 router.get("/signin", (req, res) => {
-    res.render("signin", {
-        layout: false,
-    });
+    if (!req.user) {
+        res.render("signin", {
+            layout: false,
+        });
+    } else {
+        res.redirect('/');
+    }
 });
 
 router.post('/signin', (req, res, next) => {
@@ -116,9 +120,13 @@ router.post('/signin', (req, res, next) => {
 });
 
 router.get("/signup", (req, res) => {
-    res.render("signup", {
-        layout: false,
-    });
+    if (!req.user) {
+        res.render("signup", {
+            layout: false,
+        });
+    } else {
+        res.redirect('/');
+    }
 });
 
 router.post('/signup', (req, res, next) => {
@@ -133,11 +141,77 @@ router.post('/signup', (req, res, next) => {
         other_name: req.body.name,
         date_of_birth: dob,
         id_role: 0,
+        created_at: new Date(),
+        updated_at: new Date(),
     }
 
     adminModel.add(entity).then(id => {
         res.redirect('/signin');
     });
+});
+
+router.get("/profile", auth, (req, res) => {
+    adminModel.singleByUsername(req.user.username).then(rows => {
+        if (rows.length > 0) {
+            res.render("profile", {
+                user_profile: rows[0],
+            });
+        } else {
+            res.redirect('/signin');
+        }
+    });
+});
+
+router.post("/profile", auth, (req, res) => {
+
+    var dob = moment(req.body.date_of_birth, 'YYYY-MM-DD').format('YYYY-MM-DD');
+    var entity = {
+        id: req.user.id,
+        name: req.body.name,
+        other_name: req.body.other_name,
+        date_of_birth: dob,
+        updated_at: new Date(),
+    }
+
+    adminModel.update(entity).then(n => {
+            res.redirect("/profile");
+        })
+        .catch(err => {
+            console.log(err);
+            res.end("error occured.");
+        });
+});
+
+router.get("/changepassword", auth, (req, res) => {
+
+    adminModel.singleByUsername(req.user.username).then(rows => {
+        if (rows.length > 0) {
+            res.render("changepassword", {
+                user_profile: rows[0],
+            });
+        } else {
+            res.redirect('/signin');
+        }
+    });
+});
+
+router.post("/changepassword", auth, (req, res) => {
+
+    var saltRounds = 10;
+    var hash = bcrypt.hashSync(req.body.password, saltRounds);
+    var entity = {
+        id: req.user.id,
+        password: hash,
+        updated_at: new Date(),
+    }
+
+    adminModel.update(entity).then(n => {
+            res.redirect("/changepassword");
+        })
+        .catch(err => {
+            console.log(err);
+            res.end("error occured.");
+        });
 });
 
 module.exports = router;

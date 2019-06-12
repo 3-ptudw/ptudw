@@ -2,8 +2,12 @@ var db = require('../utils/db');
 
 module.exports = {
 
-    singleByUsername: username => {
-        return db.load(`select * from users where username = '${username}'`);
+    all: () => {
+        return db.load(`select * from users`);
+    },
+
+    single: id => {
+        return db.load(`select * from users where id = ${id}`);
     },
 
     add: entity => {
