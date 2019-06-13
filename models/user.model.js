@@ -10,6 +10,10 @@ module.exports = {
         return db.load(`select * from users where id = ${id}`);
     },
 
+    singleByFackbook: facebook_id => {
+        return db.load(`select * from users where facebook_id = ${facebook_id}`);
+    },
+
     add: entity => {
         return db.add('users', entity);
     },

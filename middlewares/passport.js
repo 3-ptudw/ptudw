@@ -1,7 +1,9 @@
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
 var bcrypt = require('bcrypt');
 var adminModel = require('../models/admin.model');
+var userModel = require('../models/user.model');
 
 module.exports = function(app) {
     app.use(passport.initialize());
@@ -29,6 +31,18 @@ module.exports = function(app) {
     });
 
     passport.use(ls);
+
+    passport.use(new FacebookStrategy({
+            clientID: "2287560411572098",
+            clientSecret: "ac594a05b480452c6f6936968f7ffa13",
+            callbackURL: "/auth/facebook/callback"
+        },
+        function(accessToken, refreshToken, profile, cb) {
+            userModel.singleByFackbook({ facebook_id: profile.id }, function(err, user) {
+                return cb(err, user);
+            });
+        }
+    ));
 
     passport.serializeUser((user, done) => {
         return done(null, user);
