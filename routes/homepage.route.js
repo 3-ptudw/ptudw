@@ -7,22 +7,32 @@ var postModel = require("../models/post.model");
 var adminModel = require("../models/admin.model");
 var categoryModel = require("../models/category.model");
 var homepageModel = require("../models/homepage.model.");
+var projectModel = require("../models/project.model");
 
 
 var router = express.Router();
 
 router.get("/", (req, res) => {
-    postModel
-        .trueStatus()
-        .then(rows => {
-            res.render("home", {
-                posts: rows,
-            });
+    projectModel.all().then(projects => {
+        categoryModel.all().then(categories => {
+            homepageModel.view10().then(views => {
+                homepageModel.news10().then(news10 => {
+                    homepageModel.news3().then(news3 => {
+                        postModel.trueStatus().then(posts => {
+                            res.render("home", {
+                                view10: views,
+                                news10: news10,
+                                news3: news3,
+                                posts: posts,
+                                projects: projects,
+                                categories: categories,
+                            });
+                        })
+                    })
+                })
+            })
         })
-        .catch(err => {
-            console.log(err);
-            res.end("error occured.");
-        });
+    })
 });
 
 router.get("/post/:url", (req, res) => {

@@ -7,9 +7,9 @@ module.exports = {
 
     allWithDetails: () => {
         return db.load(`
-      select p.id, p.name, count(c.id) as num_of_categories
-      from projects p left join categories c on p.id = c.id_project
-      group by p.id, p.name
+    select p.id, p.name, count(c.id) as num_of_categories
+    from projects p left join categories c on p.id = c.id_project
+    group by p.id, p.name
     `);
     },
 

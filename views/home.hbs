@@ -6,7 +6,7 @@
         <div class="hero-slides owl-carousel">
 
           <!-- Single Blog Post -->
-          {{#each this.posts}}
+          {{#each this.view10}}
           <div class="single-blog-post d-flex align-items-center mb-50">
             <div class="post-thumb">
               <!-- 130x130 -->
@@ -39,7 +39,7 @@
         <div class="welcome-slides owl-carousel">
 
           <!-- Single Welcome Slide -->
-          {{#each this.posts}}
+          {{#each this.news10}}
           <div class="single-welcome-slide">
             <div class="row no-gutters">
               <div class="col-lg-2">
@@ -57,7 +57,9 @@
                   <div class="post-content" data-animation="fadeInUp" data-duration="500ms">
                     <a href="/category/{{url_category}}" class="tag">{{name_category}}</a>
                     <a href="/post/{{url}}" class="post-title">{{title}}</a>
-                    <p>{{posted_at}}</p>
+                    <p>
+                      {{posted_at}}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -90,7 +92,6 @@
         <div class="row">
 
           {{#each this.posts}}
-          {{#if (opt status '==' true opt) }}
           <!-- Single Blog Post -->
           <div class="col-12 col-lg-6">
             <div class="single-blog-post style-3">
@@ -113,7 +114,6 @@
               </div>
             </div>
           </div>
-          {{/if}}
           {{/each}}
 
 
@@ -148,7 +148,7 @@
           <div class="treading-articles-widget mb-70">
             <h4>Xem nhiều nhất</h4>
 
-            {{#each this.posts}}
+            {{#each this.view10}}
             <!-- Single Trending Articles -->
             <div class="single-blog-post style-4">
               <!-- Post Thumb -->
@@ -157,9 +157,7 @@
                 <a href="/post/{{url}}">
                   <img style="width: 350px; height: 200px;" src="{{url_thumbnail}}" alt="">
                 </a>
-                <span class="serial-number">
-                  
-                </span>
+                {{!-- <span class="serial-number">1</span> --}}
               </div>
               <!-- Post Data -->
               <div class="post-data">
