@@ -63,9 +63,10 @@ router.get("/post/:url", (req, res) => {
 
 router.get("/category/:url", async(req, res) => {
     var url = req.params.url;
-    let [category, topPost] = await Promise.all([
+    let [category, topPost, skipTopPost] = await Promise.all([
         categoryModel.getURL(url),
         categoryModel.topPost(url),
+        categoryModel.skipTopPost(url),
     ])
 
     if (category.length > 0) {
@@ -73,6 +74,7 @@ router.get("/category/:url", async(req, res) => {
             error: false,
             category: category[0],
             topPost: topPost[0],
+            skipTopPost: skipTopPost,
         });
     } else {
         res.render("category", {
