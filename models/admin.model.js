@@ -6,11 +6,12 @@ module.exports = {
         return db.load(`select * from users where username = '${username}'`);
     },
 
-    myposts: username => {
+    writer: username => {
         return db.load(`
-        select * 
+        select *, posts.status as status, (select name from categories where posts.id_category = categories.id) as name_category
         from users, posts
         where posts.id_user = (select * from (select id from users where username = '${username}') temp_tab)
+        GROUP BY posts.id DESC
         `);
     },
 
@@ -20,5 +21,11 @@ module.exports = {
 
     update: entity => {
         return db.update('users', 'id', entity);
+    },
+
+    allrole: () => {
+        return db.load(`
+            select * from roles
+        `);
     },
 };

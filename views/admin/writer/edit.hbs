@@ -1,0 +1,103 @@
+{{#section 'js'}}
+<script>
+  $(document).ready(function () {
+    $('#content').summernote({
+      height: 500,
+    });
+  });
+</script>
+<script>
+  $(function () {
+    $('input[name="posted_at"]').daterangepicker({
+      singleDatePicker: true,
+      timePicker24Hour: true,
+      timePicker: true,
+      showDropdowns: true,
+      "drops": "up",
+      locale: {
+        format: 'YYYY-MM-DD HH:mm'
+      }
+    });
+  });
+</script>
+{{/section}}
+<div class="card shadow">
+  <h4 class="card-header">
+    Edit Post
+  </h4>
+  <div class="card-body">
+    {{#if this.error}}
+    <div class="alert alert-danger" role="alert">
+      Invalid PostId. <a href="/admin/posts" class="alert-link">Go back</a>.
+    </div>
+    {{else}}
+    <form method="POST" action="/admin/posts/update">
+      <div class="form-group">
+        <label for="id">#</label>
+        <input readonly type="text" class="form-control" id="id" name="id" value="{{this.post.id}}">
+      </div>
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" id="title" name="title" autofocus placeholder="Enter Post name"
+          value="{{this.post.title}}">
+      </div>
+
+      <div class="form-group">
+        <input type="hidden" placeholder="" name="url" class="form-control" value="{{this.post.url}}">
+      </div>
+
+      {{!-- <div class="form-group">
+        <label for="id_project">Project</label>
+        <select id="id_project" class="form-control">
+          <option value="" selected disabled>Chọn Project</option>
+          {{#each this.projects}}
+          <option value="{{id}}">{{name}}</option>
+          {{/each}}
+        </select>
+      </div> --}}
+
+      <div class="form-group">
+        <label for="id_category">Category</label>
+        <select name="id_category" id="id_category" class="form-control">
+          <option value="{{this.post.id_category}}" selected>Hiện tại: {{this.post.id_category}}</option>
+          {{#each this.categories}}
+          <option value="{{id}}">{{id}}: {{name}}</option>
+          {{/each}}
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="url_thumbnail">Thumbnail</label>
+        <input type="text" class="form-control" id="url_thumbnail" name="url_thumbnail"
+          placeholder="Enter url Thumbnail" value="{{this.post.url_thumbnail}}">
+      </div>
+
+      <div class="form-group">
+        <label for="abstract">Abstract</label>
+        <input type="text" class="form-control" id="abstract" name="abstract" placeholder="Enter abstract"
+          value="{{this.post.abstract}}">
+      </div>
+
+      <div class="form-group">
+        <label for="content">Content</label>
+        <textarea name="content" id="content" cols="30" rows="10" class="form-control"
+          placeholder="Enter content">{{this.post.content}}</textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="tag">Tag</label>
+        <input type="text" class="form-control" id="tag" name="tag" placeholder="Enter tag" value="{{this.post.tag}}">
+      </div>
+
+      <a class="btn btn-primary" href="/admin/writer" role="button">
+        <i class="fa fa-backward" aria-hidden="true"></i>
+        List
+      </a>
+      <button type="submit" class="btn btn-success">
+        <i class="fa fa-check" aria-hidden="true"></i>
+        Save
+      </button>
+    </form>
+    {{/if}}
+  </div>
+</div>

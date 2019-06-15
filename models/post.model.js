@@ -2,7 +2,12 @@ var db = require('../utils/db');
 
 module.exports = {
     all: () => {
-        return db.load('select *, categories.name as name_category from categories, posts where categories.id = posts.id_category');
+        return db.load(`
+        select *, categories.name as name_category 
+        from categories, posts 
+        where categories.id = posts.id_category
+        ORDER BY posts.id DESC
+        `);
     },
 
     trueStatus: () => {

@@ -42,28 +42,23 @@
 
       <div class="form-group">
         <label for="id_role">Role</label>
-        <input type="text" class="form-control" id="id_role" name="id_role" value="{{this.user.id_role}}">
+        <select name="id_role" id="id_role" class="form-control" id="id_role" name="id_role">
+          {{#each this.roles}}
+          {{#if (opt id '==' ../this.user.id_role opt)}}
+          <option value="{{id}}" selected>{{name}}</option>
+          {{else}}
+          <option value="{{id}}">{{name}}</option>
+          {{/if}}
+          {{/each}}
+        </select>
       </div>
 
       <div class="form-group">
         <label for="premium">Premium</label>
-        <input type="text" class="form-control" id="premium" name="premium" placeholder="Enter premium" value="{{this.user.premium}}">
+        <input type="text" class="form-control" id="premium" name="premium" placeholder="Enter premium"
+          value="{{this.user.premium}}">
       </div>
 
-      <div class="form-group">
-        <label for="is_active">Status</label>
-        <select name="is_active" id="is_active" class="form-control">
-          <option value="{{this.user.is_active}}">Hiện tại:
-            {{#if this.user.is_active}}
-            Active
-            {{else}}
-            Inactive
-            {{/if}}
-          </option>
-          <option value="0">Inactive</option>
-          <option value="1">Active</option>
-        </select>
-      </div>
       <a class="btn btn-primary" href="/admin/users" role="button">
         <i class="fa fa-backward" aria-hidden="true"></i>
         List

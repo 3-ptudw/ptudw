@@ -1,6 +1,7 @@
 var express = require("express");
 var categoryModel = require("../../models/category.model");
 var projectModel = require("../../models/project.model");
+var userModel = require("../../models/user.model");
 
 var router = express.Router();
 
@@ -71,7 +72,7 @@ router.get("/id_project/:id", (req, res) => {
         });
 });
 
-router.get("/edit/:id", (req, res) => {
+router.get("/edit/:id", async(req, res) => {
     var id = req.params.id;
     if (isNaN(id)) {
         res.render("admin/categories/edit", {
@@ -80,36 +81,26 @@ router.get("/edit/:id", (req, res) => {
         });
     }
 
-    categoryModel
-        .single(id)
-        .then(rows => {
-            projectModel
-                .all()
-                .then(rows1 => {
-                    if (rows.length > 0) {
-                        res.render("admin/categories/edit", {
-                            error: false,
-                            projects: rows1,
-                            category: rows[0],
-                            layout: 'admin.hbs',
-                        });
-                    } else {
-                        res.render("admin/categories/edit", {
-                            error: true,
-                            layout: 'admin.hbs',
-                        });
-                    }
+    let [projects, category, editor] = await Promise.all([
+        projectModel.all(),
+        categoryModel.single(id),
+        userModel.writer(),
+    ])
 
-                })
-                .catch(err => {
-                    console.log(err);
-                    res.end("error occured.");
-                });
-        })
-        .catch(err => {
-            console.log(err);
-            res.end("error occured.");
+    if (category.length > 0) {
+        res.render("admin/categories/edit", {
+            error: false,
+            projects: projects,
+            category: category[0],
+            editor: editor,
+            layout: 'admin.hbs',
         });
+    } else {
+        res.render("admin/categories/edit", {
+            error: true,
+            layout: 'admin.hbs',
+        });
+    }
 });
 
 router.post("/update", (req, res) => {
@@ -117,7 +108,6 @@ router.post("/update", (req, res) => {
         id: req.body.id,
         name: req.body.name,
         url: req.body.url,
-        status: req.body.status,
         id_project: req.body.id_project,
         updated_at: new Date(),
     }

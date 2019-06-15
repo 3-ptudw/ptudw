@@ -30,7 +30,6 @@ module.exports = function(app) {
                     newUser.token = token;
                     newUser.name = profile.name.givenName + ' ' + profile.name.familyName; // bạn có thể log đối tượng profile để xem cấu trúc
                     newUser.username = profile.emails[0].value; // fb có thể trả lại nhiều email, chúng ta lấy cái đầu tiền
-                    newUser.is_active = 1;
                     // lưu vào db
                     newUser.save(function(err) {
                         if (err)

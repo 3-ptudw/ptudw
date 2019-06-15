@@ -39,17 +39,11 @@
       </div>
 
       <div class="form-group">
-        <label for="status">Status</label>
-        <select name="status" id="status" class="form-control">
-          <option value="{{this.category.status}}">Hiện tại:
-            {{#if this.category.status}}
-            Đã duyệt
-            {{else}}
-            Chưa duyệt
-            {{/if}}
-          </option>
-          <option value="0">Chưa duyệt</option>
-          <option value="1">Đã duyệt</option>
+        <label for="id_user">Phân công</label>
+        <select name="id_user" id="id_user" class="form-control">
+          {{#each this.editor}}
+            <option value="{{id}}">{{name}}</option>
+          {{/each}}
         </select>
       </div>
       <a class="btn btn-primary" href="/admin/categories" role="button">

@@ -45,7 +45,6 @@
       <tr>
         <th scope="col" class="text-center">#</th>
         <th scope="col">Name</th>
-        <th scope="col">Status</th>
         <th scope="col">of Project</th>
         <th scope="col" class="text-right">
           <a class="btn btn-outline-success" href="/admin/categories/add" role="button">
@@ -60,17 +59,6 @@
       <tr>
         <th scope="row" class="text-center">{{id}}</th>
         <td>{{name}}</td>
-        <td>
-          {{#if status}}
-          <p style="color: green; font-weight: bold;">
-            Đã duyệt
-          </p>
-          {{else}}
-          <p style="color: #ed5565; font-weight: bold;">
-            Chưa duyệt
-          </p>
-          {{/if}}
-        </td>
         <td>{{name_project}}</td>
         <td class="text-right">
           <a class="btn btn-primary btn-sm" href="/admin/categories/edit/{{id}}" role="button">

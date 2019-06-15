@@ -78,7 +78,6 @@ router.post("/update", (req, res) => {
     var entity = {
         id: req.body.id,
         name: req.body.name,
-        status: req.body.status,
         updated_at: new Date(),
     }
 

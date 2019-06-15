@@ -18,20 +18,6 @@
         <input type="text" class="form-control" id="name" name="name" autofocus placeholder="Enter category name"
           value="{{this.project.name}}">
       </div>
-      <div class="form-group">
-        <label for="status">Status</label>
-        <select name="status" id="status" class="form-control">
-          <option value="{{this.project.status}}">Hiện tại:
-            {{#if this.project.status}}
-            Đã duyệt
-            {{else}}
-            Chưa duyệt
-            {{/if}}
-          </option>
-          <option value="0">Chưa duyệt</option>
-          <option value="1">Đã duyệt</option>
-        </select>
-      </div>
       <a class="btn btn-primary" href="/admin/projects" role="button">
         <i class="fa fa-backward" aria-hidden="true"></i>
         List

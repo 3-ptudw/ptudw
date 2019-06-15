@@ -13,12 +13,6 @@ var projectModel = require("../models/project.model");
 var router = express.Router();
 
 router.get("/", async(req, res) => {
-    // let projects = await projectModel.all()
-    // let categories = await categoryModel.all()
-    // let views = await categoryModel.view10()
-    // let news10 = await homepageModel.news10()
-    // let news3 = await homepageModel.news3()
-    // let posts = await postModel.trueStatus()
 
     let [projects, categories, views10, news10, news3, top10Cat, posts] = await Promise.all([
         projectModel.all(),
