@@ -40,4 +40,11 @@ module.exports = {
     delete: id => {
         return db.delete('categories', 'id', id);
     },
+
+    topPost: url => {
+        return db.load(`select *, posts.url as url_post
+        from posts, categories
+        where posts.id_category in (select * from (select id from categories where url = "${url}" LIMIT 1) temp_tab) and posts.status = true 
+        ORDER BY posts.posted_at DESC`)
+    }
 };

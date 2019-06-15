@@ -12,27 +12,31 @@ var projectModel = require("../models/project.model");
 
 var router = express.Router();
 
-router.get("/", (req, res) => {
-    projectModel.all().then(projects => {
-        categoryModel.all().then(categories => {
-            homepageModel.view10().then(views => {
-                homepageModel.news10().then(news10 => {
-                    homepageModel.news3().then(news3 => {
-                        postModel.trueStatus().then(posts => {
-                            res.render("home", {
-                                view10: views,
-                                news10: news10,
-                                news3: news3,
-                                posts: posts,
-                                projects: projects,
-                                categories: categories,
-                            });
-                        })
-                    })
-                })
-            })
-        })
-    })
+router.get("/", async(req, res) => {
+    // let projects = await projectModel.all()
+    // let categories = await categoryModel.all()
+    // let views = await categoryModel.view10()
+    // let news10 = await homepageModel.news10()
+    // let news3 = await homepageModel.news3()
+    // let posts = await postModel.trueStatus()
+
+    let [projects, categories, views10, news10, news3, posts] = await Promise.all([
+        projectModel.all(),
+        categoryModel.all(),
+        homepageModel.view10(),
+        homepageModel.news10(),
+        homepageModel.news3(),
+        postModel.trueStatus(),
+    ])
+
+    res.render("home", {
+        view10: views10,
+        news10: news10,
+        news3: news3,
+        posts: posts,
+        projects: projects,
+        categories: categories,
+    });
 });
 
 router.get("/post/:url", (req, res) => {
@@ -57,26 +61,25 @@ router.get("/post/:url", (req, res) => {
         });
 });
 
-router.get("/category/:url", (req, res) => {
+router.get("/category/:url", async(req, res) => {
     var url = req.params.url;
-    categoryModel
-        .getURL(url)
-        .then(rows => {
-            if (rows.length > 0) {
-                res.render("category", {
-                    error: false,
-                    category: rows[0],
-                });
-            } else {
-                res.render("category", {
-                    error: true,
-                });
-            }
-        })
-        .catch(err => {
-            console.log(err);
-            res.end(err);
+    let [category, topPost] = await Promise.all([
+        categoryModel.getURL(url),
+        categoryModel.topPost(url),
+    ])
+
+    if (category.length > 0) {
+        res.render("category", {
+            error: false,
+            category: category[0],
+            topPost: topPost[0],
         });
+    } else {
+        res.render("category", {
+            error: true,
+        });
+    }
+
 });
 
 router.post('/logout', auth, (req, res, next) => {
