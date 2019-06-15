@@ -20,22 +20,24 @@ router.get("/", async(req, res) => {
     // let news3 = await homepageModel.news3()
     // let posts = await postModel.trueStatus()
 
-    let [projects, categories, views10, news10, news3, posts] = await Promise.all([
+    let [projects, categories, views10, news10, news3, top10Cat, posts] = await Promise.all([
         projectModel.all(),
         categoryModel.all(),
         homepageModel.view10(),
         homepageModel.news10(),
         homepageModel.news3(),
+        homepageModel.top10Cat(),
         postModel.trueStatus(),
     ])
 
     res.render("home", {
+        projects: projects,
+        categories: categories,
         view10: views10,
         news10: news10,
         news3: news3,
+        top10Cat: top10Cat,
         posts: posts,
-        projects: projects,
-        categories: categories,
     });
 });
 
