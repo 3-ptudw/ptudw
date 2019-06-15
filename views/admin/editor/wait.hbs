@@ -1,0 +1,106 @@
+{{#section 'js'}}
+<script>
+  $('.table').on('click', '.btn-refuse-post', function () {
+    var id = $(this).data('id');
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      type: 'warning',
+      showConfirmButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Yes, refuse it!',
+      cancelButtonText: 'No, cancel!',
+      confirmButtonColor: "#28a745",
+      cancelButtonColor: "#dc3545",
+      reverseButtons: true,
+      focusConfirm: true,
+      showCloseButton: true,
+
+    }).then((result) => {
+      if (result.value) {
+        Swal.fire(
+          'refused!',
+          'Your post has been refused.',
+          'success'
+        );
+        window.location.href = '/admin/editor/refuse/' + id;
+      }
+      else {
+        Swal.fire(
+          'Cancelled',
+          'Your post has been retained!',
+          'error'
+        )
+      }
+    })
+  });
+</script>
+{{/section}}
+<div class="card shadow">
+  <h4 class="card-header">
+    Posts Wait
+  </h4>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col" class="text-center">#</th>
+        <th scope="col">Title</th>
+        <th scope="col">of Category</th>
+        <th scope="col">Status</th>
+        <th scope="col" class="text-right">
+          {{!-- <a class="btn btn-outline-success" href="/admin/writer/add" role="button">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            Add Post
+          </a> --}}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each this.editorWait}}
+      <tr>
+        <th scope="row" class="text-center">{{id}}</th>
+        <td>{{title}}</td>
+        <td>{{name_category}}</td>
+        <td>
+          {{#if (opt status '==' -1 opt )}}
+          <p style="color: red; font-weight: bold;">
+            Bị từ chối
+          </p>
+          {{/if}}
+
+          {{#if (opt status '==' 0 opt )}}
+          <p style="color:blue; font-weight: bold;">
+            Chưa duyệt
+          </p>
+          {{/if}}
+
+          {{#if (opt status '==' 1 opt )}}
+          <p style="color:orange; font-weight: bold;">
+            Đã được duyệt, chờ xuất bản
+          </p>
+          {{/if}}
+
+          {{#if (opt status '==' 2 opt )}}
+          <p style="color:green; font-weight: bold;">
+            Đã xuất bản
+          </p>
+          {{/if}}
+        </td>
+        <td class="text-right">
+          {{#if (opt status '==' 0 opt )}}
+          <a class="btn btn-primary btn-sm" href="/admin/editor/approve/{{id}}" role="button">
+            <i class="fa fa-edit" aria-hidden="true"></i>
+            Duyệt
+          </a>
+
+          <button id="btn-refuse" class="btn btn-danger btn-refuse-post btn-sm" data-id="{{id}}" role="button">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+            Từ chối
+          </button>
+          {{/if}}
+
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>

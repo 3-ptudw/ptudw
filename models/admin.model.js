@@ -15,6 +15,24 @@ module.exports = {
         `);
     },
 
+    editorAll: username => {
+        return db.load(`
+        select posts.title, posts.id as id, categories.name as name_category, posts.status as status
+        from users, categories, posts
+        where categories.id_user = (select * from (select id from users where username = '${username}') temp_tab) and posts.id_category = categories.id
+        GROUP BY posts.id DESC
+        `);
+    },
+
+    editorWait: username => {
+        return db.load(`
+        select posts.title, posts.id as id, categories.name as name_category, posts.status as status
+        from users, categories, posts
+        where categories.id_user = (select * from (select id from users where username = '${username}') temp_tab) and posts.id_category = categories.id and posts.status = 0
+        GROUP BY posts.id DESC
+        `);
+    },
+
     add: entity => {
         return db.add('users', entity);
     },

@@ -94,21 +94,6 @@
         <input type="text" class="form-control" id="posted_at" name="posted_at" value="{{this.post.posted_at}}">
       </div>
 
-
-      <div class="form-group">
-        <label for="status">Status</label>
-        <select name="status" id="status" class="form-control">
-          <option value="{{this.post.status}}">Hiện tại:
-            {{#if this.post.status}}
-            Đã duyệt
-            {{else}}
-            Chưa duyệt
-            {{/if}}
-          </option>
-          <option value="0">Chưa duyệt</option>
-          <option value="1">Đã duyệt</option>
-        </select>
-      </div>
       <a class="btn btn-primary" href="/admin/posts" role="button">
         <i class="fa fa-backward" aria-hidden="true"></i>
         List

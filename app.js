@@ -21,6 +21,7 @@ app.use('/admin/categories', auth, require('./routes/admin/category.route'))
 app.use('/admin/posts', auth, require('./routes/admin/post.route'))
 app.use('/admin/users', auth, require('./routes/admin/user.route'))
 app.use('/admin/writer', auth, require('./routes/admin/writer.route'))
+app.use('/admin/editor', auth, require('./routes/admin/editor.route'))
 
 app.use((req, res, next) => {
     res.render('404', { layout: false });

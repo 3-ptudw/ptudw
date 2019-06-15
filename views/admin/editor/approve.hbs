@@ -1,0 +1,63 @@
+{{#section 'js'}}
+<script>
+  $(document).ready(function () {
+    $('#content').summernote({
+      height: 500,
+    });
+  });
+</script>
+<script>
+  $(function () {
+    $('input[name="posted_at"]').daterangepicker({
+      singleDatePicker: true,
+      timePicker24Hour: true,
+      timePicker: true,
+      showDropdowns: true,
+      "drops": "down",
+      locale: {
+        format: 'YYYY-MM-DD HH:mm'
+      }
+    });
+  });
+</script>
+{{/section}}
+<div class="card shadow">
+  <h4 class="card-header">
+    Edit Post
+  </h4>
+  <div class="card-body">
+    {{#if this.error}}
+    <div class="alert alert-danger" role="alert">
+      Invalid PostId. <a href="/admin/editor" class="alert-link">Go back</a>.
+    </div>
+    {{else}}
+    <form method="POST" action="/admin/editor/update">
+
+      <div class="form-group">
+        <label for="id">#</label>
+        <input readonly type="text" class="form-control" id="id" name="id" value="{{this.post.id}}">
+      </div>
+
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input readonly type="text" class="form-control" id="title" name="title" placeholder="Enter Post name"
+          value="{{this.post.title}}">
+      </div>
+
+      <div class="form-group">
+        <label for="posted_at">Time Post</label>
+        <input type="text" class="form-control" id="posted_at" name="posted_at">
+      </div>
+
+      <a class="btn btn-primary" href="/admin/editor" role="button">
+        <i class="fa fa-backward" aria-hidden="true"></i>
+        List
+      </a>
+      <button type="submit" class="btn btn-success">
+        <i class="fa fa-check" aria-hidden="true"></i>
+        Approve
+      </button>
+    </form>
+    {{/if}}
+  </div>
+</div>
