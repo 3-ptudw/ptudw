@@ -6,7 +6,7 @@ module.exports = {
     },
 
     news10: () => {
-        return db.load(`select *, categories.name as name_category 
+        return db.load(`select *, categories.name as name_category, categories.url as url_category
         from categories, posts 
         where categories.id = posts.id_category and posts.status = true 
         ORDER BY posts.posted_at DESC 
@@ -14,7 +14,7 @@ module.exports = {
     },
 
     news3: () => {
-        return db.load(`select *, categories.name as name_category 
+        return db.load(`select *, categories.name as name_category, categories.url as url_category 
         from categories, posts 
         where categories.id = posts.id_category and posts.status = true 
         ORDER BY posts.posted_at DESC 
@@ -22,7 +22,7 @@ module.exports = {
     },
 
     view10: () => {
-        return db.load(`select *, categories.name as name_category 
+        return db.load(`select *, categories.name as name_category, categories.url as url_category 
         from categories, posts 
         where categories.id = posts.id_category 
         and posts.status = true 
