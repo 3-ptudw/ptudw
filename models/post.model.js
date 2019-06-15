@@ -18,7 +18,21 @@ module.exports = {
     },
 
     getURL: url => {
-        return db.load(`select * from posts where posts.url = "${url}"`);
+        return db.load(`
+        select *, categories.name as name_category, categories.url as url_category, users.name as name_user, (select title from posts where url = "${url}") as title_post, (select content from posts where url = "${url}") as content_post
+        from posts, categories, users
+        where categories.id in (select * from (select id_category from posts where url = "${url}") temp_tab) and posts.status = true
+        `);
+    },
+
+    random5: url => {
+        return db.load(`
+        select *, posts.url as url_post, posts.title as title_post
+        from posts, categories
+        where posts.id_category = (select * from (select id_category from posts p1 where url = "${url}") temp_tab) and posts.status = true
+        GROUP BY posts.title
+        LIMIT 5
+        `);
     },
 
     add: entity => {

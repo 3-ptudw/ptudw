@@ -10,22 +10,22 @@
 
             <!-- Breadcumb Area -->
             <div class="col-12 col-md-4">
-                <h3>{{this.post.id_category}}</h3>
+                <h3>{{this.post.title_post}}</h3>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/">Home</a></li>
-                        <li class="breadcrumb-item"><a href="#">ID_PROJECT</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{this.post.id_category}}</li>
+                        <li class="breadcrumb-item"><a href="/category/{{this.post.url_category}}">{{this.post.name_category}}</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{this.post.title_post}}</li>
                     </ol>
                 </nav>
             </div>
 
             <!-- Add Widget -->
-            <div class="col-12 col-md-8">
-                <div class="add-widget">
-                    <a href="#"><img src="/img/bg-img/add2.png" alt=""></a>
+                <div class="col-12 col-md-8">
+                    <div class="add-widget">
+                        <a href="#"><img src="/img/bg-img/add2.png" alt=""></a>
+                    </div>
                 </div>
-            </div>
         </div>
     </div>
 </div>
@@ -42,9 +42,9 @@
                     <div class="single-blog-post-details">
                         <div class="post-data">
                             <h2 class="post-title">
-                                {{this.post.title}}
+                                {{this.post.title_post}}
                             </h2>
-                            <a href="phim-anh" class="post-catagory">ID_PROJECT</a>
+                            <a href="/category/{{this.post.url_category}}" class="post-catagory">{{this.post.name_category}}</a>
                             <div class="post-meta">
 
                                 <!-- Post Details Meta Data -->
@@ -52,7 +52,7 @@
                                     class="post-details-meta-data mb-50 d-flex align-items-center justify-content-between">
                                     <!-- Post Author & Date -->
                                     <div class="post-authors-date">
-                                        <p class="post-author">Đăng bởi <a href="#">ID_USER</a></p>
+                                        <p class="post-author">Đăng bởi <a>{{this.post.name_user}}</a></p>
                                         <p class="post-date">{{this.post.posted_at}}</p>
                                         <p class="post-author">Tag <a href="#">{{this.post.tag}}</a></p>
                                     </div>
@@ -64,7 +64,7 @@
                                 </div>
 
                                 <div>
-                                    {{{this.post.content}}}
+                                    {{{this.post.content_post}}}
                                 </div>
 
                             </div>
@@ -173,140 +173,30 @@
                         <h4 class="mb-70">Bài viết cùng chuyên mục</h4>
 
                         <div class="row">
+                            {{#each this.random5}}
                             <!-- Single Post -->
                             <div class="col-12 col-lg-12">
                                 <div class="single-blog-post style-3 style-5 d-flex align-items-center mb-50">
                                     <!-- Post Thumb -->
                                     <div class="post-thumb">
-                                        <a href="#"><img style="width: 508px; height: 293px;"
-                                                src="https://znews-photo.zadn.vn/w480/Uploaded/mdf_rkxrxd/2019_04_29/Avengers_endgame_1_1.jpg"
-                                                alt=""></a>
+                                        <a href="{{url_post}}"><img style="width: 508px; height: 293px;" src="{{url_thumbnail}}" alt=""></a>
                                     </div>
                                     <!-- Post Data -->
                                     <div class="post-data">
-                                        <a href="#" class="post-catagory">ID_PROJECT</a>
-                                        <a href="#" class="post-title">
-                                            <h6>Trong kịch bản đầu tiên, 'Avengers: Endgame' diễn biến như thế nào?</h6>
+                                        <a href="/category/{{../this.post.url_category}}" class="post-catagory">{{../this.post.name_category}}</a>
+                                        <a href="{{url_post}}" class="post-title">
+                                            <h6>{{title_post}}</h6>
                                         </a>
                                         <div class="post-meta">
-                                            <p class="post-author">Tag <a href="#">Avengers Endgame</a>, <a
-                                                    href="#">Tony Stark</a> </p>
-                                            <p class="post-date">5 Hours Ago</p>
+                                            <p class="post-author">Tag 
+                                                <a href="#">Avengers Endgame</a>, <a href="#">Tony Stark</a> </p>
+                                            <p class="post-date">{{posted_at}}</p>
                                         </div>
-                                        <p class="post-excerp">Để cho ra một siêu phẩm hoàn hảo nhất có thể, biên kịch
-                                            của 'Avengers: Endgame' đã phải dựng lên nhiều ý tưởng khác nhau trước khi
-                                            đi đến kịch bản cuối cùng.</p>
+                                        <p class="post-excerp">{{abstract}}</p>
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Single Post -->
-                            <div class="col-12 col-lg-12">
-                                <div class="single-blog-post style-3 style-5 d-flex align-items-center mb-50">
-                                    <!-- Post Thumb -->
-                                    <div class="post-thumb">
-                                        <a href="#"><img style="width: 508px; height: 293px;"
-                                                src="https://znews-photo.zadn.vn/w480/Uploaded/xbhunku/2019_04_29/e15.jpg"
-                                                alt=""></a>
-                                    </div>
-                                    <!-- Post Data -->
-                                    <div class="post-data">
-                                        <a href="#" class="post-catagory">ID_PROJECT</a>
-                                        <a href="#" class="post-title">
-                                            <h6>Những chi tiết thú vị ẩn giấu trong bom tấn 'Avengers: Endgame'</h6>
-                                        </a>
-                                        <div class="post-meta">
-                                            <p class="post-author">Tag <a href="#">Avengers Endgame</a>, <a
-                                                    href="#">Tony Stark</a> </p>
-                                            <p class="post-date">5 Hours Ago</p>
-                                        </div>
-                                        <p class="post-excerp">Bom tấn siêu anh hùng mới nhất của Marvel Studios chẳng
-                                            khác nào một bữa đại tiệc 'trứng phục sinh' để các fan tìm kiếm, soi xét, và
-                                            suy đoán.</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Single Post -->
-                            <div class="col-12 col-lg-12">
-                                <div class="single-blog-post style-3 style-5 d-flex align-items-center mb-50">
-                                    <!-- Post Thumb -->
-                                    <div class="post-thumb">
-                                        <a href="#"><img style="width: 508px; height: 293px;"
-                                                src="https://znews-photo.zadn.vn/w480/Uploaded/bzcvolp3/2019_04_29/ironmantony.jpg"
-                                                alt=""></a>
-                                    </div>
-                                    <!-- Post Data -->
-                                    <div class="post-data">
-                                        <a href="#" class="post-catagory">ID_PROJECT</a>
-                                        <a href="#" class="post-title">
-                                            <h6>Iron Man - siêu anh hùng vĩ đại nhất</h6>
-                                        </a>
-                                        <div class="post-meta">
-                                            <p class="post-author">Tag <a href="#">Avengers Endgame</a>, <a
-                                                    href="#">Tony Stark</a> </p>
-                                            <p class="post-date">5 Hours Ago</p>
-                                        </div>
-                                        <p class="post-excerp">Trong thế giới truyện tranh, Iron Man thua kém Batman và
-                                            Superman của DC, Spider-Man và Wolverine từ Marvel. Nhưng trên màn ảnh lớn,
-                                            không ai có thể so được với Tony Stark.</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Single Post -->
-                            <div class="col-12 col-lg-12">
-                                <div class="single-blog-post style-3 style-5 d-flex align-items-center mb-50">
-                                    <!-- Post Thumb -->
-                                    <div class="post-thumb">
-                                        <a href="#"><img style="width: 508px; height: 293px;"
-                                                src="https://znews-photo.zadn.vn/w480/Uploaded/mdf_rkxrxd/2019_04_29/avaend1.jpeg"
-                                                alt=""></a>
-                                    </div>
-                                    <!-- Post Data -->
-                                    <div class="post-data">
-                                        <a href="#" class="post-catagory">ID_PROJECT</a>
-                                        <a href="#" class="post-title">
-                                            <h6>Với 1,2 tỷ USD doanh thu tuần đầu, 'Endgame' liệu có vượt 'Avatar'?</h6>
-                                        </a>
-                                        <div class="post-meta">
-                                            <p class="post-author">Tag <a href="#">Avengers Endgame</a>, <a
-                                                    href="#">Tony Stark</a> </p>
-                                            <p class="post-date">5 Hours Ago</p>
-                                        </div>
-                                        <p class="post-excerp">Doanh thu 1,2 tỷ USD sau tuần đầu công chiếu liệu có phải
-                                            là tín hiệu cho thấy "Avengers: Endgame" sẽ soán ngôi "Avatar" ở danh sách
-                                            phim có doanh thu cao nhất mọi thời đại?</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Single Post -->
-                        <div class="col-12 col-lg-12">
-                            <div class="single-blog-post style-3 style-5 d-flex align-items-center mb-50">
-                                <!-- Post Thumb -->
-                                <div class="post-thumb">
-                                    <a href="#"><img style="width: 508px; height: 293px;"
-                                            src="https://znews-photo.zadn.vn/w480/Uploaded/xbhunku/2019_04_29/58379605_379647249302285_3675327566727610368_n.jpg"
-                                            alt=""></a>
-                                </div>
-                                <!-- Post Data -->
-                                <div class="post-data">
-                                    <a href="#" class="post-catagory">ID_PROJECT</a>
-                                    <a href="#" class="post-title">
-                                        <h6>Avengers: 'Endgame' thu hơn 112 tỷ đồng tại Việt Nam chỉ sau 3 ngày</h6>
-                                    </a>
-                                    <div class="post-meta">
-                                        <p class="post-author">Tag <a href="#">Avengers Endgame</a>, <a href="#">Tony
-                                                Stark</a> </p>
-                                        <p class="post-date">5 Hours Ago</p>
-                                    </div>
-                                    <p class="post-excerp">Giống như tại nhiều nơi trên thế giới, 'Avengers: Endgame'
-                                        lập kỳ tích trong ba ngày trình chiếu đầu tiên ở Việt Nam.</p>
-                                </div>
-                            </div>
-                        </div>
+                            {{/each}}
                     </div>
 
                 </div>

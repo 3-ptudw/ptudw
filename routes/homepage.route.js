@@ -39,26 +39,24 @@ router.get("/", async(req, res) => {
     });
 });
 
-router.get("/post/:url", (req, res) => {
+router.get("/post/:url", async(req, res) => {
     var url = req.params.url;
-    postModel
-        .getURL(url)
-        .then(rows => {
-            if (rows.length > 0) {
-                res.render("post", {
-                    error: false,
-                    post: rows[0],
-                });
-            } else {
-                res.render("post", {
-                    error: true,
-                });
-            }
-        })
-        .catch(err => {
-            console.log(err);
-            res.end(err);
+    let [post, random5] = await Promise.all([
+        postModel.getURL(url),
+        postModel.random5(url),
+    ])
+
+    if (post.length > 0) {
+        res.render("post", {
+            error: false,
+            post: post[0],
+            random5: random5,
         });
+    } else {
+        res.render("post", {
+            error: true,
+        });
+    }
 });
 
 router.get("/category/:url", async(req, res) => {
