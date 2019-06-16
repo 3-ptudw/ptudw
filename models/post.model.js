@@ -24,7 +24,7 @@ module.exports = {
 
     getURL: url => {
         return db.load(`
-        select *, categories.name as name_category, categories.url as url_category, users.name as name_user, (select title from posts where url = "${url}") as title_post, (select content from posts where url = "${url}") as content_post, (select id from posts where url = "${url}") as id_post, (select url from posts where url = "${url}") as url_post
+        select *, categories.name as name_category, categories.url as url_category, users.name as name_user, (select title from posts where url = "${url}") as title_post, (select content from posts where url = "${url}") as content_post, (select id from posts where url = "${url}") as id_post, (select url from posts where url = "${url}") as url_post, (select count(comments.id_post) from comments where comments.id_post in (select * from (select id from posts where url = "${url}") temp_tab)) as count_comment
         from posts, categories, users
         where categories.id in (select * from (select id_category from posts where url = "${url}") temp_tab) and posts.status = 2
         `);

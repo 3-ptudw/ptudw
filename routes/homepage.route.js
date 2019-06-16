@@ -193,7 +193,8 @@ router.post('/signup', async(req, res, next) => {
         name: req.body.name,
         other_name: req.body.name,
         date_of_birth: dob,
-        id_role: 0,
+        id_role: 4,
+        avatar: 'http://www.medya32.com/themes/gold/assets/images/no-author-photo.png',
         created_at: new Date(),
         updated_at: new Date(),
     }
@@ -232,6 +233,7 @@ router.post("/profile", auth, async(req, res) => {
         name: req.body.name,
         other_name: req.body.other_name,
         date_of_birth: dob,
+        avatar: req.body.avatar,
         updated_at: new Date(),
     }
 

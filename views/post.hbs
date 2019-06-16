@@ -61,7 +61,7 @@
                                     <!-- View Comments -->
                                     <div class="view-comments">
                                         <p class="views">{{this.post.views}} lượt xem</p>
-                                        <a href="#comments" class="comments">3 bình luận</a>
+                                        <a href="#comments" class="comments">{{this.post.count_comment}} bình luận</a>
                                     </div>
                                 </div>
 
@@ -82,7 +82,7 @@
 
                     <!-- Comment Area Start -->
                     <div class="comment_area clearfix" id="comments">
-                        <h4 class="title mb-70">3 comment</h4>
+                        <h4 class="title mb-70">{{this.post.count_comment}} comment</h4>
 
                         <ol>
                             <!-- Single Comment Area -->
@@ -130,11 +130,11 @@
                                 <div class="comment-content d-flex">
                                     <!-- Comment Author -->
                                     <div class="comment-author">
-                                        <img src="/img/bg-img/t3.jpg" alt="author">
+                                        <img src="{{avatar_url}}" alt="author">
                                     </div>
                                     <!-- Comment Meta -->
                                     <div class="comment-meta">
-                                        <a class="post-author">Christian Williams</a>
+                                        <a class="post-author">{{name_user}}</a>
                                         <a class="post-date">{{formatTime time_comment "DD/MM/YYYY HH:mm"}}</a>
                                         <p>{{content_comment}}</p>
                                     </div>

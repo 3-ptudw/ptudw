@@ -52,7 +52,7 @@ module.exports = {
 
     loadCommentGetByURL: url => {
         return db.load(`
-        select *, comments.content as content_comment, comments.created_at as time_comment
+        select *, comments.content as content_comment, comments.created_at as time_comment, (select name from users where comments.id_user = users.id ) as name_user, (select avatar from users where comments.id_user = users.id ) as avatar_url 
         from comments, posts
         where comments.id_post in (select * from (select id from posts where url = "${url}") temp_tab)
         GROUP BY comments.id
