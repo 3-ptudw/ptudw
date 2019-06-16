@@ -35,16 +35,32 @@ router.get("/", async(req, res) => {
     });
 });
 
-router.get("/category/:url", async(req, res) => {
+router.get("/category/:url", async(req, res, next) => {
     var url = req.params.url;
-    let [projects, categories, category, topPost, skipTopPost, news3] = await Promise.all([
+    var page = req.query.page || 1;
+    if (page < 1) page = 1;
+
+    var limit = 9;
+    var offset = 1 + (page - 1) * limit;
+
+    let [projects, categories, category, topPost, skipTopPost, news3, count_rows] = await Promise.all([
         projectModel.all(),
         categoryModel.all(),
         categoryModel.getURL(url),
         categoryModel.topPost(url),
-        categoryModel.skipTopPost(url),
+        categoryModel.skipTopPost(url, limit, offset),
         homepageModel.news3(),
+        categoryModel.countByURL(url),
     ])
+
+    var total = count_rows[0].total;
+    var nPages = Math.floor(total / limit);
+    if (total % limit > 0) nPages++;
+    var pages = [];
+    for (i = 1; i <= nPages; i++) {
+        var obj = { value: i, active: i === +page };
+        pages.push(obj);
+    }
 
     if (category.length > 0) {
         res.render("category", {
@@ -55,6 +71,7 @@ router.get("/category/:url", async(req, res) => {
             projects: projects,
             categories: categories,
             news3: news3,
+            pages
         });
     } else {
         res.render("category", {

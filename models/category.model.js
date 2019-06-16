@@ -2,19 +2,32 @@ var db = require('../utils/db');
 
 module.exports = {
     all: () => {
-        return db.load('select *, projects.name as name_project from projects, categories where projects.id = categories.id_project ');
+        return db.load(`
+        select *, projects.name as name_project 
+        from projects, categories 
+        where projects.id = categories.id_project
+        `);
+    },
+
+    pagination: (limit, offset) => {
+        return db.load(`
+        select *, projects.name as name_project 
+        from projects, categories 
+        where projects.id = categories.id_project
+        limit ${limit} 
+        offset ${offset}
+        `);
+    },
+
+    count: () => {
+        return db.load(`
+        select count(*) as total
+        from categories
+        `)
     },
 
     allById: id => {
         return db.load(`select * from categories where id_project = ${id}`);
-    },
-
-    pageById: (id, limit, offset) => {
-        return db.load(`select * from categories where id_project = ${id} limit ${limit} offset ${offset}`);
-    },
-
-    countById: id => {
-        return db.load(`select count(*) as total from categories where id_project = ${id}`);
     },
 
     getByProject: id => {
@@ -48,14 +61,24 @@ module.exports = {
         ORDER BY posts.posted_at DESC`)
     },
 
-    skipTopPost: url => {
+    skipTopPost: (url, limit, offset) => {
         return db.load(`
         select *, posts.url as url_post
         from categories, posts
         where posts.id_category in (select * from (select id from categories where url = "${url}") temp_tab) and posts.status = 2 
         GROUP BY url_post
         ORDER BY posts.posted_at DESC
-        LIMIT 9 OFFSET 1
+        limit ${limit} 
+        offset ${offset}
         `)
+    },
+
+    countByURL: url => {
+        return db.load(`
+        select count(posts.id_category) as total 
+        from categories, posts 
+        where posts.id_category in (select * from (select id from categories where url = "${url}") temp_tab) and posts.status = 2 
+        GROUP BY categories.id
+        `);
     },
 };

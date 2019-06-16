@@ -28,4 +28,20 @@ module.exports = {
     delete: id => {
         return db.delete('projects', 'id', id);
     },
+
+    pagination: (limit, offset) => {
+        return db.load(`
+        select *
+        from projects
+        limit ${limit} 
+        offset ${offset}
+        `)
+    },
+
+    count: () => {
+        return db.load(`
+        select count(*) as total
+        from projects
+        `)
+    },
 };
