@@ -44,7 +44,7 @@ module.exports = {
     topPost: url => {
         return db.load(`select *, posts.url as url_post
         from posts, categories
-        where posts.id_category in (select * from (select id from categories where url = "${url}" LIMIT 1) temp_tab) and posts.status = true 
+        where posts.id_category in (select * from (select id from categories where url = "${url}" LIMIT 1) temp_tab) and posts.status = 2 
         ORDER BY posts.posted_at DESC`)
     },
 
@@ -52,7 +52,7 @@ module.exports = {
         return db.load(`
         select *, posts.url as url_post
         from categories, posts
-        where posts.id_category in (select * from (select id from categories where url = "${url}") temp_tab) and posts.status = true 
+        where posts.id_category in (select * from (select id from categories where url = "${url}") temp_tab) and posts.status = 2 
         GROUP BY url_post
         ORDER BY posts.posted_at DESC
         LIMIT 9 OFFSET 1

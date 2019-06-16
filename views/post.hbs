@@ -9,23 +9,24 @@
         <div class="row h-100 align-items-center">
 
             <!-- Breadcumb Area -->
-            <div class="col-12 col-md-4">
+            <div class="col-12 col-md-12">
                 <h3>{{this.post.title_post}}</h3>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/">Home</a></li>
-                        <li class="breadcrumb-item"><a href="/category/{{this.post.url_category}}">{{this.post.name_category}}</a></li>
+                        <li class="breadcrumb-item"><a
+                                href="/category/{{this.post.url_category}}">{{this.post.name_category}}</a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{this.post.title_post}}</li>
                     </ol>
                 </nav>
             </div>
 
             <!-- Add Widget -->
-                <div class="col-12 col-md-8">
+            {{!-- <div class="col-12 col-md-8">
                     <div class="add-widget">
                         <a href="#"><img src="/img/bg-img/add2.png" alt=""></a>
                     </div>
-                </div>
+                </div> --}}
         </div>
     </div>
 </div>
@@ -44,7 +45,8 @@
                             <h2 class="post-title">
                                 {{this.post.title_post}}
                             </h2>
-                            <a href="/category/{{this.post.url_category}}" class="post-catagory">{{this.post.name_category}}</a>
+                            <a href="/category/{{this.post.url_category}}"
+                                class="post-catagory">{{this.post.name_category}}</a>
                             <div class="post-meta">
 
                                 <!-- Post Details Meta Data -->
@@ -70,9 +72,12 @@
                             </div>
                         </div>
                         <!-- Login with Facebook to post comments -->
+                        {{#if isAuthenticated}}
+                        {{else}}
                         <div class="login-with-facebook my-5">
-                            <a href="#">Login with Facebook to post comments</a>
+                            <a href="/signin">Login to post comments</a>
                         </div>
+                        {{/if}}
                     </div>
 
                     <!-- Comment Area Start -->
@@ -81,7 +86,7 @@
 
                         <ol>
                             <!-- Single Comment Area -->
-                            <li class="single_comment_area">
+                            {{!-- <li class="single_comment_area">
                                 <!-- Comment Content -->
                                 <div class="comment-content d-flex">
                                     <!-- Comment Author -->
@@ -116,9 +121,10 @@
                                         </div>
                                     </li>
                                 </ol>
-                            </li>
+                            </li> --}}
 
                             <!-- Single Comment Area -->
+                            {{#each this.comments}}
                             <li class="single_comment_area">
                                 <!-- Comment Content -->
                                 <div class="comment-content d-flex">
@@ -136,42 +142,36 @@
                                     </div>
                                 </div>
                             </li>
+                            {{/each}}
+
                         </ol>
                     </div>
 
+                    {{#if isAuthenticated}}
                     <div class="post-a-comment-area">
-                        <h4 class="mb-70">Leave a comment</h4>
+                        {{!-- <h4 class="mb-70">Leave a comment</h4> --}}
 
                         <!-- Reply Form -->
                         <div class="contact-form-area">
-                            <form action="#" method="post">
+                            <form action="/comment/post/{{this.post.id_post}}/{{this.post.url_post}}" method="POST">
                                 <div class="row">
-                                    <div class="col-12 col-lg-6">
-                                        <input type="text" class="form-control" id="name" placeholder="Name*">
-                                    </div>
-                                    <div class="col-12 col-lg-6">
-                                        <input type="email" class="form-control" id="email" placeholder="Email*">
+                                    <div class="col-12">
+                                        <textarea name="content" class="form-control" id="content" cols="30"
+                                            rows="10"></textarea>
                                     </div>
                                     <div class="col-12">
-                                        <input type="text" class="form-control" id="subject" placeholder="Website">
-                                    </div>
-                                    <div class="col-12">
-                                        <textarea name="message" class="form-control" id="message" cols="30" rows="10"
-                                            placeholder="Message"></textarea>
-                                    </div>
-                                    <div class="col-12">
-                                        <button class="btn viral-btn mt-30" type="submit">Submit Comment</button>
+                                        <button class="btn viral-btn mt-30" type="submit">Gửi bình luận</button>
                                     </div>
                                 </div>
                             </form>
                         </div>
                     </div>
+                    {{/if}}
 
                     <br>
                     <!-- Related Articles Area -->
                     <div class="related-articles-">
                         <h4 class="mb-70">Bài viết cùng chuyên mục</h4>
-
                         <div class="row">
                             {{#each this.random5}}
                             <!-- Single Post -->
@@ -179,16 +179,18 @@
                                 <div class="single-blog-post style-3 style-5 d-flex align-items-center mb-50">
                                     <!-- Post Thumb -->
                                     <div class="post-thumb">
-                                        <a href="{{url_post}}"><img style="width: 508px; height: 293px;" src="{{url_thumbnail}}" alt=""></a>
+                                        <a href="{{url_post}}"><img style="width: 508px; height: 293px;"
+                                                src="{{url_thumbnail}}" alt=""></a>
                                     </div>
                                     <!-- Post Data -->
                                     <div class="post-data">
-                                        <a href="/category/{{../this.post.url_category}}" class="post-catagory">{{../this.post.name_category}}</a>
+                                        <a href="/category/{{../this.post.url_category}}"
+                                            class="post-catagory">{{../this.post.name_category}}</a>
                                         <a href="{{url_post}}" class="post-title">
                                             <h6>{{title_post}}</h6>
                                         </a>
                                         <div class="post-meta">
-                                            <p class="post-author">Tag 
+                                            <p class="post-author">Tag
                                                 <a href="#">Avengers Endgame</a>, <a href="#">Tony Stark</a> </p>
                                             <p class="post-date">{{posted_at}}</p>
                                         </div>
@@ -197,14 +199,14 @@
                                 </div>
                             </div>
                             {{/each}}
+                        </div>
+
                     </div>
-
                 </div>
+
+
             </div>
-
-
         </div>
     </div>
-</div>
-<!-- ##### Blog Area End ##### -->
-{{/if}}
+    <!-- ##### Blog Area End ##### -->
+    {{/if}}

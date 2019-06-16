@@ -12,6 +12,7 @@ router.get("/", async(req, res) => {
 
     res.render("admin/users/index", {
         users: users,
+        url: 'user',
         layout: 'admin.hbs',
     });
 
@@ -21,6 +22,7 @@ router.get("/edit/:id", async(req, res) => {
     var id = req.params.id;
     if (isNaN(id)) {
         res.render("admin/users/edit", {
+            url: 'user',
             error: true,
             layout: 'admin.hbs',
         });
@@ -33,6 +35,7 @@ router.get("/edit/:id", async(req, res) => {
 
     if (user.length > 0) {
         res.render("admin/users/edit", {
+            url: 'user',
             error: false,
             user: user[0],
             roles: roles,
@@ -40,6 +43,7 @@ router.get("/edit/:id", async(req, res) => {
         });
     } else {
         res.render("admin/users/edit", {
+            url: 'user',
             error: true,
             layout: 'admin.hbs',
         });
@@ -47,7 +51,7 @@ router.get("/edit/:id", async(req, res) => {
 
 });
 
-router.post("/update", (req, res) => {
+router.post("/update", async(req, res) => {
     var entity = {
         id: req.body.id,
         name: req.body.name,
@@ -56,15 +60,13 @@ router.post("/update", (req, res) => {
         premium: req.body.premium,
         updated_at: new Date(),
     }
-    userModel
-        .update(entity)
-        .then(n => {
-            res.redirect("/admin/users");
-        })
-        .catch(err => {
-            console.log(err);
-            res.end("error occured.");
-        });
+
+    let [] = await Promise.all([
+        userModel.update(entity),
+    ])
+
+    res.redirect("/admin/users");
+
 });
 
 

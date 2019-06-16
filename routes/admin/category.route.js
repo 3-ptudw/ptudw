@@ -5,37 +5,33 @@ var userModel = require("../../models/user.model");
 
 var router = express.Router();
 
-router.get("/", (req, res) => {
-    categoryModel
-        .all()
-        .then(rows => {
-            res.render("admin/categories/index", {
-                categories: rows,
-                layout: 'admin.hbs',
-            });
-        })
-        .catch(err => {
-            console.log(err);
-            res.end("error occured.");
-        });
+router.get("/", async(req, res) => {
+    let [categories] = await Promise.all([
+        categoryModel.all(),
+    ])
+
+    res.render("admin/categories/index", {
+        url: 'category',
+        categories: categories,
+        layout: 'admin.hbs',
+    });
+
 });
 
-router.get("/add", (req, res) => {
-    projectModel
-        .all()
-        .then(rows => {
-            res.render("admin/categories/add", {
-                projects: rows,
-                layout: 'admin.hbs',
-            });
-        })
-        .catch(err => {
-            console.log(err);
-            res.end("error occured.");
-        });
+router.get("/add", async(req, res) => {
+    let [projects] = await Promise.all([
+        projectModel.all(),
+    ])
+
+    res.render("admin/categories/add", {
+        url: 'category',
+        projects: projects,
+        layout: 'admin.hbs',
+    });
+
 });
 
-router.post("/add", (req, res) => {
+router.post("/add", async(req, res) => {
 
     var entity = {
         name: req.body.name,
@@ -44,38 +40,30 @@ router.post("/add", (req, res) => {
         created_at: new Date(),
         updated_at: new Date(),
     }
+    let [] = await Promise.all([
+        categoryModel.add(entity),
+    ])
 
-    categoryModel
-        .add(entity)
-        .then(id => {
-            res.redirect("/admin/categories");
-        })
-        .catch(err => {
-            console.log(err);
-            res.end("error occured.");
-        });
+    res.redirect("/admin/categories");
+
 });
 
-router.get("/id_project/:id", (req, res) => {
+router.get("/id_project/:id", async(req, res) => {
     var id = req.params.id;
-    console.log(id);
-    categoryModel
-        .getByProject(id)
-        .then(rows => {
-            res.json({
-                categories: rows,
-            });
-        })
-        .catch(err => {
-            console.log(err);
-            res.end("error occured.");
-        });
+    let [categories] = await Promise.all([
+        categoryModel.getByProject(id),
+    ])
+
+    res.json({
+        categories: categories,
+    });
 });
 
 router.get("/edit/:id", async(req, res) => {
     var id = req.params.id;
     if (isNaN(id)) {
         res.render("admin/categories/edit", {
+            url: 'category',
             error: true,
             layout: 'admin.hbs',
         });
@@ -89,6 +77,7 @@ router.get("/edit/:id", async(req, res) => {
 
     if (category.length > 0) {
         res.render("admin/categories/edit", {
+            url: 'category',
             error: false,
             projects: projects,
             category: category[0],
@@ -97,13 +86,14 @@ router.get("/edit/:id", async(req, res) => {
         });
     } else {
         res.render("admin/categories/edit", {
+            url: 'category',
             error: true,
             layout: 'admin.hbs',
         });
     }
 });
 
-router.post("/update", (req, res) => {
+router.post("/update", async(req, res) => {
     var entity = {
         id: req.body.id,
         name: req.body.name,
@@ -111,27 +101,20 @@ router.post("/update", (req, res) => {
         id_project: req.body.id_project,
         updated_at: new Date(),
     }
-    categoryModel
-        .update(entity)
-        .then(n => {
-            res.redirect("/admin/categories");
-        })
-        .catch(err => {
-            console.log(err);
-            res.end("error occured.");
-        });
+    let [] = await Promise.all([
+        categoryModel.update(entity),
+    ])
+
+    res.redirect("/admin/categories");
 });
 
-router.get("/delete/:id", (req, res) => {
-    categoryModel
-        .delete(req.params.id)
-        .then(n => {
-            res.redirect("/admin/categories");
-        })
-        .catch(err => {
-            console.log(err);
-            res.end("error occured.");
-        });
+router.get("/delete/:id", async(req, res) => {
+    let [] = await Promise.all([
+        categoryModel.delete(req.params.id),
+    ])
+
+    res.redirect("/admin/categories");
+
 });
 
 module.exports = router;

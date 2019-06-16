@@ -9,7 +9,7 @@ module.exports = {
         return db.load(`
         select *, categories.name as name_category, categories.url as url_category
         from categories, posts 
-        where categories.id = posts.id_category and posts.status = true 
+        where categories.id = posts.id_category and posts.status = 2 
         ORDER BY posts.posted_at DESC 
         LIMIT 10
         `)
@@ -19,7 +19,7 @@ module.exports = {
         return db.load(`
         select *, categories.name as name_category, categories.url as url_category 
         from categories, posts 
-        where categories.id = posts.id_category and posts.status = true 
+        where categories.id = posts.id_category and posts.status = 2 
         ORDER BY posts.posted_at DESC 
         LIMIT 3
         `)
@@ -30,7 +30,7 @@ module.exports = {
         select *, categories.name as name_category, categories.url as url_category 
         from categories, posts 
         where categories.id = posts.id_category 
-        and posts.status = true 
+        and posts.status = 2 
         ORDER BY posts.views DESC 
         LIMIT 10
         `)
@@ -43,6 +43,18 @@ module.exports = {
         where p1.id_category = p2.id_category and p1.posted_at >= ALL(select p3.posted_at from posts p3 where p1.id_category=p3.id_category) 
         GROUP BY p1.id_category 
         LIMIT 10)
+        `);
+    },
+
+    addComment: entity => {
+        return db.add('comments', entity);
+    },
+
+    loadCommentGetByURL: url => {
+        return db.load(`
+        select *
+        from comments, posts
+        where comment.id_post in (select * from (select id from posts where url = "${url}") temp_tab)
         `);
     },
 

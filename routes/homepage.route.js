@@ -35,32 +35,15 @@ router.get("/", async(req, res) => {
     });
 });
 
-router.get("/post/:url", async(req, res) => {
-    var url = req.params.url;
-    let [post, random5] = await Promise.all([
-        postModel.getURL(url),
-        postModel.random5(url),
-    ])
-
-    if (post.length > 0) {
-        res.render("post", {
-            error: false,
-            post: post[0],
-            random5: random5,
-        });
-    } else {
-        res.render("post", {
-            error: true,
-        });
-    }
-});
-
 router.get("/category/:url", async(req, res) => {
     var url = req.params.url;
-    let [category, topPost, skipTopPost] = await Promise.all([
+    let [projects, categories, category, topPost, skipTopPost, news3] = await Promise.all([
+        projectModel.all(),
+        categoryModel.all(),
         categoryModel.getURL(url),
         categoryModel.topPost(url),
         categoryModel.skipTopPost(url),
+        homepageModel.news3(),
     ])
 
     if (category.length > 0) {
@@ -69,14 +52,64 @@ router.get("/category/:url", async(req, res) => {
             category: category[0],
             topPost: topPost[0],
             skipTopPost: skipTopPost,
+            projects: projects,
+            categories: categories,
+            news3: news3,
         });
     } else {
         res.render("category", {
             error: true,
         });
     }
-
 });
+
+router.get("/post/:url", async(req, res) => {
+    var url = req.params.url;
+    let [projects, categories, post, random5, news3, comments] = await Promise.all([
+        projectModel.all(),
+        categoryModel.all(),
+        postModel.getURL(url),
+        postModel.random5(url),
+        homepageModel.news3(),
+        homepageModel.loadCommentGetByURL(url),
+    ])
+
+    if (post.length > 0) {
+        res.render("post", {
+            error: false,
+            post: post[0],
+            random5: random5,
+            projects: projects,
+            categories: categories,
+            news3: news3,
+            comments: comments,
+        });
+    } else {
+        res.render("post", {
+            error: true,
+        });
+    }
+});
+
+router.post('/comment/post/:id/:url', async(req, res, next) => {
+
+    url = '/post/' + req.params.url + '#comments';
+    var entity = {
+        id_user: req.user.id,
+        id_post: req.params.id,
+        content: req.body.content,
+        created_at: new Date(),
+        updated_at: new Date(),
+    }
+
+    let [] = await Promise.all([
+        homepageModel.addComment(entity),
+    ])
+
+    res.redirect(url);
+});
+
+
 
 router.post('/logout', auth, (req, res, next) => {
     req.logOut();
@@ -84,15 +117,17 @@ router.post('/logout', auth, (req, res, next) => {
 })
 
 
-router.get('/is-available', (req, res, next) => {
+router.get('/is-available', async(req, res, next) => {
     var username = req.query.username;
-    adminModel.singleByUsername(username).then(rows => {
-        if (rows.length > 0) {
-            return res.json(false);
-        } else {
-            return res.json(true);
-        }
-    });
+
+    let [rows] = await Promise.all([
+        adminModel.singleByUsername(username),
+    ])
+    if (rows.length > 0) {
+        return res.json(false);
+    } else {
+        return res.json(true);
+    }
 });
 
 router.get("/signin", (req, res) => {
@@ -147,7 +182,7 @@ router.get("/signup", (req, res) => {
     }
 });
 
-router.post('/signup', (req, res, next) => {
+router.post('/signup', async(req, res, next) => {
     var saltRounds = 10;
     var hash = bcrypt.hashSync(req.body.password, saltRounds);
     var dob = moment(req.body.date_of_birth, 'DD/MM/YYYY').format('YYYY-MM-DD');
@@ -163,24 +198,33 @@ router.post('/signup', (req, res, next) => {
         updated_at: new Date(),
     }
 
-    adminModel.add(entity).then(id => {
+    let [] = await Promise.all([
+        adminModel.add(entity),
+    ])
+
+    res.redirect('/signin');
+});
+
+router.get("/profile", auth, async(req, res) => {
+    let [projects, categories, user_profile, news3] = await Promise.all([
+        projectModel.all(),
+        categoryModel.all(),
+        adminModel.singleByUsername(req.user.username),
+        homepageModel.news3(),
+    ])
+    if (user_profile.length > 0) {
+        res.render("profile", {
+            user_profile: user_profile[0],
+            projects: projects,
+            categories: categories,
+            news3: news3,
+        });
+    } else {
         res.redirect('/signin');
-    });
+    }
 });
 
-router.get("/profile", auth, (req, res) => {
-    adminModel.singleByUsername(req.user.username).then(rows => {
-        if (rows.length > 0) {
-            res.render("profile", {
-                user_profile: rows[0],
-            });
-        } else {
-            res.redirect('/signin');
-        }
-    });
-});
-
-router.post("/profile", auth, (req, res) => {
+router.post("/profile", auth, async(req, res) => {
 
     var dob = moment(req.body.date_of_birth, 'YYYY-MM-DD').format('YYYY-MM-DD');
     var entity = {
@@ -191,29 +235,36 @@ router.post("/profile", auth, (req, res) => {
         updated_at: new Date(),
     }
 
-    adminModel.update(entity).then(n => {
-            res.redirect("/profile");
-        })
-        .catch(err => {
-            console.log(err);
-            res.end("error occured.");
+    let [] = await Promise.all([
+        adminModel.update(entity),
+    ])
+
+    res.redirect("/profile");
+
+});
+
+router.get("/changepassword", auth, async(req, res) => {
+
+    let [projects, categories, user_profile, news3] = await Promise.all([
+        projectModel.all(),
+        categoryModel.all(),
+        adminModel.singleByUsername(req.user.username),
+        homepageModel.news3(),
+    ])
+    if (user_profile.length > 0) {
+        res.render("changepassword", {
+            user_profile: user_profile[0],
+            projects: projects,
+            categories: categories,
+            news3: news3,
         });
+    } else {
+        res.redirect('/signin');
+    }
+
 });
 
-router.get("/changepassword", auth, (req, res) => {
-
-    adminModel.singleByUsername(req.user.username).then(rows => {
-        if (rows.length > 0) {
-            res.render("changepassword", {
-                user_profile: rows[0],
-            });
-        } else {
-            res.redirect('/signin');
-        }
-    });
-});
-
-router.post("/changepassword", auth, (req, res) => {
+router.post("/changepassword", auth, async(req, res) => {
 
     var saltRounds = 10;
     var hash = bcrypt.hashSync(req.body.password, saltRounds);
@@ -223,13 +274,12 @@ router.post("/changepassword", auth, (req, res) => {
         updated_at: new Date(),
     }
 
-    adminModel.update(entity).then(n => {
-            res.redirect("/changepassword");
-        })
-        .catch(err => {
-            console.log(err);
-            res.end("error occured.");
-        });
+    let [] = await Promise.all([
+        adminModel.update(entity),
+    ])
+
+    res.redirect("/changepassword");
+
 });
 
 module.exports = router;

@@ -5,46 +5,35 @@ var categoryModel = require("../../models/category.model");
 
 var router = express.Router();
 
-router.get("/", (req, res) => {
-    postModel
-        .all()
-        .then(rows => {
-            res.render("admin/posts/index", {
-                posts: rows,
-                layout: 'admin.hbs',
-            });
-        })
-        .catch(err => {
-            console.log(err);
-            res.end("error occured.");
-        });
+router.get("/", async(req, res) => {
+    let [posts] = await Promise.all([
+        postModel.all()
+    ])
+
+    res.render("admin/posts/index", {
+        url: 'post',
+        posts: posts,
+        layout: 'admin.hbs',
+    });
+
 });
 
-router.get("/add", (req, res) => {
-    projectModel
-        .all()
-        .then(rows => {
-            categoryModel
-                .all()
-                .then(rows1 => {
-                    res.render("admin/posts/add", {
-                        projects: rows,
-                        categories: rows1,
-                        layout: 'admin.hbs',
-                    });
-                })
-                .catch(err => {
-                    console.log(err);
-                    res.end("error occured.");
-                });
-        })
-        .catch(err => {
-            console.log(err);
-            res.end("error occured.");
-        });
+router.get("/add", async(req, res) => {
+    let [projects, categories] = await Promise.all([
+        projectModel.all(),
+        categoryModel.all()
+    ])
+
+    res.render("admin/posts/add", {
+        url: 'post',
+        projects: projects,
+        categories: categories,
+        layout: 'admin.hbs',
+    });
+
 });
 
-router.post("/add", (req, res) => {
+router.post("/add", async(req, res) => {
     var entity = {
         title: req.body.title,
         url: req.body.url,
@@ -58,58 +47,47 @@ router.post("/add", (req, res) => {
         created_at: new Date(),
         updated_at: new Date(),
     }
-    postModel
-        .add(entity)
-        .then(id => {
-            res.redirect("/admin/posts");
-        })
-        .catch(err => {
-            console.log(err);
-            res.end("error occured.");
-        });
+    let [] = await Promise.all([
+        postModel.add(entity)
+    ])
+
+    res.redirect("/admin/posts");
+
 });
 
-router.get("/edit/:id", (req, res) => {
+router.get("/edit/:id", async(req, res) => {
     var id = req.params.id;
     if (isNaN(id)) {
         res.render("admin/posts/edit", {
+            url: 'post',
+            error: true,
+            layout: 'admin.hbs',
+        });
+    }
+    let [post, categories] = await Promise.all([
+        postModel.single(id),
+        categoryModel.all(),
+    ])
+
+    if (post.length > 0) {
+        res.render("admin/posts/edit", {
+            url: 'post',
+            error: false,
+            post: post[0],
+            categories: categories,
+            layout: 'admin.hbs',
+        });
+    } else {
+        res.render("admin/posts/edit", {
+            url: 'post',
             error: true,
             layout: 'admin.hbs',
         });
     }
 
-    postModel
-        .single(id)
-        .then(rows => {
-            categoryModel
-                .all()
-                .then(rows1 => {
-                    if (rows.length > 0) {
-                        res.render("admin/posts/edit", {
-                            error: false,
-                            post: rows[0],
-                            categories: rows1,
-                            layout: 'admin.hbs',
-                        });
-                    } else {
-                        res.render("admin/posts/edit", {
-                            error: true,
-                            layout: 'admin.hbs',
-                        });
-                    }
-                })
-                .catch(err => {
-                    console.log(err);
-                    res.end("error occured.");
-                });
-        })
-        .catch(err => {
-            console.log(err);
-            res.end("error occured.");
-        });
 });
 
-router.post("/update", (req, res) => {
+router.post("/update", async(req, res) => {
     var entity = {
         id: req.body.id,
         title: req.body.title,
@@ -123,27 +101,21 @@ router.post("/update", (req, res) => {
         posted_at: req.body.posted_at,
         updated_at: new Date(),
     }
-    postModel
-        .update(entity)
-        .then(n => {
-            res.redirect("/admin/posts");
-        })
-        .catch(err => {
-            console.log(err);
-            res.end("error occured.");
-        });
+    let [] = await Promise.all([
+        postModel.update(entity)
+    ])
+
+    res.redirect("/admin/posts");
+
 });
 
-router.get("/delete/:id", (req, res) => {
-    postModel
-        .delete(req.params.id)
-        .then(n => {
-            res.redirect("/admin/posts");
-        })
-        .catch(err => {
-            console.log(err);
-            res.end("error occured.");
-        });
+router.get("/delete/:id", async(req, res) => {
+    let [] = await Promise.all([
+        postModel.delete(req.params.id)
+    ])
+
+    res.redirect("/admin/posts");
+
 });
 
 module.exports = router;

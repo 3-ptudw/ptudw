@@ -11,11 +11,11 @@ module.exports = {
     },
 
     trueStatus: () => {
-        return db.load('select *, categories.name as name_category, categories.url as url_category from categories, posts where categories.id = posts.id_category and posts.status = true');
+        return db.load('select *, categories.name as name_category, categories.url as url_category from categories, posts where categories.id = posts.id_category and posts.status = 2');
     },
 
     falseStatus: () => {
-        return db.load('select *, categories.name as name_category from categories, posts where categories.id = posts.id_category and posts.status = true');
+        return db.load('select *, categories.name as name_category from categories, posts where categories.id = posts.id_category and posts.status = 2');
     },
 
     single: id => {
@@ -24,9 +24,9 @@ module.exports = {
 
     getURL: url => {
         return db.load(`
-        select *, categories.name as name_category, categories.url as url_category, users.name as name_user, (select title from posts where url = "${url}") as title_post, (select content from posts where url = "${url}") as content_post
+        select *, categories.name as name_category, categories.url as url_category, users.name as name_user, (select title from posts where url = "${url}") as title_post, (select content from posts where url = "${url}") as content_post, (select id from posts where url = "${url}") as id_post, (select url from posts where url = "${url}") as url_post
         from posts, categories, users
-        where categories.id in (select * from (select id_category from posts where url = "${url}") temp_tab) and posts.status = true
+        where categories.id in (select * from (select id_category from posts where url = "${url}") temp_tab) and posts.status = 2
         `);
     },
 
@@ -34,7 +34,7 @@ module.exports = {
         return db.load(`
         select *, posts.url as url_post, posts.title as title_post
         from posts, categories
-        where posts.id_category = (select * from (select id_category from posts p1 where url = "${url}") temp_tab) and posts.status = true
+        where posts.id_category = (select * from (select id_category from posts p1 where url = "${url}") temp_tab) and posts.status = 2
         GROUP BY posts.title
         LIMIT 5
         `);

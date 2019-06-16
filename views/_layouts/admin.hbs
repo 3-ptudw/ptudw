@@ -104,40 +104,29 @@
           </div>
         </div>
         <ul class="sidebar-menu scrollable pos-r">
-          <li class="nav-item mT-30 actived">
-            <a class="sidebar-link" href="/admin/projects">
-              <span class="icon-holder">
-                <i class="fa fa-microchip"></i>
-              </span>
-              <span class="title">Projects</span>
-            </a>
-          </li>
 
-          <li class="nav-item">
-            <a class="sidebar-link" href="/admin/categories">
+          <li class="nav-item dropdown 
+          {{#if (opt this.url '==' 'project' opt)}} open {{/if}}
+          {{#if (opt this.url '==' 'category' opt)}} open {{/if}}
+          {{#if (opt this.url '==' 'post' opt)}} open {{/if}}
+          {{#if (opt this.url '==' 'user' opt)}} open {{/if}}
+          ">
+            <a class="dropdown-toggle" href="javascript:void(0);">
               <span class="icon-holder">
-                <i class="fa fa-cube"></i>
+                <i class="c-orange-500 ti-layout-list-thumb"></i>
               </span>
-              <span class="title">Categories</span>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a class="sidebar-link" href="/admin/posts">
-              <span class="icon-holder">
-                <i class="fa fa-windows"></i>
+              <span class="title">Admin</span>
+              <span class="arrow">
+                <i class="ti-angle-right">
+                </i>
               </span>
-              <span class="title">Posts</span>
             </a>
-          </li>
-
-          <li class="nav-item">
-            <a class="sidebar-link" href="/admin/users">
-              <span class="icon-holder">
-                <i class="fa fa-windows"></i>
-              </span>
-              <span class="title">Users</span>
-            </a>
+            <ul class="dropdown-menu">
+              <li><a class="sidebar-link" href="/admin/projects">Quản lý thư mục</a></li>
+              <li><a class="sidebar-link" href="/admin/categories">Quản lý chuyên mục</a></li>
+              <li><a class="sidebar-link" href="/admin/posts">Quản lý bài viết</a></li>
+              <li><a class="sidebar-link" href="/admin/users">Quản lý người dùng</a></li>
+            </ul>
           </li>
 
           <li class="nav-item">
