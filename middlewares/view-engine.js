@@ -1,6 +1,7 @@
 var exphbs = require('express-handlebars');
 var hbs_sections = require('express-handlebars-sections');
 var numeral = require('numeral');
+var moment = require('moment');
 
 module.exports = function(app) {
     app.engine('hbs', exphbs({
@@ -16,6 +17,11 @@ module.exports = function(app) {
                     case '==':
                         return val1 == val2
                 }
+            },
+
+            'formatTime': function(date, format) {
+                var mmnt = moment(date);
+                return mmnt.format(format);
             },
         }
     }));

@@ -52,9 +52,10 @@ module.exports = {
 
     loadCommentGetByURL: url => {
         return db.load(`
-        select *
+        select *, comments.content as content_comment, comments.created_at as time_comment
         from comments, posts
-        where comment.id_post in (select * from (select id from posts where url = "${url}") temp_tab)
+        where comments.id_post in (select * from (select id from posts where url = "${url}") temp_tab)
+        GROUP BY comments.id
         `);
     },
 
