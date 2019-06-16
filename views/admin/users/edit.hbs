@@ -1,5 +1,18 @@
 {{#section 'js'}}
-
+<script>
+  $(function () {
+    $('input[name="premium"]').daterangepicker({
+      singleDatePicker: true,
+      timePicker24Hour: true,
+      timePicker: true,
+      showDropdowns: true,
+      "drops": "up",
+      locale: {
+        format: 'YYYY-MM-DD HH:mm'
+      }
+    });
+  });
+</script>
 {{/section}}
 <div class="card shadow">
   <h4 class="card-header">
@@ -55,8 +68,8 @@
 
       <div class="form-group">
         <label for="premium">Premium</label>
-        <input type="text" class="form-control" id="premium" name="premium" placeholder="Enter premium"
-          value="{{this.user.premium}}">
+        <input type="text" class="form-control" id="premium" name="premium"
+          value="{{formatTime this.user.premium "YYYY-MM-DD HH:mm"}}">
       </div>
 
       <a class="btn btn-primary" href="/admin/users" role="button">
