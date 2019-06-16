@@ -10,6 +10,24 @@ module.exports = {
         `);
     },
 
+    pagination: (limit, offset) => {
+        return db.load(`
+        select *, categories.name as name_category 
+        from categories, posts 
+        where categories.id = posts.id_category
+        ORDER BY posts.id DESC
+        limit ${limit} 
+        offset ${offset}
+        `);
+    },
+
+    count: () => {
+        return db.load(`
+        select count(*) as total
+        from posts
+        `)
+    },
+
     trueStatus: () => {
         return db.load('select *, categories.name as name_category, categories.url as url_category from categories, posts where categories.id = posts.id_category and posts.status = 2');
     },
