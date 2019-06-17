@@ -8,7 +8,7 @@
       showDropdowns: true,
       "drops": "up",
       locale: {
-        format: 'YYYY-MM-DD HH:mm'
+        format: 'DD/MM/YYYY HH:mm',
       }
     });
   });
@@ -69,7 +69,7 @@
       <div class="form-group">
         <label for="premium">Premium</label>
         <input type="text" class="form-control" id="premium" name="premium"
-          value="{{formatTime this.user.premium "YYYY-MM-DD HH:mm"}}">
+          value="{{moment this.user.premium format="DD/MM/YYYY HH:mm"}}">
       </div>
 
       <a class="btn btn-primary" href="/admin/users" role="button">

@@ -15,7 +15,7 @@
       showDropdowns: true,
       "drops": "up",
       locale: {
-        format: 'YYYY-MM-DD HH:mm'
+        format: 'DD/MM/YYYY HH:mm',
       }
     });
   });
@@ -91,7 +91,7 @@
 
       <div class="form-group">
         <label for="posted_at">Time Post</label>
-        <input type="text" class="form-control" id="posted_at" name="posted_at" value="{{this.post.posted_at}}">
+        <input type="text" class="form-control" id="posted_at" name="posted_at" value="{{moment this.post.posted_at format="DD/MM/YYYY HH:mm"}}">
       </div>
 
       <a class="btn btn-primary" href="/admin/posts" role="button">

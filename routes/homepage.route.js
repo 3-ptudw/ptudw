@@ -35,6 +35,19 @@ router.get("/", async(req, res) => {
     });
 });
 
+router.get("/search", async(req, res) => {
+
+    data = req.query.search;
+
+    let [posts] = await Promise.all([
+        homepageModel.search(data),
+    ])
+
+    res.render("search", {
+        posts: posts,
+    });
+});
+
 router.get("/category/:url", async(req, res, next) => {
     var url = req.params.url;
     var page = req.query.page || 1;
@@ -244,7 +257,7 @@ router.get("/profile", auth, async(req, res) => {
 
 router.post("/profile", auth, async(req, res) => {
 
-    var dob = moment(req.body.date_of_birth, 'YYYY-MM-DD').format('YYYY-MM-DD');
+    var dob = moment(req.body.date_of_birth, "DD/MM/YYYY").format("YYYY-MM-DD");
     var entity = {
         id: req.user.id,
         name: req.body.name,

@@ -2,10 +2,13 @@
 <script>
     $(function () {
 
-        $('#date_of_birth').datetimepicker({
-            format: 'Y-m-d',
-            timepicker: false,
-            mask: true,
+        $('#date_of_birth').daterangepicker({
+            singleDatePicker: true,
+            showDropdowns: true,
+            "drops": "up",
+            locale: {
+                format: 'DD/MM/YYYY',
+            }
         });
 
         $('#profileForm').validate({
@@ -111,7 +114,7 @@
                             <label for="date_of_birth" class="col-sm-2 col-form-label">Date of Birth</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" name="date_of_birth" id="date_of_birth"
-                                    value="{{user_profile.date_of_birth}}">
+                                    value="{{moment user_profile.date_of_birth format="DD/MM/YYYY HH:mm"}}">
                             </div>
                         </div>
 
@@ -127,7 +130,7 @@
                             <label for="premium" class="col-sm-2 col-form-label">Loại tài khoản</label>
                             <div class="col-sm-10">
                                 <input type="text" readonly class="form-control-plaintext" name="premium" id="premium"
-                                    value="{{user_profile.premium}}">
+                                    value="{{moment user_profile.premium format="DD/MM/YYYY HH:mm"}}">
                             </div>
                         </div>
 

@@ -64,7 +64,7 @@
                             <p class="post-author">Tag
                                 <a href="avengers-endgame">Avengers Endgame</a>, <a href="#">Tony Stark</a>
                             </p>
-                            <p class="post-date">{{formatTime this.topPost.posted_at "DD/MM/YYYY HH:mm"}}</p>
+                            <p class="post-date">{{moment this.topPost.posted_at format="DD/MM/YYYY HH:mm"}}</p>
                         </div>
                         <p class="post-excerp">{{this.topPost.abstract}}</p>
                     </div>
@@ -99,7 +99,7 @@
                                     <p class="post-author">Tag
                                         <a href="#">Avengers Endgame</a>, <a href="#">Tony Stark</a>
                                     </p>
-                                    <p class="post-date">{{formatTime posted_at "DD/MM/YYYY HH:mm"}}</p>
+                                    <p class="post-date">{{moment posted_at format="DD/MM/YYYY HH:mm"}}</p>
                                 </div>
                                 <p class="post-excerp">{{abstract}}</p>
                             </div>
