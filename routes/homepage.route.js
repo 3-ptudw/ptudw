@@ -6,7 +6,7 @@ var auth = require("../middlewares/auth");
 var postModel = require("../models/post.model");
 var adminModel = require("../models/admin.model");
 var categoryModel = require("../models/category.model");
-var homepageModel = require("../models/homepage.model.");
+var homepageModel = require("../models/homepage.model");
 var projectModel = require("../models/project.model");
 
 

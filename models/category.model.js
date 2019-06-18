@@ -55,10 +55,12 @@ module.exports = {
     },
 
     topPost: url => {
-        return db.load(`select *, posts.url as url_post
+        return db.load(`
+        select *, posts.url as url_post
         from posts, categories
         where posts.id_category in (select * from (select id from categories where url = "${url}" LIMIT 1) temp_tab) and posts.status = 2 
-        ORDER BY posts.posted_at DESC`)
+        ORDER BY posts.posted_at DESC
+        `)
     },
 
     skipTopPost: (url, limit, offset) => {
@@ -68,8 +70,8 @@ module.exports = {
         where posts.id_category in (select * from (select id from categories where url = "${url}") temp_tab) and posts.status = 2 
         GROUP BY url_post
         ORDER BY posts.posted_at DESC
-        limit ${limit} 
-        offset ${offset}
+        LIMIT ${limit} 
+        OFFSET ${offset}
         `)
     },
 
