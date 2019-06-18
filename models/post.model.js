@@ -50,10 +50,10 @@ module.exports = {
 
     random5: url => {
         return db.load(`
-        select *, posts.url as url_post, posts.title as title_post
+        select DISTINCT posts.url as url_post, posts.title as title_post, posts.url_thumbnail as url_thumbnail, posts.abstract as abstract, posts.posted_at as posted_at
         from posts, categories
         where posts.id_category = (select * from (select id_category from posts p1 where url = "${url}") temp_tab) and posts.status = 2
-        GROUP BY posts.title
+        GROUP BY categories.id, posts.id, posts.title, posts.url
         LIMIT 5
         `);
     },

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th6 18, 2019 lúc 06:15 AM
+-- Thời gian đã tạo: Th6 18, 2019 lúc 06:10 PM
 -- Phiên bản máy phục vụ: 10.1.40-MariaDB
 -- Phiên bản PHP: 7.3.5
 
@@ -129,7 +129,8 @@ INSERT INTO `comments` (`id`, `id_user`, `id_post`, `id_comment`, `content`, `cr
 (2, 1, 1, NULL, '123', '2019-06-16 04:04:54', '2019-06-16 04:04:54'),
 (3, 1, 1, NULL, '1234', '2019-06-16 04:05:59', '2019-06-16 04:05:59'),
 (4, 1, 1, NULL, '1234', '2019-06-16 04:06:34', '2019-06-16 04:06:34'),
-(5, 1, 1, NULL, '1234', '2019-06-16 04:07:13', '2019-06-16 04:07:13');
+(5, 1, 1, NULL, '1234', '2019-06-16 04:07:13', '2019-06-16 04:07:13'),
+(6, 1, 1, NULL, 'tuw chos\r\n', '2019-06-18 04:25:48', '2019-06-18 04:25:48');
 
 -- --------------------------------------------------------
 
@@ -326,7 +327,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT cho bảng `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT cho bảng `posts`

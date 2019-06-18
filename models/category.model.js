@@ -65,10 +65,10 @@ module.exports = {
 
     skipTopPost: (url, limit, offset) => {
         return db.load(`
-        select *, posts.url as url_post
+        select DISTINCT posts.url as url_post, posts.posted_at as posted_at, posts.url_thumbnail as url_thumbnail, posts.title as title, posts.abstract as abstract
         from categories, posts
         where posts.id_category in (select * from (select id from categories where url = "${url}") temp_tab) and posts.status = 2 
-        GROUP BY url_post
+        GROUP BY posts.url, categories.id, posts.id, posts.posted_at
         ORDER BY posts.posted_at DESC
         LIMIT ${limit} 
         OFFSET ${offset}
