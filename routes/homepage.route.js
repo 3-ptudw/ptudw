@@ -49,6 +49,7 @@ router.get("/search", async(req, res) => {
         projects: projects,
         categories: categories,
         posts: posts,
+        data,
     });
 });
 

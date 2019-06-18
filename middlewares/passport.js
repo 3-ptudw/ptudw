@@ -12,10 +12,10 @@ module.exports = function(app) {
     passport.use(new FacebookStrategy({
             clientID: "2287560411572098",
             clientSecret: "ac594a05b480452c6f6936968f7ffa13",
-            callbackURL: "/auth/facebook/callback"
+            callbackURL: "https://viralstory.herokuapp.com/auth/facebook/callback"
         },
         function(accessToken, refreshToken, profile, cb) {
-            userModel.singleByFackbook({ facebook_id: profile.id }, function(err, user) {
+            userModel.singleByFackbook({ facebook_id: profile.id }, async function(err, user) {
                 // return cb(err, user);
                 if (err) {
                     return done(err);
@@ -23,20 +23,22 @@ module.exports = function(app) {
                 if (user) {
                     return done(null, user); // user found, return that user
                 } else {
-                    // nếu chưa có, tạo mới user
-                    var newUser = new userModel();
-                    // lưu các thông tin cho user
-                    newUser.facebook_id = profile.id;
-                    newUser.token = token;
-                    newUser.name = profile.name.givenName + ' ' + profile.name.familyName; // bạn có thể log đối tượng profile để xem cấu trúc
-                    newUser.username = profile.emails[0].value; // fb có thể trả lại nhiều email, chúng ta lấy cái đầu tiền
-                    // lưu vào db
-                    newUser.save(function(err) {
-                        if (err)
-                            throw err;
-                        // nếu thành công, trả lại user
-                        return done(null, newUser);
-                    });
+                    var entity = {
+                        username: profile.emails[0].value,
+                        password: '123456789',
+                        name: profile.name.givenName + ' ' + profile.name.familyName,
+                        other_name: profile.name.givenName + ' ' + profile.name.familyName,
+                        date_of_birth: '1970-1-1',
+                        facebook_id: profile.id,
+                        id_role: 4,
+                        avatar: 'http://www.medya32.com/themes/gold/assets/images/no-author-photo.png',
+                        created_at: new Date(),
+                        updated_at: new Date(),
+                    }
+                    let [] = await Promise.all([
+                        adminModel.add(entity),
+                    ])
+                    return done(null, user);
                 }
             });
         }

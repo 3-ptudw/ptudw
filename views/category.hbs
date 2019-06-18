@@ -65,9 +65,11 @@
                             </h2>
                         </a>
                         <div class="post-meta">
+                            {{#if tag}}
                             <p class="post-author">Tag
-                                <a href="avengers-endgame">Avengers Endgame</a>, <a href="#">Tony Stark</a>
+                                <a href="/search?search={{tag}}">{{tag}}</a>
                             </p>
+                            {{/if}}
                             <p class="post-date">{{moment this.topPost.posted_at format="DD/MM/YYYY HH:mm"}}</p>
                         </div>
                         <p class="post-excerp">{{this.topPost.abstract}}</p>
@@ -100,9 +102,11 @@
                                     <h6>{{title}}</h6>
                                 </a>
                                 <div class="post-meta">
+                                    {{#if tag}}
                                     <p class="post-author">Tag
-                                        <a href="#">Avengers Endgame</a>, <a href="#">Tony Stark</a>
+                                        <a href="/search?search={{tag}}">{{tag}}</a>
                                     </p>
+                                    {{/if}}
                                     <p class="post-date">{{moment posted_at format="DD/MM/YYYY HH:mm"}}</p>
                                 </div>
                                 <p class="post-excerp">{{abstract}}</p>

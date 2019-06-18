@@ -62,7 +62,7 @@ module.exports = {
         return db.load(`
             select *, p.url as url_post, c.name as name_category, c.url as url_category 
             from posts p left join categories c on c.id = p.id_category
-            where p.url like "%${data}%" and status = 2
+            where (p.url like "%${data}%" or p.abstract like "%${data}%" or p.content like "%${data}%") and status = 2
             GROUP BY p.id
         `);
     },

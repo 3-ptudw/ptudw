@@ -55,8 +55,13 @@
                                     <!-- Post Author & Date -->
                                     <div class="post-authors-date">
                                         <p class="post-author">Đăng bởi <a>{{this.post.name_user}}</a></p>
-                                        <p class="post-date">{{moment this.post.posted_at format="DD/MM/YYYY HH:mm"}}</p>
-                                        <p class="post-author">Tag <a href="#">{{this.post.tag}}</a></p>
+                                        <p class="post-date">{{moment this.post.posted_at format="DD/MM/YYYY HH:mm"}}
+                                        </p>
+                                        {{#if this.post.tag}}
+                                        <p class="post-author">Tag
+                                            <a href="/search?search={{this.post.tag}}">{{this.post.tag}}</a>
+                                        </p>
+                                        {{/if}}
                                     </div>
                                     <!-- View Comments -->
                                     <div class="view-comments">
@@ -188,8 +193,11 @@
                                             <h6>{{title_post}}</h6>
                                         </a>
                                         <div class="post-meta">
+                                            {{#if tag}}
                                             <p class="post-author">Tag
-                                                <a href="#">Avengers Endgame</a>, <a href="#">Tony Stark</a> </p>
+                                                <a href="/search?search={{tag}}">{{tag}}</a>
+                                            </p>
+                                            {{/if}}
                                             <p class="post-date">{{moment posted_at format="DD/MM/YYYY HH:mm"}}</p>
                                         </div>
                                         <p class="post-excerp">{{abstract}}</p>
