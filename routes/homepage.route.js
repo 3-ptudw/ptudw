@@ -39,11 +39,15 @@ router.get("/search", async(req, res) => {
 
     data = req.query.search;
 
-    let [posts] = await Promise.all([
+    let [projects, categories, posts] = await Promise.all([
+        projectModel.all(),
+        categoryModel.all(),
         homepageModel.search(data),
     ])
 
     res.render("search", {
+        projects: projects,
+        categories: categories,
         posts: posts,
     });
 });
@@ -66,6 +70,14 @@ router.get("/category/:url", async(req, res, next) => {
         categoryModel.countByURL(url),
     ])
 
+    if (!count_rows[0]) {
+        res.render("category", {
+            error: true,
+            projects: projects,
+            categories: categories,
+            news3: news3,
+        });
+    }
     var total = count_rows[0].total;
     var nPages = Math.floor(total / limit);
     if (total % limit > 0) nPages++;
